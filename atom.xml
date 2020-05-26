@@ -99,4 +99,34 @@
         <tag>技术日记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>git 记录</title>
+    <url>/2020/05/26/git%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="git-学习"><a href="#git-学习" class="headerlink" title="git 学习"></a>git 学习</h2><p>惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下</p>
+<p>在一行显示提交信息</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure>
+
+<p>根据日期查询</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --since&#x3D;&quot;2020.03.12&quot; --until&#x3D;&quot;2020.04.18&quot;</span><br></pre></td></tr></table></figure>
+
+<p>根据提交人汇总</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git short log</span><br></pre></td></tr></table></figure>
+
+<p>掘金那位提供的一个炫酷使用版本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date&#x3D;relative</span><br></pre></td></tr></table></figure>
+
+<p>对应的别名设置，感觉蛮实用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global alias.lg &quot;log --graph --pretty&#x3D;format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date&#x3D;relative&quot;</span><br></pre></td></tr></table></figure>
+
+<p>搜索</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git log --grep&#x3D;&#39;测试&#39; --oneline</span><br></pre></td></tr></table></figure>
+
+<p>–abbrev=<n> 显示 hash 值的前几位，具体 不过这个感觉得配合–oneline 使用，一般的 git log –abbrev=10 不起效果<br><a href="https://git-scm.com/docs/git-log" target="_blank" rel="noopener">git-log</a><br><a href="https://juejin.im/post/5b3f05cae51d4519115cd04a" target="_blank" rel="noopener">掘金文章</a></p>
+<p>之后几篇应该都会去学习 crawlab 这个开源项目，有我感兴趣的 go，k8s 还有 docker 部署的流程，满满的干货样子先贴上链接<br><a href="https://github.com/crawlab-team/crawlab" target="_blank" rel="noopener">crawlab</a></p>
+<p>还有一个 nodejs 版本的 craw，也会一并学习。<br><a href="https://github.com/MrXujiang/crawel" target="_blank" rel="noopener">apify</a></p>
+]]></content>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
 </search>
