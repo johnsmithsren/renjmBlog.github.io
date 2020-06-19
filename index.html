@@ -76,6 +76,82 @@
     
     
     
+    <article id="post-链表中间节点" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/19/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/"
+    >链表中间节点</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/19/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/" class="article-date">
+  <time datetime="2020-06-19T03:14:01.000Z" itemprop="datePublished">2020-06-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p><a href="https://leetcode-cn.com/problems/middle-of-the-linked-list/" target="_blank" rel="noopener">原题链接</a></p>
+<h3 id="这个一开始我自然只会用最笨的方法了"><a href="#这个一开始我自然只会用最笨的方法了" class="headerlink" title="这个一开始我自然只会用最笨的方法了"></a>这个一开始我自然只会用最笨的方法了</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val &#x3D; val;</span><br><span class="line"> *     this.next &#x3D; null;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">var middleNode &#x3D; function(head) &#123;</span><br><span class="line">    let current &#x3D; head</span><br><span class="line">    let totalIndex &#x3D; 0</span><br><span class="line">    let index &#x3D; 0</span><br><span class="line">    while(current.next)&#123;</span><br><span class="line">        totalIndex &#x3D; totalIndex+1</span><br><span class="line">        current &#x3D;  current.next</span><br><span class="line">    &#125;</span><br><span class="line">    if(totalIndex%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">        totalIndex &#x3D; totalIndex&#x2F;2</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        totalIndex&#x3D;(totalIndex+1)&#x2F;2</span><br><span class="line">    &#125;</span><br><span class="line">    while(head)&#123;</span><br><span class="line">        if(index &#x3D;&#x3D;totalIndex)&#123;</span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">        index+&#x3D;1</span><br><span class="line">        head &#x3D; head.next</span><br><span class="line">        &#125;</span><br><span class="line">    return head</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后看到了官方的优化方法，也就是快慢指针</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var middleNode &#x3D; function(head) &#123;</span><br><span class="line">    slow &#x3D; fast &#x3D; head;</span><br><span class="line">    while (fast &amp;&amp; fast.next) &#123;</span><br><span class="line">        slow &#x3D; slow.next;</span><br><span class="line">        fast &#x3D; fast.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    return slow;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>基本就是匀速前进，一个人速度是你的两倍，走过的距离也是你的两倍，就是这样。这个就简单很多了。</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-移除链表元素" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -718,78 +794,6 @@
 
       
       <h2 id="搭建-hexo-选在-ayer-也碰到了图片加载问题，这个就需要-f12-慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有-cdn-缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。"><a href="#搭建-hexo-选在-ayer-也碰到了图片加载问题，这个就需要-f12-慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有-cdn-缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。" class="headerlink" title="搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。"></a>搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。</h2>
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E8%AE%B0/" rel="tag">技术日记</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="技术日记-加入gitalk评论" class="article article-type-技术日记" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/26/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/"
-    >加入 gitalk 评论</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/26/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/" class="article-date">
-  <time datetime="2020-05-26T04:07:57.000Z" itemprop="datePublished">2020-05-26</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="给博客添加-Gitalk"><a href="#给博客添加-Gitalk" class="headerlink" title="给博客添加 Gitalk"></a>给博客添加 Gitalk</h2><ul>
-<li>valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。</li>
-</ul>
-<ul>
-<li>然后就是用 gitalk 了。这个就是比较简单了，用的人也还行，主要就两个点，就是一开始可以新建一个仓库作为评论存放的地点，我感觉不新建也行，因为其实这个 gitalk 只是用到了 issue 区域，所以应该和你部署的博客仓库一个地址也行。然后就是按照指导去创建一个 oauth application 了，获取对应的 client secret，然后就成功了，这个本地查看好像不行，得部署了才正常，我这边是这个情况，会报 network error</li>
-</ul>
-<p>不过呢感觉有点不够好的地方就是这个 gitalk 是需要 github 登陆之后才能评论的，要么你只能看评论，感觉要是有匿名就好了。</p>
-
       
       <!-- reward -->
       
