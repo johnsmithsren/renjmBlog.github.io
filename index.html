@@ -76,6 +76,78 @@
     
     
     
+    <article id="post-旋转链表" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/"
+    >旋转链表</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="article-date">
+  <time datetime="2020-07-07T09:49:33.000Z" itemprop="datePublished">2020-07-07</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p><a href="https://leetcode-cn.com/problems/rotate-list/" target="_blank" rel="noopener">原题链接</a></p>
+<p>思路的话<br>第一步找到链表的总长度，然后 k 取余总长度，获取真实移动步<br>第二步根据移动步数，打断链表<br>第三步将打断后的链表重新拼接 然后输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val &#x3D; val;</span><br><span class="line"> *     this.next &#x3D; null;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @param &#123;number&#125; k</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">var rotateRight &#x3D; function(head, k) &#123;</span><br><span class="line">  if(!head)&#123;return head&#125;</span><br><span class="line">  let current &#x3D; head</span><br><span class="line">  let second &#x3D; head</span><br><span class="line">  let tmp &#x3D; null</span><br><span class="line">  let total &#x3D; 0</span><br><span class="line">  while (current) &#123;</span><br><span class="line">    total++</span><br><span class="line">    if (!current.next) &#123;</span><br><span class="line">      break</span><br><span class="line">    &#125;</span><br><span class="line">    current &#x3D; current.next</span><br><span class="line">  &#125;</span><br><span class="line">  k &#x3D; k % total</span><br><span class="line">  console.log(k)</span><br><span class="line">  while (k++ &lt; total) &#123;</span><br><span class="line">    if(k &#x3D;&#x3D;&#x3D; total)&#123;</span><br><span class="line">        tmp &#x3D; second.next;</span><br><span class="line">        second.next&#x3D; null</span><br><span class="line">    &#125;</span><br><span class="line">    second &#x3D; second.next</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(tmp)</span><br><span class="line">  if(!tmp)&#123;return head&#125;</span><br><span class="line">  let tmp2&#x3D; tmp</span><br><span class="line">  while(tmp2)&#123;</span><br><span class="line">      if(!tmp2.next)&#123;</span><br><span class="line">          tmp2.next &#x3D; head</span><br><span class="line">          break</span><br><span class="line">      &#125;</span><br><span class="line">      tmp2&#x3D;tmp2.next</span><br><span class="line">  &#125;</span><br><span class="line">  return tmp</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-对港区国安法的看法" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -722,91 +794,6 @@
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
-    <article id="技术日记-mongo异常崩溃后" class="article article-type-技术日记" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/06/01/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/"
-    >docker mongo 异常崩溃后</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/06/01/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" class="article-date">
-  <time datetime="2020-06-01T08:43:13.000Z" itemprop="datePublished">2020-06-01</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>不得不说被吓到了，测试告诉我平台挂了，我看了下 docker 日志，好像没啥问题，然后看到数据库好像链接不了了，顿感疑惑，docker mongo 服务一直很正常，没出过啥问题，换言之，我也没处理过异常。查看 mongo 日志，看到一堆报错，关键报错就是 disk out 的感觉，估计是存储空间不够了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
-
-<p>果然，存放 mongo 数据的盘满了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">udev            2.0G     0  2.0G   0% &#x2F;a</span><br><span class="line">tmpfs           394M   41M  353M  11% &#x2F;b</span><br><span class="line">&#x2F;e              32G    32G  0     100% &#x2F;</span><br><span class="line">tmpfs           2.0G     0  2.0G   0% &#x2F;x</span><br><span class="line">tmpfs           5.0M     0  5.0M   0% &#x2F;y</span><br><span class="line">tmpfs           2.0G     0  2.0G   0% &#x2F;z</span><br><span class="line">&#x2F;f              118G  2.9G  110G   3% &#x2F;w</span><br><span class="line">tmpfs           394M     0  394M   0% &#x2F;z</span><br></pre></td></tr></table></figure>
-
-<p>（都是化名）</p>
-<p>也就是 这里的根目录 我错了，因为一开始挂载的时候，就是用的默认路径，一般来说，这个盘应该类似 windows 的 C 盘，不放项目的，谁让我菜鸡呢。。应该正常放在 w 那边</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>首先 移动所有的数据内容 到 w 目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv &#x2F;db&#x2F;* &#x2F;w&#x2F;db</span><br></pre></td></tr></table></figure>
-
-<p>然后我就开心的重启，一堆报错，继续挂，这我就开始冷汗了。<br>照例谷歌，发现 如果是正常关闭的，这个时候重启是没问题，感觉像是废话，没事我正常关闭数据库做什么？当然，缺乏运维知识的我哪有资格吐槽</p>
-<p>然后就是非正常关闭</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.  rm -rf mongo.lock    &#x2F;&#x2F; 删除mongod.lock文件</span><br><span class="line"></span><br><span class="line">2.  .&#x2F;mongod --dbpath&#x3D;&#x2F;opt&#x2F;rh&#x2F;mongodbData --repair     &#x2F;&#x2F;对数据库进行修复</span><br></pre></td></tr></table></figure>
-
-<p>大概说法就是 这个文件会记录异常状态，不删除会导致重启失效。<br>第二步不适合我，因为我是 docker 启动的，所以</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d -v &#x2F;x&#x2F;db:&#x2F;data&#x2F;db -p x:27017 mongo:latest --wiredTigerCacheSizeGB 1.8 --auth --repair</span><br></pre></td></tr></table></figure>
-
-<p>因为我启动 mongo 一般是这样的，所以就直接在后面加了–repair 即可，这样就会正常开始修复数据，等待这个过程结束，然后再次启动，就不会报错。然后我还对 cachesize 做了限制，结果触发了另外一个问题，内存不够。因为曾经我在这个测试环境的数据库里面备份了一次线上的日志数据，大概 2 千万条，导致这个时候恢复数据的时候内存不够了，然后我就修改了原先的限制，扩大到了 1.8，就好了。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如果是线上出现这个问题，首先避免出现，测试环境出现后我第一时间去看了线上的剩余磁盘空间，然后发现其实还有非常多，暂时没问题。然后如果出现异常关闭，我感觉应该还是以恢复备份为最佳，直接修复数据感觉消耗的时间也是非常慢的。</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E8%AE%B0/" rel="tag">技术日记</a></li></ul>
 
 
     </footer>
