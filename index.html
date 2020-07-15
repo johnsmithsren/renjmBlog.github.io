@@ -76,6 +76,79 @@
     
     
     
+    <article id="post-排序列表" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/"
+    >排序列表</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" class="article-date">
+  <time datetime="2020-07-15T08:41:45.000Z" itemprop="datePublished">2020-07-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p><a href="https://leetcode-cn.com/problems/sort-list/" target="_blank" rel="noopener">原题链接</a></p>
+<h3 id="应该是基础的简单排序吧"><a href="#应该是基础的简单排序吧" class="headerlink" title="应该是基础的简单排序吧"></a>应该是基础的简单排序吧</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val &#x3D; val;</span><br><span class="line"> *     this.next &#x3D; null;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">var sortList &#x3D; function(head) &#123;</span><br><span class="line">    let slow &#x3D; head</span><br><span class="line">    let fast &#x3D; head</span><br><span class="line">    let temp</span><br><span class="line">    while(slow)&#123;</span><br><span class="line">        while(fast)&#123;</span><br><span class="line">            if(slow.val&gt;fast.val)&#123;</span><br><span class="line">                temp &#x3D; slow.val</span><br><span class="line">                slow.val &#x3D; fast.val</span><br><span class="line">                fast.val  &#x3D; temp</span><br><span class="line">            &#125;</span><br><span class="line">            fast &#x3D; fast.next</span><br><span class="line">        &#125;</span><br><span class="line">        slow  &#x3D; slow.next</span><br><span class="line">        fast &#x3D; slow</span><br><span class="line">    &#125;</span><br><span class="line">    return head</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这个速度很慢</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+  
+  
+  
+
+</article>
+    
     <article id="post-数组异或操作" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -746,81 +819,13 @@
 
 </article>
     
-    <article id="leetcode-整数反转" class="article article-type-leetcode" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/06/17/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/"
-    >整数反转 &amp; 回文数</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/06/17/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/" class="article-date">
-  <time datetime="2020-06-17T08:25:48.000Z" itemprop="datePublished">2020-06-17</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="原题链接"><a href="#原题链接" class="headerlink" title="原题链接"></a><a href="https://leetcode-cn.com/problems/reverse-integer/submissions/" target="_blank" rel="noopener">原题链接</a></h2><h3 id="思路主要就是转换成字符串，主要因为字符串是有反转的方法的"><a href="#思路主要就是转换成字符串，主要因为字符串是有反转的方法的" class="headerlink" title="思路主要就是转换成字符串，主要因为字符串是有反转的方法的"></a>思路主要就是转换成字符串，主要因为字符串是有反转的方法的</h3><p>然后思路我对的，不过没想到math有这几个方法，看到别人是这样用math的，受教。就是学习了math的两个用法，一个是sign 获取正负的，pow 平方</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var reverse &#x3D; function(x) &#123;</span><br><span class="line">  let sign &#x3D; Math.sign(x)</span><br><span class="line">  let res &#x3D; (Math.abs(x) + &#39;&#39;).split(&#39;&#39;).reverse().join(&#39;&#39;) * sign</span><br><span class="line">  if (res &gt; Math.pow(2, 31) - 1 || res &lt; Math.pow(2, 31) * -1) res &#x3D; 0</span><br><span class="line">  return res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="原题链接-1"><a href="#原题链接-1" class="headerlink" title="原题链接"></a><a href="https://leetcode-cn.com/problems/palindrome-number/" target="_blank" rel="noopener">原题链接</a></h2><h3 id="这个思路就是在上面的数字反转基础上添加符号判断即可"><a href="#这个思路就是在上面的数字反转基础上添加符号判断即可" class="headerlink" title="这个思路就是在上面的数字反转基础上添加符号判断即可"></a>这个思路就是在上面的数字反转基础上添加符号判断即可</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let sign &#x3D; Math.sign(x)</span><br><span class="line">let res &#x3D; (Math.abs(x) + &#39;&#39;).split(&#39;&#39;).reverse().join(&#39;&#39;) * sign</span><br><span class="line">if (res &#x3D;&#x3D;&#x3D;x &amp;&amp; x &gt;&#x3D; 0 ) &#123;</span><br><span class="line">  return true</span><br><span class="line">&#125;</span><br><span class="line">return false</span><br></pre></td></tr></table></figure>
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-  
-  
-  
-
-</article>
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
