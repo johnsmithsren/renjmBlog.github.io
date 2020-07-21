@@ -358,4 +358,17 @@
         <tag>leetcode</tag>
       </tags>
   </entry>
+  <entry>
+    <title>好数对的数目</title>
+    <url>/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/</url>
+    <content><![CDATA[<p><a href="https://leetcode-cn.com/problems/number-of-good-pairs/" target="_blank" rel="noopener">原题链接</a></p>
+<h3 id="基础题"><a href="#基础题" class="headerlink" title="基础题"></a>基础题</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">var numIdenticalPairs &#x3D; function(nums) &#123;</span><br><span class="line">    let end &#x3D; nums.length-1</span><br><span class="line">    let start &#x3D; 0</span><br><span class="line">    let total &#x3D; 0</span><br><span class="line">    while(start!&#x3D;nums.length-1)&#123;</span><br><span class="line">        if(nums[start]&#x3D;&#x3D;&#x3D;nums[end])&#123;</span><br><span class="line">            total++</span><br><span class="line">        &#125;</span><br><span class="line">        end--</span><br><span class="line">        if(end&#x3D;&#x3D;start)&#123;</span><br><span class="line">            end&#x3D;nums.length-1</span><br><span class="line">            start++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return total</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+      <tags>
+        <tag>leetcode</tag>
+      </tags>
+  </entry>
 </search>
