@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    leetcode 每日一题 |  日常物语
+    react感想 |  日常物语
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -42,7 +42,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="leetcode-leetcode每日一题" class="article article-type-leetcode" itemscope
+  <article id="技术日记-react感想" class="article article-type-技术日记" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -50,7 +50,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  leetcode 每日一题
+  react感想
 </h1>
  
 
@@ -59,8 +59,8 @@
 
     
     <div class="article-meta">
-      <a href="/2020/05/27/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" class="article-date">
-  <time datetime="2020-05-27T12:13:00.000Z" itemprop="datePublished">2020-05-27</time>
+      <a href="/2021/07/06/react%E6%84%9F%E6%83%B3/" class="article-date">
+  <time datetime="2021-07-06T08:45:11.000Z" itemprop="datePublished">2021-07-06</time>
 </a>
       
       
@@ -70,7 +70,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">250</span>
+            <span class="post-count">739</span>
         </span>
     </span>
 
@@ -79,7 +79,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">3 min</span>
         </span>
     </span>
 </div>
@@ -90,8 +90,6 @@
 
     
     
-    <div class="tocbot"></div>
-
 
 
 
@@ -104,14 +102,12 @@
       
 
       
-      <h2 id="开始刷题"><a href="#开始刷题" class="headerlink" title="开始刷题"></a>开始刷题</h2><ol>
-<li>给定一个整数数组 nums  和一个目标值 target，请你在该数组中找出和为目标值的那   两个   整数，并返回他们的数组下标。</li>
-</ol>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  var twoSum &#x3D; function(nums, target) &#123;</span><br><span class="line">    let map&#x3D;new Map()</span><br><span class="line">    let result</span><br><span class="line">    for(let key in nums)&#123;</span><br><span class="line">        let value &#x3D; nums[key]</span><br><span class="line">        result &#x3D; target-value</span><br><span class="line">        if(map.has(result))&#123;</span><br><span class="line">            return [map.get(result),key]</span><br><span class="line">        &#125;</span><br><span class="line">        map.set(value,key)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>这道题开始自然是 for 循环，然后超时。。。愚蠢的我，一点新意都没有，然后就是采用 map 形式，避免多次遍历，然后就没有超时了。这道题界解决信心爆棚，随机了一道二叉树的题目，然后崩溃。。。明天会看下别人的题解，然后自行把二叉树用自己的语言写一遍，希望能够弥补自身算法逻辑缺少训练的弊端。</p>
-
+      <ul>
+<li>关于react的感想<br>  1.就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。用的antd的组件，只需要针对部分做样式简单的调整<br>  2.比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑暂时涉及不到。最近碰到的问题主要就是关于状态传递的，父组件如何传递状态给子组件，子组件中再嵌套子组件的情况下，内容传递的一致性，同时还要考虑代码的简洁。我发现，useref这些对于一层父子组件来说，还是比较直观，可靠的。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">    import React, &#123; forwardRef, useImperativeHandle, useState &#125; from &quot;react&quot;;</span><br><span class="line">    import &#123; Button, DatePicker, Divider &#125; from &quot;antd&quot;;</span><br><span class="line">    import &#123; useObserver &#125; from &quot;mobx-react&quot;;</span><br><span class="line">    import ComponentStore from &quot;store/ComponentStore&quot;;</span><br><span class="line">    const &#123; RangePicker &#125; = DatePicker;</span><br><span class="line">    import moment from &quot;moment&quot;;</span><br><span class="line">    const _ = require(&quot;lodash&quot;);</span><br><span class="line">    export const RangePickCondition = forwardRef((props, ref) =&gt; &#123;</span><br><span class="line">    const [startTime, setStartTime] = useState(0);</span><br><span class="line">    const [endTime, setEndTime] = useState(0);</span><br><span class="line">    const [regTime, setRegTime] = useState(0);</span><br><span class="line">    const type = _.get(props, &quot;type&quot;);</span><br><span class="line">    useImperativeHandle(ref, () =&gt; (&#123;</span><br><span class="line">        startTime: _.toNumber(moment(startTime).format(&quot;X&quot;)),</span><br><span class="line">        endTime: _.toNumber(moment(endTime).format(&quot;X&quot;)),</span><br><span class="line">        regTime: _.toNumber(moment(regTime).format(&quot;X&quot;)),</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    return useObserver(() =&gt; (</span><br><span class="line">        &lt;&gt;</span><br><span class="line">        &#123;type == &quot;needReg&quot; ? (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            &lt;Button type=&quot;primary&quot;&gt;注册时间&lt;/Button&gt;</span><br><span class="line">            &lt;Divider type=&quot;vertical&quot; /&gt;</span><br><span class="line">            &lt;DatePicker</span><br><span class="line">                showTime</span><br><span class="line">                format=&quot;YYYY-MM-DD HH:mm:ss&quot;</span><br><span class="line">                onChange=&#123;(dates: any, dateStrings: any[]) =&gt; &#123;</span><br><span class="line">                setRegTime(dates.valueOf());</span><br><span class="line">                ComponentStore.rangePickRegtime = _.toNumber(</span><br><span class="line">                    moment(regTime).format(&quot;X&quot;)</span><br><span class="line">                );</span><br><span class="line">                &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        ) : (</span><br><span class="line">            []</span><br><span class="line">        )&#125;</span><br><span class="line">        &lt;Button type=&quot;primary&quot;&gt;时间范围&lt;/Button&gt;</span><br><span class="line">        &lt;Divider type=&quot;vertical&quot; /&gt;</span><br><span class="line">        &lt;RangePicker</span><br><span class="line">            format=&quot;YYYY-MM-DD HH:mm:ss&quot;</span><br><span class="line">            placeholder=&#123;[&quot;开始时间&quot;, &quot;结束时间&quot;]&#125;</span><br><span class="line">            onChange=&#123;(dates: any, dateStrings: any[]) =&gt; &#123;</span><br><span class="line">            setStartTime(dates[0].valueOf());</span><br><span class="line">            setEndTime(dates[1].valueOf());</span><br><span class="line">            ComponentStore.rangePickStartTime = _.toNumber(</span><br><span class="line">                moment(dates[0].valueOf()).format(&quot;X&quot;)</span><br><span class="line">            );</span><br><span class="line">            ComponentStore.rangePickEndTime = _.toNumber(</span><br><span class="line">                moment(dates[1].valueOf()).format(&quot;X&quot;)</span><br><span class="line">            );</span><br><span class="line">            &#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;/&gt;</span><br><span class="line">    ));</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">export default RangePickCondition;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>1. 但是我尝试在这个子组件中再加上一个小的子组件时候，用ref就会发现初始值出现延迟的问题，连续点击按钮两次，才能够获得正确数值，第一次只会获取这个useref定义的初始默认值。期间考虑了使用usecontext，然而效果依然不佳
+2. 最终想了想，这种传值还是只限于两层的父子组件中可以尝试，如果涉及多层，我还是决定引入mobx来作为统一的存储。这样就能够自如的进行组件的组合拼接，而不再去通过props，ref这些去做深层次的数值传递。因为看到大家一般使用也是作为控件的简单操作会引入。</code></pre>
       
       <!-- reward -->
       
@@ -179,14 +175,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/27/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/07/06/react%E6%84%9F%E6%83%B3/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%97%A5%E8%AE%B0/" rel="tag">技术日记</a></li></ul>
 
 
     </footer>
@@ -197,19 +193,19 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/06/01/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" class="article-nav-link">
+      <a href="/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            docker mongo 异常崩溃后
+            2021第一篇
           
         </div>
       </a>
     
     
-      <a href="/2020/05/26/git%E8%AE%B0%E5%BD%95/" class="article-nav-link">
+      <a href="/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">git 记录</div>
+        <div class="article-nav-title">分隔链表</div>
       </a>
     
   </nav>
@@ -258,7 +254,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2020
+        2020-2021
         <i class="ri-heart-fill heart_icon"></i> John Doe
       </li>
     </ul>
