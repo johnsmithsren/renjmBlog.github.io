@@ -1,305 +1,236 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus 评论","order":-1},"livere":{"text":"LiveRe 评论","order":-2}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"atom.xml"};
+  </script>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="日常随笔" type="application/atom+xml" />
-
-
-
-
-
-
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="日常随笔">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="日常随笔">
-<meta property="og:locale">
-<meta property="article:author" content="John Doe">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="renjm">
 <meta name="twitter:card" content="summary">
 
+<link rel="canonical" href="http://example.com/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://yoursite.com/"/>
-
-
-
-
-
   <title>日常随笔</title>
   
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77162231-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-77162231-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0442bffd067501ab6af54ee3386c07fd";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+<link rel="alternate" href="/atom.xml" title="日常随笔" type="application/atom+xml">
+</head>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">日常随笔</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">日常随笔</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
   </div>
 </div>
 
+
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-2020">
-          <a href="/2020/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
-            
-            2020
-          </a>
-        </li>
-      
-        
+  <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-fa fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-fa fa-tags"></i>标签</a>
 
-  
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
- </div>
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/johnsmithsren" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content index posts-expand">
             
-  <section id="posts" class="posts-expand">
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/" itemprop="url">质量属性及相应设计策略</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">质量属性及相应设计策略</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-07T16:44:28+08:00">
-                2021-07-07
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="创建时间：2021-07-07 16:44:28 / 修改时间：17:58:28" itemprop="dateCreated datePublished" datetime="2021-07-07T16:44:28+08:00">2021-07-07</time>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -307,131 +238,87 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <h3 id="质量属性"><a href="#质量属性" class="headerlink" title="质量属性"></a>质量属性</h3><ol>
+<li>性能<ul>
+<li>需要多长时间才能做出响应，或者系统能够处理的事件的个数。 代表参数：响应时间，吞吐量。 设计策略： 优先级队列，资源调度</li>
+</ul>
+</li>
+<li>可用性<ul>
+<li>系统能够正常运行的时间比例，通常用两次故障之间的时间长度或在出现故障系统能够恢复正常的速度来表示。 代表参数： 故障间隔时间，设计策略： 冗余，心跳线</li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>系统在向合法用户提供服务的同事能够阻止非授权用户使用的企图或是拒绝服务的能力，安全性可以划分为机密性，完整性，不可否认性。 设计策略： 追踪审计</li>
+</ul>
+</li>
+<li>可修改性<ul>
+<li>快速和较高的性能价格对系统进行变更的能力，通过考察变更的代价衡量可修改性。主要策略: 信息隐藏</li>
+</ul>
+</li>
+<li>可靠性<ul>
+<li>在发生错误的时候，还能够维持系统的功能特性的基本能力. 代表参数: MTTF，MTBF。 设计策略：冗余，心跳线</li>
+</ul>
+</li>
+</ol>
 
-      
-        
-          
-          质量属性
-性能
-需要多长时间才能做出响应，或者系统能够处理的事件的个数。 代表参数：响应时间，吞吐量。 设计策略： 优先级队列，资源调度
-
-
-可用性
-系统能够正常运行的时间比例，通常用两次故障之间的时间长度或在出现故障系统能够恢复正常的速度来表示。 代表参数： 故障间隔时间，设计策略： 冗余，心跳线
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">redis数据类型</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-title-link" itemprop="url">redis数据类型</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-07T11:54:37+08:00">
-                2021-07-07
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="创建时间：2021-07-07 11:54:37 / 修改时间：12:01:42" itemprop="dateCreated datePublished" datetime="2021-07-07T11:54:37+08:00">2021-07-07</time>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -439,128 +326,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <ul>
+<li>string,hash,set ,zset,list</li>
+</ul>
 
-      
-        
-          
-          
-string,hash,set ,zset,list
-
-
-          
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" itemprop="url">数据存储方式</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">数据存储方式</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-07T11:32:40+08:00">
-                2021-07-07
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="创建时间：2021-07-07 11:32:40 / 修改时间：16:42:04" itemprop="dateCreated datePublished" datetime="2021-07-07T11:32:40+08:00">2021-07-07</time>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -568,130 +395,91 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <h3 id="小小抄"><a href="#小小抄" class="headerlink" title="小小抄"></a>小小抄</h3><ol>
+<li>数组的存储方式主要为数组和链表<blockquote>
+<p>散列表通过散列函数吧键映射到一个大数组中，不过需要考虑解决散列冲突<br>树用数组实现就是堆，因为堆是一个完全二叉树，用数组存储不需要节点指针。用链表表示，会衍生出巧妙的设计，比如二叉搜索树，avl树，红黑树</p>
+</blockquote>
+</li>
+<li>数组的优点: 可以随机访问，通过索引快速找到对应元素，相对而言，链表不支持随机访问，也就是通过索无法快速找到对应元素，主要因为链表需要通过顺序访问，通过前驱或者后继去依次访问表内元素。</li>
+<li>链表的优点: 不需要考虑扩容，方便插入和删除元素，如果知道某一个元素的前驱和后驱，插入和删除的时间复杂度就是o(1)</li>
+</ol>
+<h3 id="何为动态规划"><a href="#何为动态规划" class="headerlink" title="何为动态规划"></a>何为动态规划</h3><ol>
+<li>动态规划问题的一般形式是求最值，求解动态规划的核心是穷举</li>
+<li>重叠子问题，最优子结构，状态转移返程就是动态规划三要素</li>
+<li>方法论： 明确base case。明确状态，明确选择，定义数组或者函数的含义<h4 id="斐波那契数列"><a href="#斐波那契数列" class="headerlink" title="斐波那契数列"></a>斐波那契数列</h4></li>
+<li>暴力递归(什么是递归，是重复调用函数自身来实现循环，迭代是函数内部某段代码实现循环，迭代中当前循环的结果会作为下次循环的初始值)<ul>
+<li>代码低效，主要原因在于出现大量的重复计算，比如f(20) = f(19)+f(18),f(19) = f(18)+ f(17),  f(18) 会被算两次，后面其他数字也是重复计算，这还只是f(20)，如果是更加大的数值，那么计算量会非常庞大。 这个也就是<strong> 重叠子问题 </strong></li>
+<li>递归算法的时间复杂度是子问题的个数乘以一个子问题需要的时间，所以子问题的个数为 2^n ,子问题时间的话，是 o(1) 因为就一个加法<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int <span class="function"><span class="title">fib</span>(<span class="params">int N</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (N == <span class="number">1</span> || N == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> fib(N - <span class="number">1</span>) + fib(N - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li>优化算法，带备忘录的递归算法<ul>
+<li>最终的时间复杂度为o(n)</li>
+<li>这个和动态规划的解法也差不多了， 这个是自顶向下，动态规划一般是自底向上<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int fib(int N) &#123;</span><br><span class="line">    if (N &lt; 1) return 0;</span><br><span class="line">    // 备忘录全初始化为 0</span><br><span class="line">    vector&lt;int&gt; memo(N + 1, 0);</span><br><span class="line">    // 进行带备忘录的递归</span><br><span class="line">    return helper(memo, N);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int helper(vector&lt;int&gt;&amp; memo, int n) &#123;</span><br><span class="line">    // base case</span><br><span class="line">    if (n == 1 || n == 2) return 1;</span><br><span class="line">    // 已经计算过</span><br><span class="line">    if (memo[n] != 0) return memo[n];</span><br><span class="line">    memo[n] = helper(memo, n - 1) + helper(memo, n - 2);</span><br><span class="line">    return memo[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
 
-      
-        
-          
-          小小抄
-数组的存储方式主要为数组和链表
-散列表通过散列函数吧键映射到一个大数组中，不过需要考虑解决散列冲突树用数组实现就是堆，因为堆是一个完全二叉树，用数组存储不需要节点指针。用链表表示，会衍生出巧妙的设计，比如二叉搜索树，avl树，红黑树
-
-
-数组的优点: 可以随机访问，通过索引快速找到对应元素，
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/" itemprop="url">2021第一篇</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/" class="post-title-link" itemprop="url">2021第一篇</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-06T17:11:22+08:00">
-                2021-07-06
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="创建时间：2021-07-06 17:11:22 / 修改时间：17:17:54" itemprop="dateCreated datePublished" datetime="2021-07-06T17:11:22+08:00">2021-07-06</time>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -699,126 +487,72 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p>21年第一篇感想，实在是太懒了，去年考研差了分数线一百多分，令人无比沮丧，然后又以此为借口没有准备换工作，然后发现通货膨胀的厉害，现阶段的工资已经快要变为行业底层，所以，准备到年底开始考虑面试换工作的事宜。<a target="_blank" rel="noopener" href="https://labuladong.gitee.io/">贴一个朋友推荐的刷题链接</a> ，读了一下，感觉作者写的挺有趣，令人有往下学习的动力，点赞。</p>
+<p>当然，去年的另外一个目标软件设计师证书顺利完成，还算是令人欣慰的。今年准备继续考研和软件架构师的考试准备。这个架构师说实话大家都说没啥用处，除非去事业单位，互联网公司一般是不看的，我深以为然，不过我这人一向是后知后觉，那时候也并没有深思熟虑过，只是想着闲着也是闲着。不过备考了之后才发现，这个架构师也不算是一无是处，其中的内容是比较陈旧，但是毕竟是作为高级软件工程师的证书，他的内容，学习和考虑的东西，更多的是有上层建筑的味道，战略意味更加浓一些，所以还是收益颇多。</p>
+<ol>
+<li>考研这块其实也是深切的感觉到了自己的无知，大学时候也会上政治课，但是，直到现在需要考研，才发现马克思主义的理论真的蛮有道理的，无关政党，这个理论给人的感觉很有哲理。</li>
+<li>计算机方面也是知道了原来有这么多细节题目，计算题，仿佛大学白上了。不过后来一想，凡事需温故而知新，也就了然了。</li>
+<li>之后，会继续保持每天学习算法的，这次要去一个大点的公司，这家公司主要是给我自己一种停滞的感觉，较为边缘，没什么新内容。我还是喜欢工作促进学习的方式，让我完全依靠兴趣去探索新东西，我不太适应。其他方面，这家公司我还是比较喜欢的，哎，也正因为如此，才又蹉跎了一年。</li>
+</ol>
 
-      
-        
-          
-          21年第一篇感想，实在是太懒了，去年考研差了分数线一百多分，令人无比沮丧，然后又以此为借口没有准备换工作，然后发现通货膨胀的厉害，现阶段的工资已经快要变为行业底层，所以，准备到年底开始考虑面试换工作的事宜。贴一个朋友推荐的刷题链接 ，读了一下，感觉作者写的挺有趣，令人有往下学习的动力，点赞。
-当然，
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2021/07/06/2021%E7%AC%AC%E4%B8%80%E7%AF%87/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/06/react%E6%84%9F%E6%83%B3/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/06/react%E6%84%9F%E6%83%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/06/react%E6%84%9F%E6%83%B3/" itemprop="url">react感想</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/06/react%E6%84%9F%E6%83%B3/" class="post-title-link" itemprop="url">react感想</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-06T16:45:11+08:00">
-                2021-07-06
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
+              <time title="创建时间：2021-07-06 16:45:11 / 修改时间：17:11:32" itemprop="dateCreated datePublished" datetime="2021-07-06T16:45:11+08:00">2021-07-06</time>
+            </span>
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -826,148 +560,81 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <ul>
+<li>关于react的感想<br>  1.就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。用的antd的组件，只需要针对部分做样式简单的调整<br>  2.比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑暂时涉及不到。最近碰到的问题主要就是关于状态传递的，父组件如何传递状态给子组件，子组件中再嵌套子组件的情况下，内容传递的一致性，同时还要考虑代码的简洁。我发现，useref这些对于一层父子组件来说，还是比较直观，可靠的。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">    import React, &#123; forwardRef, useImperativeHandle, useState &#125; from &quot;react&quot;;</span><br><span class="line">    import &#123; Button, DatePicker, Divider &#125; from &quot;antd&quot;;</span><br><span class="line">    import &#123; useObserver &#125; from &quot;mobx-react&quot;;</span><br><span class="line">    import ComponentStore from &quot;store/ComponentStore&quot;;</span><br><span class="line">    const &#123; RangePicker &#125; = DatePicker;</span><br><span class="line">    import moment from &quot;moment&quot;;</span><br><span class="line">    const _ = require(&quot;lodash&quot;);</span><br><span class="line">    export const RangePickCondition = forwardRef((props, ref) =&gt; &#123;</span><br><span class="line">    const [startTime, setStartTime] = useState(0);</span><br><span class="line">    const [endTime, setEndTime] = useState(0);</span><br><span class="line">    const [regTime, setRegTime] = useState(0);</span><br><span class="line">    const type = _.get(props, &quot;type&quot;);</span><br><span class="line">    useImperativeHandle(ref, () =&gt; (&#123;</span><br><span class="line">        startTime: _.toNumber(moment(startTime).format(&quot;X&quot;)),</span><br><span class="line">        endTime: _.toNumber(moment(endTime).format(&quot;X&quot;)),</span><br><span class="line">        regTime: _.toNumber(moment(regTime).format(&quot;X&quot;)),</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    return useObserver(() =&gt; (</span><br><span class="line">        &lt;&gt;</span><br><span class="line">        &#123;type == &quot;needReg&quot; ? (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">            &lt;Button type=&quot;primary&quot;&gt;注册时间&lt;/Button&gt;</span><br><span class="line">            &lt;Divider type=&quot;vertical&quot; /&gt;</span><br><span class="line">            &lt;DatePicker</span><br><span class="line">                showTime</span><br><span class="line">                format=&quot;YYYY-MM-DD HH:mm:ss&quot;</span><br><span class="line">                onChange=&#123;(dates: any, dateStrings: any[]) =&gt; &#123;</span><br><span class="line">                setRegTime(dates.valueOf());</span><br><span class="line">                ComponentStore.rangePickRegtime = _.toNumber(</span><br><span class="line">                    moment(regTime).format(&quot;X&quot;)</span><br><span class="line">                );</span><br><span class="line">                &#125;&#125;</span><br><span class="line">            /&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        ) : (</span><br><span class="line">            []</span><br><span class="line">        )&#125;</span><br><span class="line">        &lt;Button type=&quot;primary&quot;&gt;时间范围&lt;/Button&gt;</span><br><span class="line">        &lt;Divider type=&quot;vertical&quot; /&gt;</span><br><span class="line">        &lt;RangePicker</span><br><span class="line">            format=&quot;YYYY-MM-DD HH:mm:ss&quot;</span><br><span class="line">            placeholder=&#123;[&quot;开始时间&quot;, &quot;结束时间&quot;]&#125;</span><br><span class="line">            onChange=&#123;(dates: any, dateStrings: any[]) =&gt; &#123;</span><br><span class="line">            setStartTime(dates[0].valueOf());</span><br><span class="line">            setEndTime(dates[1].valueOf());</span><br><span class="line">            ComponentStore.rangePickStartTime = _.toNumber(</span><br><span class="line">                moment(dates[0].valueOf()).format(&quot;X&quot;)</span><br><span class="line">            );</span><br><span class="line">            ComponentStore.rangePickEndTime = _.toNumber(</span><br><span class="line">                moment(dates[1].valueOf()).format(&quot;X&quot;)</span><br><span class="line">            );</span><br><span class="line">            &#125;&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;/&gt;</span><br><span class="line">    ));</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">export default RangePickCondition;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>1. 但是我尝试在这个子组件中再加上一个小的子组件时候，用ref就会发现初始值出现延迟的问题，连续点击按钮两次，才能够获得正确数值，第一次只会获取这个useref定义的初始默认值。期间考虑了使用usecontext，然而效果依然不佳
+2. 最终想了想，这种传值还是只限于两层的父子组件中可以尝试，如果涉及多层，我还是决定引入mobx来作为统一的存储。这样就能够自如的进行组件的组合拼接，而不再去通过props，ref这些去做深层次的数值传递。因为看到大家一般使用也是作为控件的简单操作会引入。
+</code></pre>
 
-      
-        
-          
-          
-关于react的感想  1.就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。用的antd的组件，只需要针对部分做样式简单的调整  2.比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/06/react%E6%84%9F%E6%83%B3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2021/07/06/react%E6%84%9F%E6%83%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/" itemprop="url">分隔链表</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">分隔链表</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-21T19:14:58+08:00">
-                2020-07-21
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
+              <time title="创建时间：2020-07-21 19:14:58 / 修改时间：19:16:02" itemprop="dateCreated datePublished" datetime="2020-07-21T19:14:58+08:00">2020-07-21</time>
+            </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
                 </span>
-
-                
-                
-              
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -975,148 +642,76 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-list/">原题链接</a></p>
+<h3 id="用了数据来存储，感觉不得要领，只是通过测试"><a href="#用了数据来存储，感觉不得要领，只是通过测试" class="headerlink" title="用了数据来存储，感觉不得要领，只是通过测试"></a>用了数据来存储，感觉不得要领，只是通过测试</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @param &#123;number&#125; x</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var partition = function(head, x) &#123;</span><br><span class="line">    let current = head</span><br><span class="line">    let bigArray = []</span><br><span class="line">    let smallArray = []</span><br><span class="line">    while(current)&#123;</span><br><span class="line">        if(x&gt;current.val)&#123;</span><br><span class="line">            smallArray.push(current.val)</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            bigArray.push(current.val)</span><br><span class="line">        &#125;</span><br><span class="line">        current = current.next</span><br><span class="line">    &#125;</span><br><span class="line">    smallArray  = smallArray.concat(bigArray)</span><br><span class="line">     current  = head</span><br><span class="line">    let i = 0</span><br><span class="line">    while(current)&#123;</span><br><span class="line">        current.val = smallArray[i]</span><br><span class="line">        current = current.next</span><br><span class="line">        i++</span><br><span class="line">    &#125;</span><br><span class="line">    return head</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-        
-          
-          原题链接
-用了数据来存储，感觉不得要领，只是通过测试12345678910111213141516171819202122232425262728293031323334/** * Definition for singly-linked list. * function ListNode(val)
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2020/07/21/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/" itemprop="url">好数对的数目</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/" class="post-title-link" itemprop="url">好数对的数目</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-21T19:00:46+08:00">
-                2020-07-21
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
+              <time title="创建时间：2020-07-21 19:00:46 / 修改时间：19:01:55" itemprop="dateCreated datePublished" datetime="2020-07-21T19:00:46+08:00">2020-07-21</time>
+            </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
                 </span>
-
-                
-                
-              
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1124,148 +719,76 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/number-of-good-pairs/">原题链接</a></p>
+<h3 id="基础题"><a href="#基础题" class="headerlink" title="基础题"></a>基础题</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number[]&#125; nums</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span><br><span class="line">var numIdenticalPairs = function(nums) &#123;</span><br><span class="line">    let end = nums.length-1</span><br><span class="line">    let start = 0</span><br><span class="line">    let total = 0</span><br><span class="line">    while(start!=nums.length-1)&#123;</span><br><span class="line">        if(nums[start]===nums[end])&#123;</span><br><span class="line">            total++</span><br><span class="line">        &#125;</span><br><span class="line">        end--</span><br><span class="line">        if(end==start)&#123;</span><br><span class="line">            end=nums.length-1</span><br><span class="line">            start++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return total</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-        
-          
-          原题链接
-基础题1234567891011121314151617181920/** * @param &#123;number[]&#125; nums * @return &#123;number&#125; */var numIdenticalPairs = function(nums) &#
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2020/07/21/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" itemprop="url">排序列表</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" class="post-title-link" itemprop="url">排序列表</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-15T16:41:45+08:00">
-                2020-07-15
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
+              <time title="创建时间：2020-07-15 16:41:45 / 修改时间：16:43:42" itemprop="dateCreated datePublished" datetime="2020-07-15T16:41:45+08:00">2020-07-15</time>
+            </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
                 </span>
-
-                
-                
-              
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1273,148 +796,78 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sort-list/">原题链接</a></p>
+<h3 id="应该是基础的简单排序吧"><a href="#应该是基础的简单排序吧" class="headerlink" title="应该是基础的简单排序吧"></a>应该是基础的简单排序吧</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var sortList = function(head) &#123;</span><br><span class="line">    let slow = head</span><br><span class="line">    let fast = head</span><br><span class="line">    let temp</span><br><span class="line">    while(slow)&#123;</span><br><span class="line">        while(fast)&#123;</span><br><span class="line">            if(slow.val&gt;fast.val)&#123;</span><br><span class="line">                temp = slow.val</span><br><span class="line">                slow.val = fast.val</span><br><span class="line">                fast.val  = temp</span><br><span class="line">            &#125;</span><br><span class="line">            fast = fast.next</span><br><span class="line">        &#125;</span><br><span class="line">        slow  = slow.next</span><br><span class="line">        fast = slow</span><br><span class="line">    &#125;</span><br><span class="line">    return head</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-        
-          
-          原题链接
-应该是基础的简单排序吧123456789101112131415161718192021222324252627282930/** * Definition for singly-linked list. * function ListNode(val) &#123; *     this
-          ...
+<p>这个速度很慢</p>
+
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2020/07/15/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/15/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/15/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/" itemprop="url">数组异或操作</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/15/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">数组异或操作</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-15T14:41:25+08:00">
-                2020-07-15
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
+              <time title="创建时间：2020-07-15 14:41:25 / 修改时间：14:43:11" itemprop="dateCreated datePublished" datetime="2020-07-15T14:41:25+08:00">2020-07-15</time>
+            </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
                 </span>
-
-                
-                
-              
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1422,148 +875,78 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/xor-operation-in-an-array/">原题链接</a></p>
+<h2 id="关键在于首先设置头"><a href="#关键在于首先设置头" class="headerlink" title="关键在于首先设置头"></a>关键在于首先设置头</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param &#123;number&#125; n</span><br><span class="line"> * @param &#123;number&#125; start</span><br><span class="line"> * @return &#123;number&#125;</span><br><span class="line"> */</span><br><span class="line">var xorOperation = function(n, start) &#123;</span><br><span class="line">    let sum =start;</span><br><span class="line">    let nums =[]</span><br><span class="line">    let i =1</span><br><span class="line">    while(i&lt;n)&#123;</span><br><span class="line">        sum = sum ^ (start + 2*(i))</span><br><span class="line">        i++</span><br><span class="line">    &#125;</span><br><span class="line">    return sum</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-        
-          
-          原题链接
-关键在于首先设置头123456789101112131415/** * @param &#123;number&#125; n * @param &#123;number&#125; start * @return &#123;number&#125; */var xorOperation
-          ...
+<p>这个简单，也没啥好说的</p>
+
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/07/15/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2020/07/15/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
       
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="日常随笔">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" itemprop="url">旋转链表</a></h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">旋转链表</a>
+        </h2>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
+              <span class="post-meta-item-text">发表于</span>
               
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-07T17:49:33+08:00">
-                2020-07-07
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
+              <time title="创建时间：2020-07-07 17:49:33 / 修改时间：18:33:34" itemprop="dateCreated datePublished" datetime="2020-07-07T17:49:33+08:00">2020-07-07</time>
+            </span>
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
+              <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
-                  </a>
+                  <a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
                 </span>
-
-                
-                
-              
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
 
           
 
         </div>
       </header>
-    
 
     
     
@@ -1571,60 +954,36 @@ string,hash,set ,zset,list
     <div class="post-body" itemprop="articleBody">
 
       
-      
+          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/rotate-list/">原题链接</a></p>
+<p>思路的话<br>第一步找到链表的总长度，然后 k 取余总长度，获取真实移动步<br>第二步根据移动步数，打断链表<br>第三步将打断后的链表重新拼接 然后输出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @param &#123;number&#125; k</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var rotateRight = function(head, k) &#123;</span><br><span class="line">  if(!head)&#123;return head&#125;</span><br><span class="line">  let current = head</span><br><span class="line">  let second = head</span><br><span class="line">  let tmp = null</span><br><span class="line">  let total = 0</span><br><span class="line">  while (current) &#123;</span><br><span class="line">    total++</span><br><span class="line">    if (!current.next) &#123;</span><br><span class="line">      break</span><br><span class="line">    &#125;</span><br><span class="line">    current = current.next</span><br><span class="line">  &#125;</span><br><span class="line">  k = k % total</span><br><span class="line">  console.log(k)</span><br><span class="line">  while (k++ &lt; total) &#123;</span><br><span class="line">    if(k === total)&#123;</span><br><span class="line">        tmp = second.next;</span><br><span class="line">        second.next= null</span><br><span class="line">    &#125;</span><br><span class="line">    second = second.next</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(tmp)</span><br><span class="line">  if(!tmp)&#123;return head&#125;</span><br><span class="line">  let tmp2= tmp</span><br><span class="line">  while(tmp2)&#123;</span><br><span class="line">      if(!tmp2.next)&#123;</span><br><span class="line">          tmp2.next = head</span><br><span class="line">          break</span><br><span class="line">      &#125;</span><br><span class="line">      tmp2=tmp2.next</span><br><span class="line">  &#125;</span><br><span class="line">  return tmp</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
-        
-          
-          原题链接
-思路的话第一步找到链表的总长度，然后 k 取余总长度，获取真实移动步第二步根据移动步数，打断链表第三步将打断后的链表重新拼接 然后输出
-12345678910111213141516171819202122232425262728293031323334353637383940414243
-          ...
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+            <div class="post-button">
+              <a class="btn" href="/2020/07/07/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           <!--/noindex-->
         
       
     </div>
-    
-    
-    
 
     
-
     
-
     
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
+      <footer class="post-footer">
         <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-
-    
-  </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1632,265 +991,186 @@ string,hash,set ,zset,list
           </div>
           
 
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives">
-              
-                  <span class="site-state-item-count">28</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">分类</span>
-                
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
-                  <span class="site-state-item-name">标签</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
   }
 </script>
 
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">renjm</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/about/#%E8%81%94%E7%B3%BB%E6%88%91" title="Email → &#x2F;about&#x2F;#联系我"><i class="fa fa-fw fa-fa fa-envelope"></i>Email</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/johnsmithsren" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;johnsmithsren" rel="noopener" target="_blank"><i class="fa fa-fw fa-fab fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">renjm</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
 
 
 
 
   
-
-
-
-
-
-  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -1903,22 +1183,6 @@ string,hash,set ,zset,list
 
 
 
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
 
   
 
