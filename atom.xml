@@ -165,7 +165,7 @@
     <title>redis数据类型</title>
     <url>/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<ul>
-<li>string,hash,set ,zset,list,hset<span id="more"></span></li>
+<li>string,hash,set ,zset,list,hset,get<span id="more"></span></li>
 </ul>
 ]]></content>
       <tags>
