@@ -312,15 +312,19 @@
       
         
           
-            <h2 id="开始刷题"><a href="#开始刷题" class="headerlink" title="开始刷题"></a>开始刷题</h2><ol>
-<li>给定一个整数数组 nums  和一个目标值 target，请你在该数组中找出和为目标值的那   两个   整数，并返回他们的数组下标。</li>
-</ol>
-<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  var twoSum = function(nums, target) &#123;</span><br><span class="line">    let map=new Map()</span><br><span class="line">    let result</span><br><span class="line">    for(let key in nums)&#123;</span><br><span class="line">        let value = nums[key]</span><br><span class="line">        result = target-value</span><br><span class="line">        if(map.has(result))&#123;</span><br><span class="line">            return [map.get(result),key]</span><br><span class="line">        &#125;</span><br><span class="line">        map.set(value,key)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          开始刷题
+给定一个整数数组 nums  和一个目标值 target，请你在该数组中找出和为目标值的那   两个   整数，并返回他们的数组下标。
 
-<p>这道题开始自然是 for 循环，然后超时。。。愚蠢的我，一点新意都没有，然后就是采用 map 形式，避免多次遍历，然后就没有超时了。这道题界解决信心爆棚，随机了一道二叉树的题目，然后崩溃。。。明天会看下别人的题解，然后自行把二叉树用自己的语言写一遍，希望能够弥补自身算法逻辑缺少训练的弊端。</p>
-
-          
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
+12345678910111213  var twoSum = functio
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/27/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -438,30 +442,20 @@
       
         
           
-            <h2 id="git-学习"><a href="#git-学习" class="headerlink" title="git 学习"></a>git 学习</h2><p>惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下</p>
-<p>在一行显示提交信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure>
+          git 学习惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下
+在一行显示提交信息
+1git log --oneline
 
-<p>根据日期查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --since=&quot;2020.03.12&quot; --until=&quot;2020.04.18&quot;</span><br></pre></td></tr></table></figure>
-
-<p>根据提交人汇总</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git short log</span><br></pre></td></tr></table></figure>
-
-<p>掘金那位提供的一个炫酷使用版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --abbrev-commit --date=relative</span><br></pre></td></tr></table></figure>
-
-<p>对应的别名设置，感觉蛮实用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.lg &quot;log --graph --pretty=format:&#x27;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#x27; --abbrev-commit --date=relative&quot;</span><br></pre></td></tr></table></figure>
-
-<p>搜索</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --grep=&#x27;测试&#x27; --oneline</span><br></pre></td></tr></table></figure>
-
-<p>–abbrev=<n> 显示 hash 值的前几位，具体 不过这个感觉得配合–oneline 使用，一般的 git log –abbrev=10 不起效果<br><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-log">git-log</a><br><a target="_blank" rel="noopener" href="https://juejin.im/post/5b3f05cae51d4519115cd04a">掘金文章</a></p>
-<p>之后几篇应该都会去学习 crawlab 这个开源项目，有我感兴趣的 go，k8s 还有 docker 部署的流程，满满的干货样子先贴上链接<br><a target="_blank" rel="noopener" href="https://github.com/crawlab-team/crawlab">crawlab</a></p>
-<p>还有一个 nodejs 版本的 craw，也会一并学习。<br><a target="_blank" rel="noopener" href="https://github.com/MrXujiang/crawel">apify</a></p>
-
-          
+根据日期查询
+1gi
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/26/git%E8%AE%B0%E5%BD%95/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -579,8 +573,15 @@
       
         
           
-            <h2 id="搭建-hexo-选在-ayer-也碰到了图片加载问题，这个就需要-f12-慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有-cdn-缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。"><a href="#搭建-hexo-选在-ayer-也碰到了图片加载问题，这个就需要-f12-慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有-cdn-缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。" class="headerlink" title="搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。"></a>搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。</h2>
-          
+          搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/26/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -698,15 +699,16 @@
       
         
           
-            <h2 id="给博客添加-Gitalk"><a href="#给博客添加-Gitalk" class="headerlink" title="给博客添加 Gitalk"></a>给博客添加 Gitalk</h2><ul>
-<li>valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。</li>
-</ul>
-<ul>
-<li>然后就是用 gitalk 了。这个就是比较简单了，用的人也还行，主要就两个点，就是一开始可以新建一个仓库作为评论存放的地点，我感觉不新建也行，因为其实这个 gitalk 只是用到了 issue 区域，所以应该和你部署的博客仓库一个地址也行。然后就是按照指导去创建一个 oauth application 了，获取对应的 client secret，然后就成功了，这个本地查看好像不行，得部署了才正常，我这边是这个情况，会报 network error</li>
-</ul>
-<p>不过呢感觉有点不够好的地方就是这个 gitalk 是需要 github 登陆之后才能评论的，要么你只能看评论，感觉要是有匿名就好了。</p>
-
-          
+          给博客添加 Gitalk
+valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/26/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -824,20 +826,27 @@
       
         
           
-            <h3 id="宝宝百日啦"><a href="#宝宝百日啦" class="headerlink" title="宝宝百日啦"></a>宝宝百日啦</h3><p>唯一的唯一，希望宝宝身体健康，对于宝宝的期望是能够健康成长</p>
-<p>以后等宝宝长大一点，一定要把他拉过来看看这个记录，哈哈哈</p>
-<p>好啦，下面奉上大图</p>
-<ul>
-<li>萌照 1</li>
-</ul>
-<img title="宝宝百日" alt="宝宝百日" class="babyHundredDayCongratulation" src="http://renjmBlog.top/static/images/babyHundredDayCongratulation.jpg?imageView2/2/w/600">
+          宝宝百日啦唯一的唯一，希望宝宝身体健康，对于宝宝的期望是能够健康成长
+以后等宝宝长大一点，一定要把他拉过来看看这个记录，哈哈哈
+好啦，下面奉上大图
 
-<ul>
-<li>萌照 2</li>
-</ul>
-<img title="宝宝萌萌哒" alt="时间记不得了，百日前几周吧" class="babySmileSweet" src="http://renjmBlog.top/static/images/babySmileSweet.jpg?imageView2/2/w/600">
+萌照 1
+
+
+
+
+萌照 2
+
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/25/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -955,26 +964,16 @@
       
         
           
-            <h3 id="最近碰到一个技术问题，就是现在做的平台需要提供日志分析"><a href="#最近碰到一个技术问题，就是现在做的平台需要提供日志分析" class="headerlink" title="最近碰到一个技术问题，就是现在做的平台需要提供日志分析"></a>最近碰到一个技术问题，就是现在做的平台需要提供日志分析</h3><ul>
-<li><p>最初的想法就是简单的mongo查询，然后恶补了一下聚合查询的方式，基本解决了最初的需求，然后发现一旦采用lookup会特别慢，感觉和索引有啥关系之类，得设置一下，才能够联表查询。所以改写了原先的写法，非常蠢的先查询一个表，找到符合的例如uuid之类，然后通$in查询，速度提升了一些，但是这个方法其实还是蛮致命的，如果用户级数上升到十万百万级别，到时候单纯的数据存储查询uuid估计是不行的，所以后续还得改进，应该还是得走lookup那条路。</p>
-</li>
-<li><p>然后现在遇到了另一个问题，就算现在的测试用户数量只有可怜的万人级别，日活跃用户千人的级别，生成的日志数量依然达到了2千万条的级别，一旦跨日期查询，还是需要等待几十秒，这个实在是不能忍，于是乎产生了另外一个想法，就是采用redis的缓存机制来减少和数据库的交互，想法也很简单，就是数据库交互时间总归要大于内存查询时间。</p>
-</li>
-<li><p>平台使用的技术栈就是react，koa。然后语言是typescript，node版本用的13吧，现在node都是async，await了嘛，有时候都有点感觉不到异步了。。。习惯性await了，这个时候才发现redis那边暂时还不支持async，await。也不是完全不支持，我的意思是stream方式。因为我想要缓存日志信息，就是根据日期，玩家id，还有指定条目，去缓存玩家的使用数值，大概这样流程，然后就涉及到遍历key，谷歌一番，首先解决方法不多，大多是采用额外插件来做这个redis。幸好看到一个人说可以采用node新特性解决，然后我就是试了下，是可以打出key，就是下面这个，不过不知道还有没有坑，后续会进行数据校验，看看是否真的可以</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let uuidList = [];</span><br><span class="line">var stream = RedisStore.redis.scanStream(&#123;</span><br><span class="line">  // only returns keys following the pattern of `user:*`</span><br><span class="line">  match: `*$&#123;currentDay&#125;:$&#123;this.radioValue&#125;`,</span><br><span class="line">  // returns approximately 100 elements per call</span><br><span class="line">  count: 100,</span><br><span class="line">&#125;);</span><br><span class="line">for await (let x of stream) &#123;</span><br><span class="line">  console.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>希望这次采用promise.all + redis 缓存辅助的方式能够让日志分析突破一下，为后续平台处理更大规模日志做准备。当然还得继续学习mongo看看聚合查询针对数组数据处理的方法，这样要是能够大部分运算都在mongo引擎内处理掉，也能够接受。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const allTask = [];</span><br><span class="line">await cursor.eachAsync((actionInfo) =&gt; &#123;</span><br><span class="line">  allTask.push(this.xxxx(xxx, xxx));</span><br><span class="line">&#125;);</span><br><span class="line">await Promise.all(allTask);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>如果这些路都走不通，依然扛不住大规模推广产生的用户日志数据分析的话，也许就得采用elk啥的，把日志搞到kibana上面去，不过我还是觉得能够在平台查看自然是最方便的，接到kibana就属于下策了</li>
-</ul>
-
-          
+          最近碰到一个技术问题，就是现在做的平台需要提供日志分析
+最初的想法就是简单的mongo查询，然后恶补了一下聚合查询的方式，基本解决了最初的需求，然后发现一旦采用lookup会特别慢，感觉和索引有啥关系之类，得设置一下，才能够联表查询。所以改写了原先的写法，非常蠢的先查询一个表，找到符合的例如uuid
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/23/redis-ts-nodejs/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1092,12 +1091,16 @@
       
         
           
-            <p>   之前尝试了用亚马逊服务器，自己写前端，后端，但是还整了个定时爬虫，每周去爬漫画海贼王漫画图片，然后转成pdf版本。效果其实蛮好，运行正常，然而后来亚马逊不是免费试用期1年嘛，后来到期了之后再用就比较贵了。</p>
-<p>   这次就尝试了这个hexo 加 github的模式，想想只要github不被墙，然后也不想再去自己折腾了，就简简单单专注博客吧，认真记录我的现在，我想这才是我的真正需求，原先的折腾更多的还有技术尝试的因素在内。</p>
-<p>   用的博客主题是ayer，还是蛮干净清爽的，给作者掌声，欢迎大家去使用这个主题。我的页尾也没改，大家可以直接链接过去。</p>
-<p>   现在作为一个react+koa的程序员，应该会开始记录日常技术积累，感想，应该还会有孩子的图片呀啥的。</p>
-
-          
+             之前尝试了用亚马逊服务器，自己写前端，后端，但是还整了个定时爬虫，每周去爬漫画海贼王漫画图片，然后转成pdf版本。效果其实蛮好，运行正常，然而后来亚马逊不是免费试用期1年嘛，后来到期了之后再用就比较贵了。
+   这次就尝试了这个hexo 加 github的模式，想想只要github不被墙，然后
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/22/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1215,21 +1218,15 @@
       
         
           
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/05/22/hello-world/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
