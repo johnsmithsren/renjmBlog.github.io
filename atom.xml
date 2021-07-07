@@ -446,9 +446,49 @@
 </li>
 </ol>
 <hr>
+<ol>
+<li>优化算法，带备忘录的递归算法<ul>
+<li>最终的时间复杂度为o(n)</li>
+<li>这个和动态规划的解法也差不多了， 这个是自顶向下，动态规划一般是自底向上<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int fib(int N) &#123;</span><br><span class="line">    if (N &lt; 1) return 0;</span><br><span class="line">    // 备忘录全初始化为 0</span><br><span class="line">    vector&lt;int&gt; memo(N + 1, 0);</span><br><span class="line">    // 进行带备忘录的递归</span><br><span class="line">    return helper(memo, N);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int helper(vector&lt;int&gt;&amp; memo, int n) &#123;</span><br><span class="line">    // base case</span><br><span class="line">    if (n == 1 || n == 2) return 1;</span><br><span class="line">    // 已经计算过</span><br><span class="line">    if (memo[n] != 0) return memo[n];</span><br><span class="line">    memo[n] = helper(memo, n - 1) + helper(memo, n - 2);</span><br><span class="line">    return memo[n];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
 ]]></content>
       <tags>
         <tag>算法相关</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>质量属性及相应设计策略</title>
+    <url>/2021/07/07/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/</url>
+    <content><![CDATA[<p>###质量属性</p>
+<ol>
+<li>性能<ul>
+<li>需要多长时间才能做出响应，或者系统能够处理的事件的个数。 代表参数：响应时间，吞吐量。 设计策略： 优先级队列，资源调度</li>
+</ul>
+</li>
+<li>可用性<ul>
+<li>系统能够正常运行的时间比例，通常用两次故障之间的时间长度或在出现故障系统能够恢复正常的速度来表示。 代表参数： 故障间隔时间，设计策略： 冗余，心跳线</li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>系统在向合法用户提供服务的同事能够阻止非授权用户使用的企图或是拒绝服务的能力，安全性可以划分为机密性，完整性，不可否认性。 设计策略： 追踪审计</li>
+</ul>
+</li>
+<li>可修改性<ul>
+<li>快速和较高的性能价格对系统进行变更的能力，通过考察变更的代价衡量可修改性。主要策略: 信息隐藏</li>
+</ul>
+</li>
+<li>可靠性<ul>
+<li>在发生错误的时候，还能够维持系统的功能特性的基本能力. 代表参数: MTTF，MTBF。 设计策略：冗余，心跳线</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>软件架构师</tag>
       </tags>
   </entry>
 </search>
