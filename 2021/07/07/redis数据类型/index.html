@@ -81,15 +81,15 @@
 
 
 
-<meta name="description" content="给博客添加 Gitalk valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。   然后就是用 gitalk 了。这个就是比较简">
+<meta name="description" content="string,hash,set ,zset,list">
 <meta property="og:type" content="article">
-<meta property="og:title" content="加入 gitalk 评论">
-<meta property="og:url" content="http://yoursite.com/2020/05/26/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/index.html">
+<meta property="og:title" content="redis数据类型">
+<meta property="og:url" content="http://yoursite.com/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="日常物语">
-<meta property="og:description" content="给博客添加 Gitalk valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。   然后就是用 gitalk 了。这个就是比较简">
+<meta property="og:description" content="string,hash,set ,zset,list">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-26T04:07:57.000Z">
-<meta property="article:modified_time" content="2020-06-18T03:40:38.848Z">
+<meta property="article:published_time" content="2021-07-07T03:54:37.000Z">
+<meta property="article:modified_time" content="2021-07-07T04:01:42.320Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="技术日记">
 <meta name="twitter:card" content="summary">
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/26/加入gitalk评论/"/>
+  <link rel="canonical" href="http://yoursite.com/2021/07/07/redis数据类型/"/>
 
 
 
 
 
-  <title>加入 gitalk 评论 | 日常物语</title>
+  <title>redis数据类型 | 日常物语</title>
   
 
 
@@ -245,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/07/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -262,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">加入 gitalk 评论</h1>
+          <h1 class="post-title" itemprop="name headline">redis数据类型</h1>
         
 
         <div class="post-meta">
@@ -274,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-26T12:07:57+08:00">
-                2020-05-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-07T11:54:37+08:00">
+                2021-07-07
               </time>
             
 
@@ -312,13 +312,9 @@
       
 
       
-        <h2 id="给博客添加-Gitalk"><a href="#给博客添加-Gitalk" class="headerlink" title="给博客添加 Gitalk"></a>给博客添加 Gitalk</h2><ul>
-<li>valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。</li>
+        <ul>
+<li>string,hash,set ,zset,list</li>
 </ul>
-<ul>
-<li>然后就是用 gitalk 了。这个就是比较简单了，用的人也还行，主要就两个点，就是一开始可以新建一个仓库作为评论存放的地点，我感觉不新建也行，因为其实这个 gitalk 只是用到了 issue 区域，所以应该和你部署的博客仓库一个地址也行。然后就是按照指导去创建一个 oauth application 了，获取对应的 client secret，然后就成功了，这个本地查看好像不行，得部署了才正常，我这边是这个情况，会报 network error</li>
-</ul>
-<p>不过呢感觉有点不够好的地方就是这个 gitalk 是需要 github 登陆之后才能评论的，要么你只能看评论，感觉要是有匿名就好了。</p>
 
       
     </div>
@@ -349,8 +345,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/25/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/" rel="next" title="宝宝百日">
-                <i class="fa fa-chevron-left"></i> 宝宝百日
+              <a href="/2021/07/07/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" rel="next" title="数据存储方式">
+                <i class="fa fa-chevron-left"></i> 数据存储方式
               </a>
             
           </div>
@@ -358,10 +354,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/26/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" rel="prev" title="hexo 图片加载">
-                hexo 图片加载 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -413,17 +405,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -490,22 +473,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%99%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0-Gitalk"><span class="nav-number">1.</span> <span class="nav-text">给博客添加 Gitalk</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
