@@ -230,7 +230,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-07 19:01:39" itemprop="dateModified" datetime="2021-07-07T19:01:39+08:00">2021-07-07</time>
+                <time title="修改时间：2021-07-08 10:22:07" itemprop="dateModified" datetime="2021-07-08T10:22:07+08:00">2021-07-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -255,6 +255,8 @@
       
           <h3 id="港区国安法就这样迅雷之势发布了，头条也推送了相关的新闻。"><a href="#港区国安法就这样迅雷之势发布了，头条也推送了相关的新闻。" class="headerlink" title="港区国安法就这样迅雷之势发布了，头条也推送了相关的新闻。"></a>港区国安法就这样迅雷之势发布了，头条也推送了相关的新闻。</h3><p>这次的国家媒体有点上道，还记得之前香港局势紧张之际，国家媒体的动作给人强烈的用力过猛的感觉，把群众基本看做猩猩，清一色的政治正确。现在这种淡然处之的报道反而效果才是最佳。</p>
 <span id="more"></span>
+
+
 <h3 id="赞同"><a href="#赞同" class="headerlink" title="赞同"></a>赞同</h3><p>自然是赞同的，很简单，作为 90 后，成长在大陆，从小耳濡目染，接受爱国教育，当我看到香港那些人，把自己围成一个劫匪模样，手持棍棒，打砸抢，然后标语 “时代革命，光复香港”（这个我觉得还不错，只是光复这个用词很奇怪，难道被殖民是光荣的？如果这样，需要我们只需要香港这个地方，这个地方的人我们都不需要的），然后还有 英国国旗，美国国旗，”特朗普总统解放香港”,然后唱”天佑女王” 的时候，我当时就觉得需要管制他们了，也许真的吃的太饱了。大陆的不自由的确令人感慨，失望，但是想要通过请外国同盟来帮助自己的，莫不是忘记了中国屈辱的近代史吧。苏联干涉使外蒙古独立，英国干涉使西藏事实上脱离了中央管辖。</p>
 <h3 id="详述"><a href="#详述" class="headerlink" title="详述"></a>详述</h3><p>中国千年的历史让我们国家的政治土壤乌漆嘛黑，没想到现在我觉得我们的政治制度大体上和历史的封建王朝的制度没有本质差别，当然，最大的差别还是有的，汉人当家做主和异族人当家做主还是有极大差别的。也许是我们国家的古装剧思想深度匮乏导致我产生这种感觉吧。各个朝代的政治斗争一个模子刻出来的。</p>
 <p>但是就近代而言，我相信就算党媒如何宣传，捏造，依然没人敢真的歪曲历史的脉络，那就是我们国家的近代史就是一个追求独立，一个想要站起来的国家在做的事情。现在我越发认为清朝的灭亡和他时代局限性有关，更加和他落后于世界有关，如果说在大航海之前，你的落后没人管，那么在清朝末年的时候，你的落后就会引来群狼环绕，也就是现在香港这些青年想要的外国友好人士。</p>
@@ -340,11 +342,45 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">原题链接</a></p>
-<h3 id="主要思路是对于节点-val-修改数值，那么如果出现-节点-next-存在，但是-val-不存在，那就是环形，然而这个明显不对的解，居然通过了"><a href="#主要思路是对于节点-val-修改数值，那么如果出现-节点-next-存在，但是-val-不存在，那就是环形，然而这个明显不对的解，居然通过了" class="headerlink" title="主要思路是对于节点 val 修改数值，那么如果出现 节点 next 存在，但是 val 不存在，那就是环形，然而这个明显不对的解，居然通过了"></a>主要思路是对于节点 val 修改数值，那么如果出现 节点 next 存在，但是 val 不存在，那就是环形，然而这个明显不对的解，居然通过了</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @return &#123;boolean&#125;</span><br><span class="line"> */</span><br><span class="line">var hasCycle = function(head) &#123;</span><br><span class="line">    let current = new ListNode(1)</span><br><span class="line">    current.next  = head</span><br><span class="line">    while(current.next &amp;&amp; current.val)&#123;</span><br><span class="line">        current.val = false</span><br><span class="line">        current  = current.next</span><br><span class="line">    &#125;</span><br><span class="line">    if(current.next)&#123;</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line">    return false</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          原题链接
 
-<h3 id="正解-使用双指针，也就是龟兔赛跑的想法，对于环形链表，总会追上"><a href="#正解-使用双指针，也就是龟兔赛跑的想法，对于环形链表，总会追上" class="headerlink" title="正解,使用双指针，也就是龟兔赛跑的想法，对于环形链表，总会追上"></a>正解,使用双指针，也就是龟兔赛跑的想法，对于环形链表，总会追上</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if (head == null || head.next == null) &#123;</span><br><span class="line">     return false;</span><br><span class="line"> &#125;</span><br><span class="line"> ListNode slow = head;</span><br><span class="line"> ListNode fast = head.next;</span><br><span class="line"> while (slow != fast) &#123;</span><br><span class="line">     if (fast == null || fast.next == null) &#123;</span><br><span class="line">         return false;</span><br><span class="line">     &#125;</span><br><span class="line">     slow = slow.next;</span><br><span class="line">     fast = fast.next.next;</span><br><span class="line"> &#125;</span><br><span class="line"> return true;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+主要思路是对于节点 val 修改数值，那么如果出现 节点 next 存在，但是 val 不存在，那就是环形，然而这个明显不对的解，居然通过了
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
 
           <!--noindex-->
             <div class="post-button">
@@ -426,11 +462,73 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sum-lists-lcci/">原题链接</a></p>
-<span id="more"></span>
-<p>这道题主要的关键点在于最后的位数的处理。如果两数位数不等，那么，就要进行补位操作</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">let reverseNode = function(head)&#123;</span><br><span class="line">    let preNode = null</span><br><span class="line">    let nextNode = null</span><br><span class="line">    let currentNode = head</span><br><span class="line">    while(currentNode)&#123;</span><br><span class="line">        nextNode = currentNode.next</span><br><span class="line">        currentNode.next = preNode</span><br><span class="line">        preNode  = currentNode</span><br><span class="line">        currentNode = nextNode</span><br><span class="line">    &#125;</span><br><span class="line">    return preNode</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; l1</span><br><span class="line"> * @param &#123;ListNode&#125; l2</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var addTwoNumbers = function(l1, l2) &#123;</span><br><span class="line">    let nodel1 = l1</span><br><span class="line">    let nodel2  = l2</span><br><span class="line">    let num = 0</span><br><span class="line">    while(nodel1 &amp;&amp; nodel2)&#123;</span><br><span class="line">        let value = nodel2.val + nodel1.val</span><br><span class="line">        if(num &gt;0)&#123;</span><br><span class="line">            value +=num</span><br><span class="line">            num = 0</span><br><span class="line">        &#125;</span><br><span class="line">        if(value &gt;=10)&#123;</span><br><span class="line">            num = Math.floor(value/10)</span><br><span class="line">            value = value % 10</span><br><span class="line">        &#125;</span><br><span class="line">        nodel2.val = value</span><br><span class="line">        if(num&gt;0&amp;&amp; !nodel2.next)&#123;</span><br><span class="line">            console.log(num)</span><br><span class="line">            nodel2.next=&#123;val:num,next:null&#125;</span><br><span class="line">            num = 0</span><br><span class="line">        &#125;</span><br><span class="line">        if(!nodel2.next &amp;&amp; nodel1.next)&#123;</span><br><span class="line">            nodel2.next=&#123;val:0,next:null&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(!nodel1.next &amp;&amp; nodel2.next)&#123;</span><br><span class="line">            nodel1.next=&#123;val:0,next:null&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        nodel2 = nodel2.next</span><br><span class="line">        nodel1 = nodel1.next</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    return l2</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          原题链接
 
+这道题主要的关键点在于最后的位数的处理。如果两数位数不等，那么，就要进行补位操作
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = 
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/19/%E9%93%BE%E8%A1%A8%E6%B1%82%E5%92%8C/#more" rel="contents">
@@ -511,15 +609,56 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/middle-of-the-linked-list/">原题链接</a></p>
-<h3 id="这个一开始我自然只会用最笨的方法了"><a href="#这个一开始我自然只会用最笨的方法了" class="headerlink" title="这个一开始我自然只会用最笨的方法了"></a>这个一开始我自然只会用最笨的方法了</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var middleNode = function(head) &#123;</span><br><span class="line">    let current = head</span><br><span class="line">    let totalIndex = 0</span><br><span class="line">    let index = 0</span><br><span class="line">    while(current.next)&#123;</span><br><span class="line">        totalIndex = totalIndex+1</span><br><span class="line">        current =  current.next</span><br><span class="line">    &#125;</span><br><span class="line">    if(totalIndex%2==0)&#123;</span><br><span class="line">        totalIndex = totalIndex/2</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        totalIndex=(totalIndex+1)/2</span><br><span class="line">    &#125;</span><br><span class="line">    while(head)&#123;</span><br><span class="line">        if(index ==totalIndex)&#123;</span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">        index+=1</span><br><span class="line">        head = head.next</span><br><span class="line">        &#125;</span><br><span class="line">    return head</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          原题链接
 
-<p>然后看到了官方的优化方法，也就是快慢指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var middleNode = function(head) &#123;</span><br><span class="line">    slow = fast = head;</span><br><span class="line">    while (fast &amp;&amp; fast.next) &#123;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    return slow;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+这个一开始我自然只会用最笨的方法了
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
 
-<p>基本就是匀速前进，一个人速度是你的两倍，走过的距离也是你的两倍，就是这样。这个就简单很多了。</p>
 
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+v
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/19/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/#more" rel="contents">
@@ -600,11 +739,46 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-linked-list-elements/">原题链接</a></p>
-<span id="more"></span>
-<p>这道题最大的困难在于如何处理表头<br>在掌握了 js 的传递引用之后，处理链表就慢慢走上正轨。但是在遍历之后会发现表头无法处理，所以就想出了虚拟一个表头来解决这个问题，在官方题解中，这个做法被认为是 哨兵节点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @param &#123;number&#125; val</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var removeElements = function(head, val) &#123;</span><br><span class="line">        let nextNode = null</span><br><span class="line">        let preNode =new ListNode(0)</span><br><span class="line">        preNode.next = head</span><br><span class="line">        let current = preNode</span><br><span class="line">        while(current.next)&#123;</span><br><span class="line">            nextNode = current.next</span><br><span class="line">            if(nextNode &amp;&amp; nextNode.val===val)&#123;</span><br><span class="line">                current.next = nextNode.next</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                current  = current.next</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return preNode.next</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          原题链接
 
+这道题最大的困难在于如何处理表头
+在掌握了 js 的传递引用之后，处理链表就慢慢走上正轨。但是在遍历之后会发现表头无法处理，所以就想出了虚拟一个表头来解决这个问题，在官方题解中，这个做法被认为是 哨兵节点
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = n
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/19/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/#more" rel="contents">
@@ -685,12 +859,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/submissions/">原题链接</a></p>
-<h2 id="关键在于维护-next"><a href="#关键在于维护-next" class="headerlink" title="关键在于维护 next"></a>关键在于维护 next</h2><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val) &#123;</span><br><span class="line"> *     this.val = val;</span><br><span class="line"> *     this.next = null;</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; head</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var reverseList = function(head) &#123;</span><br><span class="line">    let current = head</span><br><span class="line">    let preNode = null</span><br><span class="line">    let nextNode = null</span><br><span class="line">    while(current)&#123;</span><br><span class="line">        nextNode = current.next;</span><br><span class="line">        current.next  = preNode;</span><br><span class="line">        preNode  = current</span><br><span class="line">        current = nextNode</span><br><span class="line">    &#125;</span><br><span class="line">    return preNode;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          原题链接
 
-<p>反转的关键在于保护好下一个原始数据，否则链就断了。这个时候先用 nextnode 存储 current 的下一个，不至于丢失原始数据。然后这个时候 current 就是当前值，将当前值的 next 重置为 prenode。然后将当前值引用赋值给 prenode，作为下一次循环的新数据</p>
+关键在于维护 next
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
 
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function(head) {
+  
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/18/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/#more" rel="contents">
@@ -851,11 +1060,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="原题链接"><a href="#原题链接" class="headerlink" title="原题链接"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/submissions/">原题链接</a></h2><h3 id="思路主要就是转换成字符串，主要因为字符串是有反转的方法的"><a href="#思路主要就是转换成字符串，主要因为字符串是有反转的方法的" class="headerlink" title="思路主要就是转换成字符串，主要因为字符串是有反转的方法的"></a>思路主要就是转换成字符串，主要因为字符串是有反转的方法的</h3><span id="more"></span>
-<p>然后思路我对的，不过没想到math有这几个方法，看到别人是这样用math的，受教。就是学习了math的两个用法，一个是sign 获取正负的，pow 平方</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var reverse = function(x) &#123;</span><br><span class="line">  let sign = Math.sign(x)</span><br><span class="line">  let res = (Math.abs(x) + &#x27;&#x27;).split(&#x27;&#x27;).reverse().join(&#x27;&#x27;) * sign</span><br><span class="line">  if (res &gt; Math.pow(2, 31) - 1 || res &lt; Math.pow(2, 31) * -1) res = 0</span><br><span class="line">  return res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          原题链接
+思路主要就是转换成字符串，主要因为字符串是有反转的方法的
+然后思路我对的，不过没想到math有这几个方法，看到别人是这样用math的，受教。就是学习了math的两个用法，一个是sign 获取正负的，pow 平方
 
-<h2 id="原题链接-1"><a href="#原题链接-1" class="headerlink" title="原题链接"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-number/">原题链接</a></h2><h3 id="这个思路就是在上面的数字反转基础上添加符号判断即可"><a href="#这个思路就是在上面的数字反转基础上添加符号判断即可" class="headerlink" title="这个思路就是在上面的数字反转基础上添加符号判断即可"></a>这个思路就是在上面的数字反转基础上添加符号判断即可</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let sign = Math.sign(x)</span><br><span class="line">let res = (Math.abs(x) + &#x27;&#x27;).split(&#x27;&#x27;).reverse().join(&#x27;&#x27;) * sign</span><br><span class="line">if (res ===x &amp;&amp; x &gt;= 0 ) &#123;</span><br><span class="line">  return true</span><br><span class="line">&#125;</span><br><span class="line">return false</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+1
+2
+3
+4
+5
+6
+
+
+var reverse = function(x) {
+  let sign = Math.sign(x)
+  let res = (Math.abs(x) + '').split('').reverse().join('') * sign
+  if (res > Math.pow(2, 31) - 1 || res < Math.pow(2, 
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/17/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/#more" rel="contents">
@@ -927,12 +1147,50 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><span id="more"></span>
-<img title="三数之和" alt="三数之和" class="threeSum" src="http://renjmBlog.top/static/images/threeSum.jpg?imageView2/2/w/600">
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/">原题链接</a></p>
-<p>参考了思路双指针，然后自己练习，发现去重是这个题目的重点。。然后别人简单的去重没记住，就做了一个 map 来去重，结果速度比较慢，但是通过了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">var threeSum = function(nums) &#123;</span><br><span class="line">  nums.sort((a, b) =&gt; a - b)</span><br><span class="line">  let len = nums.length</span><br><span class="line">  let res = [];</span><br><span class="line">  let map = &#123;&#125;</span><br><span class="line">  for(let i = 0;i&lt;len-2;i++)&#123;</span><br><span class="line">      let right = i+1;</span><br><span class="line">      let left = len-1</span><br><span class="line">      while(left &gt; right)&#123;</span><br><span class="line">          let sum = nums[i]+nums[left]+nums[right]</span><br><span class="line">          if(sum==0)&#123;</span><br><span class="line">              let mapValue = `$&#123;nums[i]&#125;-$&#123;nums[right]&#125;-$&#123;nums[left]&#125;`</span><br><span class="line">              if(map[mapValue]==1 )&#123;</span><br><span class="line">                  right++;</span><br><span class="line">                  left--;</span><br><span class="line">                  continue</span><br><span class="line">              &#125;</span><br><span class="line">              map[mapValue] = 1</span><br><span class="line">              res.push([nums[i],nums[right],nums[left]])</span><br><span class="line">              left--;</span><br><span class="line">              right++;</span><br><span class="line"></span><br><span class="line">          &#125;else if (sum&gt;0)&#123;</span><br><span class="line">              left--</span><br><span class="line">          &#125;else &#123;</span><br><span class="line">              right++</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          题目
+原题链接
 
+参考了思路双指针，然后自己练习，发现去重是这个题目的重点。。然后别人简单的去重没记住，就做了一个 map 来去重，结果速度比较慢，但是通过了
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+
+
+var threeSum = function(nums) {
+  nums.sort((a, b) => a - b)
+  let len = nums.length
+  let res = [];
+  let map = {}
+  for(let i = 0;i
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/16/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/#more" rel="contents">
