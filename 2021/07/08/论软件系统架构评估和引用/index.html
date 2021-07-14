@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":{"disqus":{"text":"Disqus 评论","order":-1},"livere":{"text":"LiveRe 评论","order":-2}}},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"atom.xml"};
   </script>
 
-  <meta name="description" content="笔记 SAAM 和 ATAM  * SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 1. 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力     2. 评估活动，saam 的过程包括五个步骤，就是场景开发，">
+  <meta name="description" content="笔记SAAM 和 ATAM SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力 评估活动，saam 的过程包括五个步骤，就是场景开发，体系结构描述，单个场景评估，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论软件系统架构评估和引用">
 <meta property="og:url" content="http://example.com/2021/07/08/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/index.html">
 <meta property="og:site_name" content="日常随笔">
-<meta property="og:description" content="笔记 SAAM 和 ATAM  * SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 1. 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力     2. 评估活动，saam 的过程包括五个步骤，就是场景开发，">
+<meta property="og:description" content="笔记SAAM 和 ATAM SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力 评估活动，saam 的过程包括五个步骤，就是场景开发，体系结构描述，单个场景评估，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-08T03:06:58.000Z">
-<meta property="article:modified_time" content="2021-07-08T05:39:09.667Z">
+<meta property="article:modified_time" content="2021-07-14T09:57:14.304Z">
 <meta property="article:author" content="renjm">
 <meta property="article:tag" content="软件架构师">
 <meta name="twitter:card" content="summary">
@@ -227,10 +227,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-07-08 11:06:58 / 修改时间：13:39:09" itemprop="dateCreated datePublished" datetime="2021-07-08T11:06:58+08:00">2021-07-08</time>
+              <time title="创建时间：2021-07-08 11:06:58" itemprop="dateCreated datePublished" datetime="2021-07-08T11:06:58+08:00">2021-07-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-14 17:57:14" itemprop="dateModified" datetime="2021-07-14T17:57:14+08:00">2021-07-14</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -264,18 +270,30 @@
 </ol>
 </li>
 </ul>
-<h3 id="风险，非风险，敏感点和权衡点"><a href="#风险，非风险，敏感点和权衡点" class="headerlink" title="风险，非风险，敏感点和权衡点"></a>风险，非风险，敏感点和权衡点</h3><pre><code>1. 敏感点是构件之间的关系特性，让设计人员搞清楚实现质量目标时候需要注意什么
-2. 权衡点则是对于质量属性之间的比较，感觉权衡点相比较于敏感点，属于上层建筑
-3. 风险点和非风险点属于常规概念，可能引起风险的因素，就是风险点
-</code></pre>
-<h3 id="构建分类方法"><a href="#构建分类方法" class="headerlink" title="构建分类方法"></a>构建分类方法</h3><pre><code>1. 关键字分类法：不可分解的原子级别关键字包含隶属于他的某些构建
-2. 刻面分类法：定义若干用于刻画构建特征的面，每个面包含若干概念，这些概念表述构建在面上的特征
-3. 超文本组织方法：基于全文检索技术
-</code></pre>
-<h3 id="EJB-分为会话Bean，实体，消息驱动"><a href="#EJB-分为会话Bean，实体，消息驱动" class="headerlink" title="EJB 分为会话Bean，实体，消息驱动"></a>EJB 分为会话Bean，实体，消息驱动</h3><pre><code>1. 会话 主要实现数据访问，实现业务逻辑，可以有状态，也可以无状态
-2. 实体，主要是映射数据库中的表
-3. 消息驱动，只能接受客户端发送的消息然后处理，实际上是一个异步的
-</code></pre>
+<h3 id="风险，非风险，敏感点和权衡点"><a href="#风险，非风险，敏感点和权衡点" class="headerlink" title="风险，非风险，敏感点和权衡点"></a>风险，非风险，敏感点和权衡点</h3><ol>
+<li>敏感点是构件之间的关系特性，让设计人员搞清楚实现质量目标时候需要注意什么</li>
+<li>权衡点则是对于质量属性之间的比较，感觉权衡点相比较于敏感点，属于上层建筑</li>
+<li>风险点和非风险点属于常规概念，可能引起风险的因素，就是风险点</li>
+</ol>
+<h3 id="构建分类方法"><a href="#构建分类方法" class="headerlink" title="构建分类方法"></a>构建分类方法</h3><ol>
+<li>关键字分类法：不可分解的原子级别关键字包含隶属于他的某些构建</li>
+<li>刻面分类法：定义若干用于刻画构建特征的面，每个面包含若干概念，这些概念表述构建在面上的特征</li>
+<li>超文本组织方法：基于全文检索技术<h3 id="EJB-分为会话Bean，实体，消息驱动"><a href="#EJB-分为会话Bean，实体，消息驱动" class="headerlink" title="EJB 分为会话Bean，实体，消息驱动"></a>EJB 分为会话Bean，实体，消息驱动</h3></li>
+<li>会话 主要实现数据访问，实现业务逻辑，可以有状态，也可以无状态</li>
+<li>实体，主要是映射数据库中的表</li>
+<li>消息驱动，只能接受客户端发送的消息然后处理，实际上是一个异步的<h3 id="构件和对象的概念"><a href="#构件和对象的概念" class="headerlink" title="构件和对象的概念"></a>构件和对象的概念</h3></li>
+<li>构件：独立部署单元，第三方的组装单元，没有可见状态，</li>
+<li>对象：实例单元，具有唯一标识，可能具有状态，封装了自身状态和行为<h3 id="对象管理组织基于CORBA定义了四种构建"><a href="#对象管理组织基于CORBA定义了四种构建" class="headerlink" title="对象管理组织基于CORBA定义了四种构建"></a>对象管理组织基于CORBA定义了四种构建</h3></li>
+<li>实体，加工，属于需要容器管理其持久化的，服务构件是没有状态，会话构件需要构件本身来管理状态<h3 id="CRM-客户关系管理"><a href="#CRM-客户关系管理" class="headerlink" title="CRM(客户关系管理)"></a>CRM(客户关系管理)</h3></li>
+<li>通过人力资源，业务流程，专业技术进行有效的整合。主要模块包括销售自动化，营销自动化，客户服务与支持，商业智能</li>
+</ol>
+<h3 id="数据仓库模式"><a href="#数据仓库模式" class="headerlink" title="数据仓库模式"></a>数据仓库模式</h3><ol>
+<li>星型的交互方式，文件或者模型作为数据结构，业务功能驱动，模型适配作为扩展。</li>
+<li> 模型，数据库，语法结构树，编辑器，编译器，调试器，适配器，应用模拟器工具</li>
+</ol>
+<h3 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h3><ol>
+<li>用业务逻辑，数据，界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面和用户交互的同事，不需要重新编写业务逻辑。系统分为模型，视图，控制器三个不分离，模型负责维护和保存具有持久性的业务数据，实现业务处理功能，并将业务数据的变化情况及时通知视图，视图负责呈现模型中包含的业务数据，响应模型变化，更新呈现方式，并且向控制器传递用户的页面动作，控制器负责键用户的界面动作映射为模型中的业务处理功能并实际调用。比如 监控管理系统中。监控组件 是 M，属于底层模块，业务逻辑，V是控制终端，作为用户操作和数据展示， 管理模块是C 负责调用 监控组件</li>
+</ol>
 
     </div>
 
@@ -376,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SAAM-%E5%92%8C-ATAM"><span class="nav-number">1.1.</span> <span class="nav-text">SAAM 和 ATAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%A4%8D%E5%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">架构复审</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%8E%E9%99%A9%EF%BC%8C%E9%9D%9E%E9%A3%8E%E9%99%A9%EF%BC%8C%E6%95%8F%E6%84%9F%E7%82%B9%E5%92%8C%E6%9D%83%E8%A1%A1%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">风险，非风险，敏感点和权衡点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">构建分类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EJB-%E5%88%86%E4%B8%BA%E4%BC%9A%E8%AF%9DBean%EF%BC%8C%E5%AE%9E%E4%BD%93%EF%BC%8C%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8"><span class="nav-number">1.5.</span> <span class="nav-text">EJB 分为会话Bean，实体，消息驱动</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%94%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SAAM-%E5%92%8C-ATAM"><span class="nav-number">1.1.</span> <span class="nav-text">SAAM 和 ATAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84%E5%A4%8D%E5%AE%A1"><span class="nav-number">1.2.</span> <span class="nav-text">架构复审</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%8E%E9%99%A9%EF%BC%8C%E9%9D%9E%E9%A3%8E%E9%99%A9%EF%BC%8C%E6%95%8F%E6%84%9F%E7%82%B9%E5%92%8C%E6%9D%83%E8%A1%A1%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">风险，非风险，敏感点和权衡点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">构建分类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EJB-%E5%88%86%E4%B8%BA%E4%BC%9A%E8%AF%9DBean%EF%BC%8C%E5%AE%9E%E4%BD%93%EF%BC%8C%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8"><span class="nav-number">1.5.</span> <span class="nav-text">EJB 分为会话Bean，实体，消息驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E4%BB%B6%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.6.</span> <span class="nav-text">构件和对象的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%AE%A1%E7%90%86%E7%BB%84%E7%BB%87%E5%9F%BA%E4%BA%8ECORBA%E5%AE%9A%E4%B9%89%E4%BA%86%E5%9B%9B%E7%A7%8D%E6%9E%84%E5%BB%BA"><span class="nav-number">1.7.</span> <span class="nav-text">对象管理组织基于CORBA定义了四种构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRM-%E5%AE%A2%E6%88%B7%E5%85%B3%E7%B3%BB%E7%AE%A1%E7%90%86"><span class="nav-number">1.8.</span> <span class="nav-text">CRM(客户关系管理)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.9.</span> <span class="nav-text">数据仓库模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC%E6%9E%B6%E6%9E%84"><span class="nav-number">1.10.</span> <span class="nav-text">MVC架构</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -222,10 +222,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-07-08 11:06:58 / 修改时间：13:39:09" itemprop="dateCreated datePublished" datetime="2021-07-08T11:06:58+08:00">2021-07-08</time>
+              <time title="创建时间：2021-07-08 11:06:58" itemprop="dateCreated datePublished" datetime="2021-07-08T11:06:58+08:00">2021-07-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-14 17:57:14" itemprop="dateModified" datetime="2021-07-14T17:57:14+08:00">2021-07-14</time>
+              </span>
 
           
 
@@ -238,13 +244,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          笔记
-SAAM 和 ATAM
- * SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 1. 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力
-    2. 评估活动，saam 的过程包括五个步骤，就是场景开发，体系结构描述，单个场景评估，场景交互和总体评估
-   
-   
- * ATAM 在SAAM的基础上发展起来的，主要针对性能，实用性，安全性和可修改性，在系统开发之前，对这些质量属性进行评价和这种 1.
+          <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="SAAM-和-ATAM"><a href="#SAAM-和-ATAM" class="headerlink" title="SAAM 和 ATAM"></a>SAAM 和 ATAM</h3><ul>
+<li>SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性<ol>
+<li>特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力</li>
+<li>评估活动，saam 的过程包括五个步骤，就是场景开发，体系结构描述，单个场景评估，场景交互和总体评估</li>
+</ol>
+</li>
+<li>ATAM 在SAAM的基础上发展起来的，主要针对性能，实用性，安全性和可修改性，在系统开发之前，对这些质量属性进行评价和这种<ol>
+<li>特定目标：在考虑多个相互影响的质量属性的情况下，从原则上提供一种理解软件体系结构的能力的方法，使用该方法确定在多个质量属性之间折中的必要性</li>
+<li>评估活动：分为四个主要的活动领域，分别是场景和需求收集，体系结构视图和场景实现，属性模型构造和分析，折中</li>
+<li>质量属性，分析多个相互竞争的质量属性，开始时，考虑的是系统的可修改性，安全性，性能和可用性<h3 id="架构复审"><a href="#架构复审" class="headerlink" title="架构复审"></a>架构复审</h3></li>
+<li>来自于absd，在absd中，架构设计，文档化和复审是一个迭代过程，在一个主版本的架构分析之后，要安排一次由外部人员参加的复审</li>
+</ol>
+</li>
+</ul>
+<h3 id="风险，非风险，敏感点和权衡点"><a href="#风险，非风险，敏感点和权衡点" class="headerlink" title="风险，非风险，敏感点和权衡点"></a>风险，非风险，敏感点和权衡点</h3><ol>
+<li>敏感点是构件之间的关系特性，让设计人员搞清楚实现质量目标时候需要注意什么</li>
+<li>权衡点则是对于质量属性之间的比较，感觉权衡点相比较于敏感点，属于上层建筑</li>
+<li>风险点和非风险点属于常规概念，可能引起风险的因素，就是风险点</li>
+</ol>
+<h3 id="构建分类方法"><a href="#构建分类方法" class="headerlink" title="构建分类方法"></a>构建分类方法</h3><ol>
+<li>关键字分类法：不可分解的原子级别关键字包含隶属于他的某些构建</li>
+<li>刻面分类法：定义若干用于刻画构建特征的面，每个面包含若干概念，这些概念表述构建在面上的特征</li>
+<li>超文本组织方法：基于全文检索技术<h3 id="EJB-分为会话Bean，实体，消息驱动"><a href="#EJB-分为会话Bean，实体，消息驱动" class="headerlink" title="EJB 分为会话Bean，实体，消息驱动"></a>EJB 分为会话Bean，实体，消息驱动</h3></li>
+<li>会话 主要实现数据访问，实现业务逻辑，可以有状态，也可以无状态</li>
+<li>实体，主要是映射数据库中的表</li>
+<li>消息驱动，只能接受客户端发送的消息然后处理，实际上是一个异步的<h3 id="构件和对象的概念"><a href="#构件和对象的概念" class="headerlink" title="构件和对象的概念"></a>构件和对象的概念</h3></li>
+<li>构件：独立部署单元，第三方的组装单元，没有可见状态，</li>
+<li>对象：实例单元，具有唯一标识，可能具有状态，封装了自身状态和行为<h3 id="对象管理组织基于CORBA定义了四种构建"><a href="#对象管理组织基于CORBA定义了四种构建" class="headerlink" title="对象管理组织基于CORBA定义了四种构建"></a>对象管理组织基于CORBA定义了四种构建</h3></li>
+<li>实体，加工，属于需要容器管理其持久化的，服务构件是没有状态，会话构件需要构件本身来管理状态<h3 id="CRM-客户关系管理"><a href="#CRM-客户关系管理" class="headerlink" title="CRM(客户关系管理)"></a>CRM(客户关系管理)</h3></li>
+<li>通过人力资源，业务流程，专业技术进行有效的整合。主要模块包括销售自动化，营销自动化，客户服务与支持，商业智能</li>
+</ol>
+<h3 id="数据仓库模式"><a href="#数据仓库模式" class="headerlink" title="数据仓库模式"></a>数据仓库模式</h3><ol>
+<li>星型的交互方式，文件或者模型作为数据结构，业务功能驱动，模型适配作为扩展。</li>
+<li> 模型，数据库，语法结构树，编辑器，编译器，调试器，适配器，应用模拟器工具</li>
+</ol>
+<h3 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h3>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/07/08/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/#more" rel="contents">
