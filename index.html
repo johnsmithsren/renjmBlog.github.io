@@ -199,6 +199,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/27/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/cover5.jpg">
+      <meta itemprop="name" content="renjm">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="日常随笔">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/10/27/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">nodejs kafka docker 部署遇到的坑</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-10-27 13:36:21 / 修改时间：13:48:02" itemprop="dateCreated datePublished" datetime="2021-10-27T13:36:21+08:00">2021-10-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          这个nodejs去链接 docker 部署的kafka 主要的坑点就一个，dockerhub 主要就是 bitanami/kafka 他们家的镜像比较好的样子，我暂时就只用一个kafka。
+唯一坑点就是 KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://xxx.xxx.xxx.xxx:9092 这个参数的配置需要 填内网ip，我看到有人说填外网ip也可以，不过我这边测试发现内网ip也就可以成功链接了。
+
+废话不多说，直接代码吧
+docker-compose文件
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/27/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/11/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -887,80 +978,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/06/react%E6%84%9F%E6%83%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/cover5.jpg">
-      <meta itemprop="name" content="renjm">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日常随笔">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/06/react%E6%84%9F%E6%83%B3/" class="post-title-link" itemprop="url">react感想</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-07-06 16:45:11" itemprop="dateCreated datePublished" datetime="2021-07-06T16:45:11+08:00">2021-07-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-07 19:03:40" itemprop="dateModified" datetime="2021-07-07T19:03:40+08:00">2021-07-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          * 关于react的感想
-   1.就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。用的antd的组件，只需要针对部分做样式简单的调整
-   2.比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑暂时涉及不到。最近碰到的问题主要就是关于状态传递的，父组件如何传递状态给子组件，子组件中再嵌套子组件的情况下，内容传递的一致性，同时还要考虑代码的简洁。我发现，useref这些对于一层
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/07/06/react%E6%84%9F%E6%83%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1032,7 +1049,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
