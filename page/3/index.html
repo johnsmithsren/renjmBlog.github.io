@@ -494,15 +494,50 @@ var reverseList = function(head) {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="这道题作为链表的简单题，思路上面我还是正常理解的"><a href="#这道题作为链表的简单题，思路上面我还是正常理解的" class="headerlink" title="这道题作为链表的简单题，思路上面我还是正常理解的"></a>这道题作为链表的简单题，思路上面我还是正常理解的</h3><p>但是在实际操作中，却陷入了 js 的值传递和引用传递的问题当中去了</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">原题链接</a></p>
-<span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * function ListNode(val, next) &#123;</span><br><span class="line"> *     this.val = (val===undefined ? 0 : val)</span><br><span class="line"> *     this.next = (next===undefined ? null : next)</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;ListNode&#125; l1</span><br><span class="line"> * @param &#123;ListNode&#125; l2</span><br><span class="line"> * @return &#123;ListNode&#125;</span><br><span class="line"> */</span><br><span class="line">var mergeTwoLists = function(l1, l2) &#123;</span><br><span class="line">    let newNodeHead = new ListNode(-1);</span><br><span class="line">    let newNode = newNodeHead;</span><br><span class="line">    while(l1!=null &amp;&amp; l2 != null)&#123;</span><br><span class="line">        let l1Value = l1.val</span><br><span class="line">        let l2Value = l2.val</span><br><span class="line">        if(l1Value&lt;=l2Value)&#123;</span><br><span class="line">            newNode.next = l1</span><br><span class="line">            l1 = l1.next</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            newNode.next = l2</span><br><span class="line">            l2 = l2.next</span><br><span class="line">        &#125;</span><br><span class="line">        newNode = newNode.next</span><br><span class="line">        console.log(newNode)</span><br><span class="line">    &#125;</span><br><span class="line">    newNode.next = l1 ? l1:l2</span><br><span class="line">    return newNodeHead.next</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          这道题作为链表的简单题，思路上面我还是正常理解的
+但是在实际操作中，却陷入了 js 的值传递和引用传递的问题当中去了
 
-<p>这个是简单的循环解法，但是我当时立刻产生了疑问，我认为 newnode 和 newnodehead 是一种深拷贝的形式，我修改 newnode 就会改变 newnodehead 的数据。<br>然后就觉得很奇怪，newnode 一直在后移，为啥只有给 newnode.next 操作时候才会影响到 newnodehead。而其他时候 newNode = newNode.next 就不会影响到 newnodehead</p>
-<p>然后就重新学习了一下 js 的值传递和引用传递，也理解到这个方式也是 js 解决链表问题的常用方法，就在这一变一不变中。</p>
-<h3 id="值传递和引用传递如果以下面这种形式来理解"><a href="#值传递和引用传递如果以下面这种形式来理解" class="headerlink" title="值传递和引用传递如果以下面这种形式来理解"></a>值传递和引用传递如果以下面这种形式来理解</h3><p>感觉就好很多了，在 js 中，非基础类型，比如数组，方法，对象，在进行赋值的时候，传递的是一个引用地址，而当对基础类型数据的修改时候，才会直接改变原有数据，否则，仅仅是改变了引用地址，不会影响到原有的数据</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function changeAgeAndReference(person) &#123;</span><br><span class="line">    person.age = 25;</span><br><span class="line">    person = &#123;</span><br><span class="line">        name: &quot;John&quot;,</span><br><span class="line">        age: 50</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return person;</span><br><span class="line">&#125;</span><br><span class="line">var personObj1 = &#123;</span><br><span class="line">    name: &quot;Alex&quot;,</span><br><span class="line">    age: 30</span><br><span class="line">&#125;;</span><br><span class="line">var personObj2 = changeAgeAndReference(personObj1);</span><br><span class="line">console.log(personObj1); // -&gt; ?</span><br><span class="line">console.log(personObj2); // -&gt; ?</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+原题链接
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (nex
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/18/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/#more" rel="contents">
@@ -776,16 +811,31 @@ var threeSum = function(nums) {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>不得不说被吓到了，测试告诉我平台挂了，我看了下 docker 日志，好像没啥问题，然后看到数据库好像链接不了了，顿感疑惑，docker mongo 服务一直很正常，没出过啥问题，换言之，我也没处理过异常。查看 mongo 日志，看到一堆报错，关键报错就是 disk out 的感觉，估计是存储空间不够了</p>
-<span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure>
+          前言
+不得不说被吓到了，测试告诉我平台挂了，我看了下 docker 日志，好像没啥问题，然后看到数据库好像链接不了了，顿感疑惑，docker mongo 服务一直很正常，没出过啥问题，换言之，我也没处理过异常。查看 mongo 日志，看到一堆报错，关键报错就是 disk out 的感觉，估计是存储空间不够了
 
-<p>果然，存放 mongo 数据的盘满了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Filesystem      Size  Used Avail Use% Mounted on</span><br><span class="line">udev            2.0G     0  2.0G   0% /a</span><br><span class="line">tmpfs           394M   41M  353M  11% /b</span><br><span class="line">/e              32G    32G  0     100% /</span><br><span class="line">tmpfs           2.0G     0  2.0G   0% /x</span><br><span class="line">tmpfs           5.0M     0  5.0M   0% /y</span><br><span class="line">tmpfs           2.0G     0  2.0G   0% /z</span><br><span class="line">/f              118G  2.9G  110G   3% /w</span><br><span class="line">tmpfs           394M     0  394M   0% /z</span><br></pre></td></tr></table></figure>
+1
 
-<p>（都是化名）</p>
-<p>也就是 这里的根目录 我错了，因为一开始挂载的时候，就是用的默认路径，一般来说，这个盘应该类似 windows 的 C 盘，不放项目的，谁让我菜鸡呢。。应该正常放在 w 那边</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>首先 移动所有的数据内容 到 w 目录下</p>
+
+df -h
+
+
+果然，存放 mongo 数据的盘满了
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+
+Filesystem      Size  Used Avail Use% Mounted on
+udev            2.0G     0  2.0G   0% /a
+tm
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/06/01/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/#more" rel="contents">
@@ -952,18 +1002,39 @@ var threeSum = function(nums) {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="git-学习"><a href="#git-学习" class="headerlink" title="git 学习"></a>git 学习</h2><span id="more"></span>
-<p>惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下</p>
-<p>在一行显示提交信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline</span><br></pre></td></tr></table></figure>
+          git 学习
+惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下
 
-<p>根据日期查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --since=&quot;2020.03.12&quot; --until=&quot;2020.04.18&quot;</span><br></pre></td></tr></table></figure>
+在一行显示提交信息
 
-<p>根据提交人汇总</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git short log</span><br></pre></td></tr></table></figure>
+1
 
-<p>掘金那位提供的一个炫酷使用版本</p>
+
+git log --oneline
+
+
+根据日期查询
+
+1
+
+
+git log --since="2020.03.12" --until="2020.04.18"
+
+
+根据提交人汇总
+
+1
+
+
+git short log
+
+
+掘金那位提供的一个炫酷使用版本
+
+1
+
+
+git log --graph --pretty=format:'%Cred%
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/26/git%E8%AE%B0%E5%BD%95/#more" rel="contents">
