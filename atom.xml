@@ -12,6 +12,9 @@
 <li>之后，会继续保持每天学习算法的，这次要去一个大点的公司，这家公司主要是给我自己一种停滞的感觉，较为边缘，没什么新内容。我还是喜欢工作促进学习的方式，让我完全依靠兴趣去探索新东西，我不太适应。其他方面，这家公司我还是比较喜欢的，哎，也正因为如此，才又蹉跎了一年。</li>
 </ol>
 ]]></content>
+      <categories>
+        <category>日常记录</category>
+      </categories>
       <tags>
         <tag>日常记录</tag>
       </tags>
@@ -43,6 +46,9 @@
 <p>之后几篇应该都会去学习 crawlab 这个开源项目，有我感兴趣的 go，k8s 还有 docker 部署的流程，满满的干货样子先贴上链接<br><a href="https://github.com/crawlab-team/crawlab">crawlab</a></p>
 <p>还有一个 nodejs 版本的 craw，也会一并学习。<br><a href="https://github.com/MrXujiang/crawel">apify</a></p>
 ]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
       <tags>
         <tag>git</tag>
       </tags>
@@ -69,6 +75,9 @@
     <title>hexo 图片加载</title>
     <url>/wiki/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/</url>
     <content><![CDATA[<h2 id="搭建-hexo-选在-ayer-也碰到了图片加载问题，这个就需要-f12-慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有-cdn-缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。"><a href="#搭建-hexo-选在-ayer-也碰到了图片加载问题，这个就需要-f12-慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有-cdn-缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。" class="headerlink" title="搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。"></a>搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f12 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。</h2><span id="more"></span>]]></content>
+      <categories>
+        <category>技术日记</category>
+      </categories>
       <tags>
         <tag>技术日记</tag>
       </tags>
@@ -84,6 +93,9 @@
 
 <p>这道题开始自然是 for 循环，然后超时。。。愚蠢的我，一点新意都没有，然后就是采用 map 形式，避免多次遍历，然后就没有超时了。这道题界解决信心爆棚，随机了一道二叉树的题目，然后崩溃。。。明天会看下别人的题解，然后自行把二叉树用自己的语言写一遍，希望能够弥补自身算法逻辑缺少训练的弊端。</p>
 ]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
       <tags>
         <tag>leetcode</tag>
       </tags>
@@ -113,6 +125,9 @@
 <p>因为我启动 mongo 一般是这样的，所以就直接在后面加了–repair 即可，这样就会正常开始修复数据，等待这个过程结束，然后再次启动，就不会报错。然后我还对 cachesize 做了限制，结果触发了另外一个问题，内存不够。因为曾经我在这个测试环境的数据库里面备份了一次线上的日志数据，大概 2 千万条，导致这个时候恢复数据的时候内存不够了，然后我就修改了原先的限制，扩大到了 1.8，就好了。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如果是线上出现这个问题，首先避免出现，测试环境出现后我第一时间去看了线上的剩余磁盘空间，然后发现其实还有非常多，暂时没问题。然后如果出现异常关闭，我感觉应该还是以恢复备份为最佳，直接修复数据感觉消耗的时间也是非常慢的。</p>
 ]]></content>
+      <categories>
+        <category>技术日记</category>
+      </categories>
       <tags>
         <tag>技术日记</tag>
       </tags>
@@ -130,6 +145,9 @@
 </li>
 </ul>
 ]]></content>
+      <categories>
+        <category>技术日记</category>
+      </categories>
       <tags>
         <tag>技术日记</tag>
       </tags>
@@ -157,6 +175,9 @@
 <li>如果这些路都走不通，依然扛不住大规模推广产生的用户日志数据分析的话，也许就得采用elk啥的，把日志搞到kibana上面去，不过我还是觉得能够在平台查看自然是最方便的，接到kibana就属于下策了</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>技术日记</category>
+      </categories>
       <tags>
         <tag>技术日记</tag>
       </tags>
@@ -181,6 +202,9 @@
 <p>参考了思路双指针，然后自己练习，发现去重是这个题目的重点。。然后别人简单的去重没记住，就做了一个 map 来去重，结果速度比较慢，但是通过了</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var threeSum = function(nums) &#123;</span><br><span class="line">  nums.sort((a, b) =&gt; a - b)</span><br><span class="line">  let len = nums.length</span><br><span class="line">  let res = [];</span><br><span class="line">  let map = &#123;&#125;</span><br><span class="line">  for(let i = 0;i&lt;len-2;i++)&#123;</span><br><span class="line">      let right = i+1;</span><br><span class="line">      let left = len-1</span><br><span class="line">      while(left &gt; right)&#123;</span><br><span class="line">          let sum = nums[i]+nums[left]+nums[right]</span><br><span class="line">          if(sum==0)&#123;</span><br><span class="line">              let mapValue = `$&#123;nums[i]&#125;-$&#123;nums[right]&#125;-$&#123;nums[left]&#125;`</span><br><span class="line">              if(map[mapValue]==1 )&#123;</span><br><span class="line">                  right++;</span><br><span class="line">                  left--;</span><br><span class="line">                  continue</span><br><span class="line">              &#125;</span><br><span class="line">              map[mapValue] = 1</span><br><span class="line">              res.push([nums[i],nums[right],nums[left]])</span><br><span class="line">              left--;</span><br><span class="line">              right++;</span><br><span class="line"></span><br><span class="line">          &#125;else if (sum&gt;0)&#123;</span><br><span class="line">              left--</span><br><span class="line">          &#125;else &#123;</span><br><span class="line">              right++</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
       <tags>
         <tag>leetcode</tag>
       </tags>
@@ -233,6 +257,9 @@
 </ul>
 <p>不过呢感觉有点不够好的地方就是这个 gitalk 是需要 github 登陆之后才能评论的，要么你只能看评论，感觉要是有匿名就好了。</p>
 ]]></content>
+      <categories>
+        <category>技术日记</category>
+      </categories>
       <tags>
         <tag>技术日记</tag>
       </tags>
@@ -268,6 +295,9 @@
 </ul>
 <img title="宝宝萌萌哒" alt="时间记不得了，百日前几周吧" class="babySmileSweet" src="http://renjmBlog.top/static/images/babySmileSweet.jpg?imageView2/2/w/600">
 ]]></content>
+      <categories>
+        <category>日常记录</category>
+      </categories>
       <tags>
         <tag>日常记录</tag>
       </tags>
@@ -374,6 +404,9 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var reverse = function(x) &#123;</span><br><span class="line">  let sign = Math.sign(x)</span><br><span class="line">  let res = (Math.abs(x) + &#x27;&#x27;).split(&#x27;&#x27;).reverse().join(&#x27;&#x27;) * sign</span><br><span class="line">  if (res &gt; Math.pow(2, 31) - 1 || res &lt; Math.pow(2, 31) * -1) res = 0</span><br><span class="line">  return res</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <h2 id="原题链接-1"><a href="#原题链接-1" class="headerlink" title="原题链接"></a><a href="https://leetcode-cn.com/problems/palindrome-number/">原题链接</a></h2><h3 id="这个思路就是在上面的数字反转基础上添加符号判断即可"><a href="#这个思路就是在上面的数字反转基础上添加符号判断即可" class="headerlink" title="这个思路就是在上面的数字反转基础上添加符号判断即可"></a>这个思路就是在上面的数字反转基础上添加符号判断即可</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let sign = Math.sign(x)</span><br><span class="line">let res = (Math.abs(x) + &#x27;&#x27;).split(&#x27;&#x27;).reverse().join(&#x27;&#x27;) * sign</span><br><span class="line">if (res ===x &amp;&amp; x &gt;= 0 ) &#123;</span><br><span class="line">  return true</span><br><span class="line">&#125;</span><br><span class="line">return false</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
       <tags>
         <tag>leetcode</tag>
       </tags>
@@ -514,6 +547,9 @@
 <span id="more"></span>
 
 ]]></content>
+      <categories>
+        <category>技术日记</category>
+      </categories>
       <tags>
         <tag>技术日记</tag>
       </tags>
