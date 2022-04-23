@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    
+    <title>抖音弹幕获取的另一种方式 | 日常随笔</title>
+    
+    
+        <meta name="keywords" content="项目思考">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="公司最近需要做一个直播尝试，需要获取抖音弹幕的信息，没想到抖音的直播开放平台没有相关的接口开放出来，感觉这个绝对是有问题的，作为开发者，获取自己直播间的相关信息，是个很正常的需求。然后诉诸网络，有人做了付费的服务来获取弹幕，比较贵，不过感觉挺厉害的，好像就是破解了算法，接口信息很详细，不过抖音也会换算法，这个接口估计也得跟着改，所以人家这个付费好像也能够理解。所以公司考虑自己做，然后我就上场了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抖音弹幕获取的另一种方式">
+<meta property="og:url" content="http://example.com/wiki/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="日常随笔">
+<meta property="og:description" content="公司最近需要做一个直播尝试，需要获取抖音弹幕的信息，没想到抖音的直播开放平台没有相关的接口开放出来，感觉这个绝对是有问题的，作为开发者，获取自己直播间的相关信息，是个很正常的需求。然后诉诸网络，有人做了付费的服务来获取弹幕，比较贵，不过感觉挺厉害的，好像就是破解了算法，接口信息很详细，不过抖音也会换算法，这个接口估计也得跟着改，所以人家这个付费好像也能够理解。所以公司考虑自己做，然后我就上场了">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-11T09:54:37.000Z">
+<meta property="article:modified_time" content="2021-10-11T10:24:38.423Z">
+<meta property="article:author" content="renjm">
+<meta property="article:tag" content="项目思考">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="日常随笔" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">日常随笔</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            leetcode
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">合并两个有序链表</a></li>  <li class="file"><a href="/wiki/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/">链表反转</a></li>  <li class="file"><a href="/wiki/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">移除链表元素</a></li>  <li class="file"><a href="/wiki/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/">链表中间节点</a></li>  <li class="file"><a href="/wiki/%E9%93%BE%E8%A1%A8%E6%B1%82%E5%92%8C/">链表求和</a></li>  <li class="file"><a href="/wiki/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">环形链表</a></li>  <li class="file"><a href="/wiki/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">旋转链表</a></li>  <li class="file"><a href="/wiki/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/">数组异或操作</a></li>  <li class="file"><a href="/wiki/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/">排序列表</a></li>  <li class="file"><a href="/wiki/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/">好数对的数目</a></li>  <li class="file"><a href="/wiki/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/">分隔链表</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            时事
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%AF%B9%E6%B8%AF%E5%8C%BA%E5%9B%BD%E5%AE%89%E6%B3%95%E7%9A%84%E7%9C%8B%E6%B3%95/">对国安法的看法</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">首次搭建hexo博客</a></li>  <li class="file"><a href="/wiki/redis-ts-nodejs/">redis,ts,nodejs</a></li>  <li class="file"><a href="/wiki/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a></li>  <li class="file"><a href="/wiki/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/">加入 gitalk 评论</a></li>  <li class="file"><a href="/wiki/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/">hexo 图片加载</a></li>  <li class="file"><a href="/wiki/git%E8%AE%B0%E5%BD%95/">git 记录</a></li>  <li class="file"><a href="/wiki/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">leetcode 每日一题</a></li>  <li class="file"><a href="/wiki/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a></li>  <li class="file"><a href="/wiki/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">三数之和</a></li>  <li class="file"><a href="/wiki/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/">整数反转 & 回文数</a></li>  <li class="file"><a href="/wiki/react%E6%84%9F%E6%83%B3/">react感想</a></li>  <li class="file"><a href="/wiki/2021%E7%AC%AC%E4%B8%80%E7%AF%87/">2021第一篇</a></li>  <li class="file"><a href="/wiki/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">数据存储方式</a></li>  <li class="file"><a href="/wiki/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">redis数据类型</a></li>  <li class="file"><a href="/wiki/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/">质量属性及相应设计策略</a></li>  <li class="file"><a href="/wiki/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/">论软件系统架构评估和引用</a></li>  <li class="file"><a href="/wiki/ABSD-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E6%BC%94%E5%8C%96/">ABSD 体系结构演化</a></li>  <li class="file"><a href="/wiki/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">面向服务架构</a></li>  <li class="file"><a href="/wiki/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/">架构风格</a></li>  <li class="file active"><a href="/wiki/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">抖音弹幕获取的另一种方式</a></li>  <li class="file"><a href="/wiki/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">nodejs kafka docker 部署遇到的坑</a></li>  <li class="file"><a href="/wiki/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">eggjs 开发总结</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-抖音弹幕获取的另一种方式" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%9D%E8%80%83/" rel="tag">项目思考</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+            <time datetime="2021-10-11T09:54:37.000Z" itemprop="datePublished">2021-10-11</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/Wiki-site/raw/writing/source/_posts/抖音弹幕获取的另一种方式.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/Wiki-site/edit/writing/source/_posts/抖音弹幕获取的另一种方式.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/Wiki-site/commits/writing/source/_posts/抖音弹幕获取的另一种方式.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            抖音弹幕获取的另一种方式
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>公司最近需要做一个直播尝试，需要获取抖音弹幕的信息，没想到抖音的直播开放平台没有相关的接口开放出来，感觉这个绝对是有问题的，作为开发者，获取自己直播间的相关信息，是个很正常的需求。然后诉诸网络，有人做了付费的服务来获取弹幕，比较贵，不过感觉挺厉害的，好像就是破解了算法，接口信息很详细，不过抖音也会换算法，这个接口估计也得跟着改，所以人家这个付费好像也能够理解。所以公司考虑自己做，然后我就上场了</p>
+<p>1.第一步github找思路，发现都是广告，没有可利用的，不过在大量的信息中还是能够了解到只鳞片爪的，大家的思路基本是硬钢算法。<br>2.分析抖音的网页直播间的请求，发现弹幕信息是个定时请求，返回数据是protobuf形式的，没有加密，只要protobuf序列化即可。然后请求的关键在于请求中需要计算signature，还有什么x-xx啥的字段，然后结合github，发现还是么法找出前端的加密算法。不过找到了protobuf的定义获取方式，这个还是比较关键的，有所了解的同学会方向，定义的proto 中的顺序是要相同的，也就是需要做到前后端的proto一致，才能拿到对应的数据，否则会偏差。<br>    1. <a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/376468106">参考文章1</a><br>    2. <a target="_blank" rel="external nofollow noopener noreferrer" href="https://segmentfault.com/a/1190000040508592">参考文章3</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line">package DouyinPack;</span><br><span class="line"></span><br><span class="line">message WebcastChatMessage &#123;</span><br><span class="line">     Common common = 1;</span><br><span class="line">     User user = 2;</span><br><span class="line">     string content = 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message WebcastGiftMessage &#123;</span><br><span class="line">     Common common = 1;</span><br><span class="line">     int64 repeatCount =5;</span><br><span class="line">     GiftUser user = 7;</span><br><span class="line">     Gift gift = 15;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message WebcastLikeMessage &#123;</span><br><span class="line">     Common common = 1;</span><br><span class="line">     int64 count =2;</span><br><span class="line">     int64 total =3;</span><br><span class="line">     int64 color =4;</span><br><span class="line">     User user = 5;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">message Chat &#123;</span><br><span class="line">    repeated WebcastChatMessage data = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message User &#123;</span><br><span class="line">     int64 id =1;</span><br><span class="line">     int64 shortId =2;</span><br><span class="line">     string nickname = 3;</span><br><span class="line">     // int64 gender = 4;</span><br><span class="line">     // string signature =5;</span><br><span class="line">     // int32 level =6;</span><br><span class="line">     // int64 birthday =7;</span><br><span class="line">     // string telephone = 8;</span><br><span class="line">     // string city = 15;</span><br><span class="line">     // int64 createTime = 17;</span><br><span class="line">    // AvatarThumb avatarThumb =3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message GiftUser &#123;</span><br><span class="line">    int64 id =1;</span><br><span class="line">    int64 shortId =2;</span><br><span class="line">    string nickname = 3;</span><br><span class="line">    </span><br><span class="line">   // AvatarThumb avatarThumb =3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message Gift &#123;</span><br><span class="line">    string describe = 2;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">message AvatarThumb &#123;</span><br><span class="line">    repeated string url_list =1;</span><br><span class="line">     string uri =2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message ApiResult &#123;</span><br><span class="line">    repeated message messages = 1;</span><br><span class="line">     string cursor = 2;</span><br><span class="line">     int32 fetch_interval = 3;</span><br><span class="line">     uint64 now = 4;</span><br><span class="line">     string internal_ext = 5;</span><br><span class="line">&#125;</span><br><span class="line">message  message &#123;</span><br><span class="line">     string method = 1 ;</span><br><span class="line">     bytes payload = 2;</span><br><span class="line">     uint64 message_id = 3;</span><br><span class="line">&#125;</span><br><span class="line">message Common &#123;</span><br><span class="line">     string method = 1;</span><br><span class="line">     int64 msgId = 2;</span><br><span class="line">     int64 roomId = 3;</span><br><span class="line">     // bool isShowMsg =4;</span><br><span class="line">    // optional int64 createTime = 4;</span><br><span class="line">    // string priority_score =6;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message Image &#123;</span><br><span class="line">     string uri = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message PublicAreaCommon &#123;</span><br><span class="line">     string userLabel = 1;</span><br><span class="line">     int64 userConsumeInRoom = 2;</span><br><span class="line">     int64 userSendGiftCntInRoom = 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我这边只要求获取弹幕信息，所以只拿了这部分，其他的数据其实原理都是一致的。</p>
+<ol start="3">
+<li>这样就拿到了解析数据，下一步就是如何持续获取这些数据，这个时候想到了我司的直播其实只是简单的网页直播，所以就想到爬虫伪造一个浏览器的状态，然后抓包，解析返回数据，让抖音的前端帮我做签名。。。这样一个low爆的做法。应对简单的弹幕获取需求，乃至于其他接口的获取，都是一样的。最后可以docker部署。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">import &#123; transformBuffer, processMessage &#125; from &quot;../utils/commonFunction&quot;;</span><br><span class="line">import &#123; cronFactory &#125; from &quot;../utils/cron&quot;;</span><br><span class="line">import DouyinMessageModel from &quot;../models/douyinMessage&quot;;</span><br><span class="line">import &#123; redis &#125; from &quot;../utils/redisStore&quot;;</span><br><span class="line">import moment from &#x27;moment&#x27;</span><br><span class="line">const &#123; chromium &#125; = require(&#x27;playwright&#x27;);</span><br><span class="line">const _ = require(&#x27;lodash&#x27;)</span><br><span class="line">class OnlineApiController &#123;</span><br><span class="line">    async start(ctx, next) &#123;</span><br><span class="line">        let &#123; roomId &#125; = ctx.request.query;</span><br><span class="line">        let browser = await chromium.launch(&#123; headless: true, slowMo: 1000 &#125;);</span><br><span class="line">        let page = await browser.newPage();</span><br><span class="line">        let url = `https://live.douyin.com/$&#123;roomId&#125;`;</span><br><span class="line">        await page.goto(url);</span><br><span class="line">        await page.waitForTimeout(3000);</span><br><span class="line">        let content = await page.content();</span><br><span class="line">        let roomExist = await redis.get(`$&#123;roomId&#125;:exist`);</span><br><span class="line">        if (_.includes(content, &#x27;直播已结束&#x27;)) &#123;</span><br><span class="line">            browser.close();</span><br><span class="line">            if (roomExist) &#123;</span><br><span class="line">                await redis.set(`$&#123;roomId&#125;:exist`, &#x27;neExist&#x27;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            if (roomExist) &#123;</span><br><span class="line">                browser.close();</span><br><span class="line">                await redis.set(`$&#123;roomId&#125;:exist`, &#x27;neExist&#x27;);</span><br><span class="line">                return ctx.rest(&#123;&#125;);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                await redis.set(`$&#123;roomId&#125;:exist`, &#x27;exist&#x27;);</span><br><span class="line">            &#125;</span><br><span class="line">            let result = []</span><br><span class="line">            page.on(&quot;response&quot;, async (response) =&gt; &#123;</span><br><span class="line">                let header = response.url()</span><br><span class="line">                if (_.startsWith(header, &#x27;https://live.douyin.com/webcast/im/fetch&#x27;)) &#123;</span><br><span class="line">                    let info = await response.body();</span><br><span class="line">                    let callback = transformBuffer(roomId, info)</span><br><span class="line">                    if (!_.isEmpty(callback)) &#123;</span><br><span class="line">                        result.push(callback)</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (result.length &gt; 30) &#123;</span><br><span class="line">                        await redis.set(`$&#123;roomId&#125;-dy`, &#x27;&#x27;);</span><br><span class="line">                        await redis.expire(`$&#123;roomId&#125;-dy`, 300);</span><br><span class="line">                        await DouyinMessageModel.insertMany(result, &#123; ordered: false &#125;)</span><br><span class="line">                        result = [];</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        await redis.set(`$&#123;roomId&#125;-dy`, JSON.stringify(result));</span><br><span class="line">                        await redis.expire(`$&#123;roomId&#125;-dy`, 300);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            cronFactory.startCron(roomId, browser, page)</span><br><span class="line">        &#125;</span><br><span class="line">        return ctx.rest(&#123;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    async getMessage(ctx, next) &#123;</span><br><span class="line">        let &#123; id &#125; = ctx.params;</span><br><span class="line">        let roomMessage = await redis.get(`$&#123;id&#125;-dy`);</span><br><span class="line">        if (roomMessage) &#123;</span><br><span class="line">            roomMessage = JSON.parse(roomMessage);</span><br><span class="line">            return ctx.rest(processMessage(id, roomMessage));</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            let currentTime = moment().utcOffset(8).subtract(5, &#x27;seconds&#x27;).valueOf()</span><br><span class="line">            let result = await DouyinMessageModel.find(&#123; roomId: id, createTime: &#123; $gte: currentTime &#125; &#125;).lean();</span><br><span class="line">            return ctx.rest(processMessage(id, result));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default new OnlineApiController();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>这个烂代码就是一个思路借鉴，获取数据后，超过一定数量就存到mongo中，然后平常获取都是通过redis。倒是没发现漏弹幕，我一直感觉会少弹幕来着，毕竟是抓包，不是正规的通过cursor啥的去请求接口，不过应对我司这个试水的直播需求，感觉应该不会漏弹幕信息。因为看到有说法就是手机上的热门直播间的弹幕会hash发送啥的，并不会显示所有弹幕，避免满屏幕弹幕影响观感，我还是比较担心这个的。用了微软的playwright，还是蛮好用的，这个接口挺丰富。</li>
+<li>这个思路的优点就是避免的了签名困扰。其实这个完善下去，基本你想获取啥都可以。缺点就是可能遗漏一些信息，不如算法破解来的准确。</li>
+</ol>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    nodejs kafka docker 部署遇到的坑
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">架构风格</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            renjm &copy; 2022 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>

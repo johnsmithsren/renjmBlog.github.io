@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    
+    <title>质量属性及相应设计策略 | 日常随笔</title>
+    
+    
+        <meta name="keywords" content="软件架构师">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="质量属性  1. 性能 * 需要多长时间才能做出响应，或者系统能够处理的事件的个数。 代表参数：响应时间，吞吐量。 设计策略： 优先级队列，资源调度            2. 可用性 * 系统能够正常运行的时间比例，通常用两次故障之间的时间长度或在出现故障系统能够恢复正常的速度来表示。 代表参数： 故障间隔时间，设计策略： 冗余，心跳线            3. 安全性 * 系统在向合法用户提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="质量属性及相应设计策略">
+<meta property="og:url" content="http://example.com/wiki/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="日常随笔">
+<meta property="og:description" content="质量属性  1. 性能 * 需要多长时间才能做出响应，或者系统能够处理的事件的个数。 代表参数：响应时间，吞吐量。 设计策略： 优先级队列，资源调度            2. 可用性 * 系统能够正常运行的时间比例，通常用两次故障之间的时间长度或在出现故障系统能够恢复正常的速度来表示。 代表参数： 故障间隔时间，设计策略： 冗余，心跳线            3. 安全性 * 系统在向合法用户提">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-07T08:44:28.000Z">
+<meta property="article:modified_time" content="2021-07-07T09:58:28.838Z">
+<meta property="article:author" content="renjm">
+<meta property="article:tag" content="软件架构师">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="日常随笔" type="application/atom+xml">
+    
+
+    
+        <link rel="icon" href="/favicon.ico">
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">日常随笔</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id="categories">
+        <h3 class="widget-title">
+            <span>分类</span>
+            &nbsp;
+            <a id="allExpand" href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree"> 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            leetcode
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">合并两个有序链表</a></li>  <li class="file"><a href="/wiki/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/">链表反转</a></li>  <li class="file"><a href="/wiki/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">移除链表元素</a></li>  <li class="file"><a href="/wiki/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/">链表中间节点</a></li>  <li class="file"><a href="/wiki/%E9%93%BE%E8%A1%A8%E6%B1%82%E5%92%8C/">链表求和</a></li>  <li class="file"><a href="/wiki/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">环形链表</a></li>  <li class="file"><a href="/wiki/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">旋转链表</a></li>  <li class="file"><a href="/wiki/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/">数组异或操作</a></li>  <li class="file"><a href="/wiki/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/">排序列表</a></li>  <li class="file"><a href="/wiki/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/">好数对的数目</a></li>  <li class="file"><a href="/wiki/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/">分隔链表</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            时事
+                        </a>
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%AF%B9%E6%B8%AF%E5%8C%BA%E5%9B%BD%E5%AE%89%E6%B3%95%E7%9A%84%E7%9C%8B%E6%B3%95/">对国安法的看法</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/wiki/hello-world/">Hello World</a></li>  <li class="file"><a href="/wiki/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">首次搭建hexo博客</a></li>  <li class="file"><a href="/wiki/redis-ts-nodejs/">redis,ts,nodejs</a></li>  <li class="file"><a href="/wiki/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a></li>  <li class="file"><a href="/wiki/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/">加入 gitalk 评论</a></li>  <li class="file"><a href="/wiki/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/">hexo 图片加载</a></li>  <li class="file"><a href="/wiki/git%E8%AE%B0%E5%BD%95/">git 记录</a></li>  <li class="file"><a href="/wiki/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/">leetcode 每日一题</a></li>  <li class="file"><a href="/wiki/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a></li>  <li class="file"><a href="/wiki/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">三数之和</a></li>  <li class="file"><a href="/wiki/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/">整数反转 & 回文数</a></li>  <li class="file"><a href="/wiki/react%E6%84%9F%E6%83%B3/">react感想</a></li>  <li class="file"><a href="/wiki/2021%E7%AC%AC%E4%B8%80%E7%AF%87/">2021第一篇</a></li>  <li class="file"><a href="/wiki/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">数据存储方式</a></li>  <li class="file"><a href="/wiki/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">redis数据类型</a></li>  <li class="file active"><a href="/wiki/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/">质量属性及相应设计策略</a></li>  <li class="file"><a href="/wiki/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/">论软件系统架构评估和引用</a></li>  <li class="file"><a href="/wiki/ABSD-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E6%BC%94%E5%8C%96/">ABSD 体系结构演化</a></li>  <li class="file"><a href="/wiki/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">面向服务架构</a></li>  <li class="file"><a href="/wiki/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/">架构风格</a></li>  <li class="file"><a href="/wiki/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">抖音弹幕获取的另一种方式</a></li>  <li class="file"><a href="/wiki/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">nodejs kafka docker 部署遇到的坑</a></li>  <li class="file"><a href="/wiki/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">eggjs 开发总结</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-质量属性及相应设计策略" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E5%B8%88/" rel="tag">软件架构师</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E5%8F%8A%E7%9B%B8%E5%BA%94%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5/">
+            <time datetime="2021-07-07T08:44:28.000Z" itemprop="datePublished">2021-07-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/Wiki-site/raw/writing/source/_posts/质量属性及相应设计策略.md"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/Wiki-site/edit/writing/source/_posts/质量属性及相应设计策略.md"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/Wiki-site/commits/writing/source/_posts/质量属性及相应设计策略.md"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            质量属性及相应设计策略
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h3 id="质量属性"><a href="#质量属性" class="headerlink" title="质量属性"></a>质量属性</h3><ol>
+<li>性能<ul>
+<li>需要多长时间才能做出响应，或者系统能够处理的事件的个数。 代表参数：响应时间，吞吐量。 设计策略： 优先级队列，资源调度</li>
+</ul>
+</li>
+<li>可用性<ul>
+<li>系统能够正常运行的时间比例，通常用两次故障之间的时间长度或在出现故障系统能够恢复正常的速度来表示。 代表参数： 故障间隔时间，设计策略： 冗余，心跳线</li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>系统在向合法用户提供服务的同事能够阻止非授权用户使用的企图或是拒绝服务的能力，安全性可以划分为机密性，完整性，不可否认性。 设计策略： 追踪审计</li>
+</ul>
+</li>
+<li>可修改性<ul>
+<li>快速和较高的性能价格对系统进行变更的能力，通过考察变更的代价衡量可修改性。主要策略: 信息隐藏</li>
+</ul>
+</li>
+<li>可靠性<ul>
+<li>在发生错误的时候，还能够维持系统的功能特性的基本能力. 代表参数: MTTF，MTBF。 设计策略：冗余，心跳线</li>
+</ul>
+</li>
+</ol>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    论软件系统架构评估和引用
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">redis数据类型</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            renjm &copy; 2022 
+            <a rel="external nofollow noopener noreferrer" target="_blank" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png"></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>. Theme - <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/zthxxx/hexo-theme-Wikitten">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
