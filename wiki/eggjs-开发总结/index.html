@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     
-    <title>eggjs 开发总结 | 日常随笔</title>
+    <title>eggjs+umi 总结 | 日常随笔</title>
     
     
         <meta name="keywords" content="工作相关">
@@ -11,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="开头先聊一些废话吧，从19年9月入职，接手koa项目的前后台，后台koa+rpc 前台是react使用下来有一些累，比如日志的统一，定时类的添加这些，才感觉到框架的一些好处，就是一些通用的业务处理方法如果能够规范化，对于开发效率的提高是显著的，比如日志，和定时，都是一个业务开发中必不可少的部分，还有应用的稳定性处理，任何业务都无法避免。 所以在项目伊始，就开始考虑使用框架，按照之前长期使用antd">
 <meta property="og:type" content="article">
-<meta property="og:title" content="eggjs 开发总结">
+<meta property="og:title" content="eggjs+umi 总结">
 <meta property="og:url" content="http://example.com/wiki/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="日常随笔">
 <meta property="og:description" content="开头先聊一些废话吧，从19年9月入职，接手koa项目的前后台，后台koa+rpc 前台是react使用下来有一些累，比如日志的统一，定时类的添加这些，才感觉到框架的一些好处，就是一些通用的业务处理方法如果能够规范化，对于开发效率的提高是显著的，比如日志，和定时，都是一个业务开发中必不可少的部分，还有应用的稳定性处理，任何业务都无法避免。 所以在项目伊始，就开始考虑使用框架，按照之前长期使用antd">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-22T01:13:52.000Z">
-<meta property="article:modified_time" content="2022-04-23T03:46:58.671Z">
+<meta property="article:modified_time" content="2022-04-23T04:06:42.436Z">
 <meta property="article:author" content="renjm">
 <meta property="article:tag" content="工作相关">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
                             &nbsp;
                             工作记录
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/redis-ts-nodejs/">redis,ts,nodejs</a></li>  <li class="file"><a href="/wiki/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/">加入 gitalk 评论</a></li>  <li class="file"><a href="/wiki/git%E8%AE%B0%E5%BD%95/">git 记录</a></li>  <li class="file"><a href="/wiki/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a></li>  <li class="file"><a href="/wiki/react%E6%84%9F%E6%83%B3/">react感想</a></li>  <li class="file"><a href="/wiki/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">redis数据类型</a></li>  <li class="file"><a href="/wiki/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">抖音弹幕获取的另一种方式</a></li>  <li class="file"><a href="/wiki/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">nodejs kafka docker 部署遇到的坑</a></li>  <li class="file active"><a href="/wiki/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">eggjs 开发总结</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/redis-ts-nodejs/">redis,ts,nodejs</a></li>  <li class="file"><a href="/wiki/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/">加入 gitalk 评论</a></li>  <li class="file"><a href="/wiki/git%E8%AE%B0%E5%BD%95/">git 记录</a></li>  <li class="file"><a href="/wiki/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a></li>  <li class="file"><a href="/wiki/react%E6%84%9F%E6%83%B3/">react感想</a></li>  <li class="file"><a href="/wiki/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">redis数据类型</a></li>  <li class="file"><a href="/wiki/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">抖音弹幕获取的另一种方式</a></li>  <li class="file"><a href="/wiki/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">nodejs kafka docker 部署遇到的坑</a></li>  <li class="file active"><a href="/wiki/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">eggjs+umi 总结</a></li>  <li class="file"><a href="/wiki/eggjs-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -221,7 +221,7 @@
                             &nbsp;
                             日常记录
                         </a>
-                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a></li>  <li class="file"><a href="/wiki/2021%E7%AC%AC%E4%B8%80%E7%AF%87/">2021第一篇</a></li>  </ul> 
+                         <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a></li>  <li class="file"><a href="/wiki/2021%E7%AC%AC%E4%B8%80%E7%AF%87/">2021第一篇</a></li>  <li class="file"><a href="/wiki/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -250,7 +250,7 @@
                         </a>
                          <ul class="unstyled" id="tree">  <li class="file"><a href="/wiki/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">数据存储方式</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/wiki/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85-1/">上海疫情</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -369,7 +369,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            eggjs 开发总结
+            eggjs+umi 总结
         </h1>
     
 
@@ -429,6 +429,15 @@
 
     
 <nav id="article-nav">
+    
+        <a href="/wiki/eggjs-%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    后端开发的一些想法
+                
+            </div>
+        </a>
     
     
         <a href="/wiki/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" id="article-nav-older" class="article-nav-link-wrap">
