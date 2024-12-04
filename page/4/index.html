@@ -1,544 +1,194 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>RenjmBlog - 技术分享</title><meta name="author" content="Renjm"><meta name="copyright" content="Renjm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="记录学习与生活">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RenjmBlog">
 <meta property="og:url" content="http://example.com/page/4/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="RenjmBlog">
+<meta property="og:description" content="记录学习与生活">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.png">
+<meta property="article:author" content="Renjm">
+<meta property="article:tag" content="技术,博客,前端,后端,JavaScript,Node.js">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'RenjmBlog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">RenjmBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">RenjmBlog</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:your-email@example.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/" title="架构风格">架构风格</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-30T23:31:48.000Z" title="发表于 2020-07-01 07:31:48">2020-07-01</time></span></div><div class="content">五大分类，数据流风格，独立构件风格，虚拟机风格和仓库风格 数据流风格包括批处理序列风格，管道过滤器风格 调用返回风格包括主程序&#x2F;子程序架构风格，数据抽象和面向对象风格和层次结构风格 独立构件包括进程通信架构风格和事件驱动的架构风格 虚拟机风格包括 解释器架构 和基于规则的系统 仓库风格包括数据库架构风格和黑板架构风格 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E5%AF%B9%E6%B8%AF%E5%8C%BA%E5%9B%BD%E5%AE%89%E6%B3%95%E7%9A%84%E7%9C%8B%E6%B3%95/" title="对港区国安法的看法">对港区国安法的看法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-30T22:38:08.000Z" title="发表于 2020-07-01 06:38:08">2020-07-01</time></span></div><div class="content">港区国安法就这样迅雷之势发布了，头条也推送了相关的新闻。 这次的国家媒体有点上道，还记得之前香港局势紧张之际，国家媒体的动作给人强烈的用力过猛的感觉，把群众基本看做猩猩，清一色的政治正确。 现在这种淡然处之的报道反而效果才是最佳。 赞同自然是赞同的，很简单，作为  后，成长在大陆，从小耳濡目染，接受爱国教育，当我看到香港那些人，把自己围成一个劫匪模样，手持棍棒，打砸抢，然后标语 “时代革命，光复香港”（这个我觉得还不错，只是光复这个用词很奇怪，难道被殖民是光荣的？ 如果这样，需要我们只需要香港这个地方，这个地方的人我们都不需要的），然后还有 英国国旗，美国国旗，”特朗普总统解放香港”,然后唱”天佑女王”...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="redis数据类型">redis数据类型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-30T22:31:48.000Z" title="发表于 2020-07-01 06:31:48">2020-07-01</time></span></div><div class="content">string,hash,set ,zset,list,hset,get </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/" title="论软件系统架构评估和引用">论软件系统架构评估和引用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-30T22:31:48.000Z" title="发表于 2020-07-01 06:31:48">2020-07-01</time></span></div><div class="content">笔记SAAM 和 ATAM SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力 评估活动，saam 的过程包括五个步骤，就是场景开发，体系结构描述，单个场景评估，场景交互和总体评估 ATAM 在SAAM的基础上发展起来的，主要针对性能，实用性，安全性和可修改性，在系统开发之前，对这些质量属性进行评价和这种 特定目标：在考虑多个相互影响的质量属性的情况下，从原则上提供一种理解软件体系结构的能力的方法，使用该方法确定在多个质量属性之间折中的必要性 评估活动：分为四个主要的活动领域，分别是场景和需求收集，体系结构视图和场景实现，属性模型构造和分析，折中 质量属性，分析多个相互竞争的质量属性，开始时，考虑的是系统的可修改性，安全性，性能和可用性架构复审...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/05/25/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" title="首次搭建hexo博客">首次搭建hexo博客</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-25T02:31:48.000Z" title="发表于 2020-05-25 10:31:48">2020-05-25</time></span></div><div class="content">之前尝试了用亚马逊服务器，自己写前端，后端，但是还整了个定时爬虫，每周去爬漫画海贼王漫画图片，然后转成pdf版本。 效果其实蛮好，运行正常，然而后来亚马逊不是免费试用期年嘛，后来到期了之后再用就比较贵了。 这次就尝试了这个hexo 加 github的模式，想想只要github不被墙，然后也不想再去自己折腾了，就简简单单专注博客吧，认真记录我的现在，我想这才是我的真正需求，原先的折腾更多的还有技术尝试的因素在内。 用的博客主题是ayer，还是蛮干净清爽的，给作者掌声，欢迎大家去使用这个主题。 我的页尾也没改，大家可以直接链接过去。 现在作为一个react+koa的程序员，应该会开始记录日常技术积累，感想，应该还会有孩子的图片呀啥的。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/05/25/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/" title="加入 gitalk 评论">加入 gitalk 评论</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-25T01:31:48.000Z" title="发表于 2020-05-25 09:31:48">2020-05-25</time></span></div><div class="content">给博客添加 Gitalk valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。 然后就是用 gitalk 了。 这个就是比较简单了，用的人也还行，主要就两个点，就是一开始可以新建一个仓库作为评论存放的地点，我感觉不新建也行，因为其实这个 gitalk 只是用到了 issue 区域，所以应该和你部署的博客仓库一个地址也行。 然后就是按照指导去创建一个 oauth application 了，获取对应的 client secret，然后就成功了，这个本地查看好像不行，得部署了才正常，我这边是这个情况，会报 network error 不过呢感觉有点不够好的地方就是这个 gitalk 是需要 github 登陆之后才能评论的，要么你只能看评论，感觉要是有匿名就好了。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/05/25/git%E8%AE%B0%E5%BD%95/" title="git 记录">git 记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-25T00:31:48.000Z" title="发表于 2020-05-25 08:31:48">2020-05-25</time></span></div><div class="content">git 学习 惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下 在一行显示提交信息 git log –oneline 根据日期查询 git log –since&#x3D;”..” –until&#x3D;”..” 根据提交人汇总 git short log 掘金那位提供的一个炫酷使用版本 git log –graph –pretty&#x3D;format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –date&#x3D;relative 对应的别名设置，感觉蛮实用 git config –global alias.lg “log –graph –pretty&#x3D;format:’%Cred%h%Creset -%C(yellow)%d%Creset %s...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/05/25/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" title="hexo 图片加载">hexo 图片加载</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-24T23:31:48.000Z" title="发表于 2020-05-25 07:31:48">2020-05-25</time></span></div><div class="content">搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。 然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。 这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/05/25/hello-world/" title="部署hexo">部署hexo</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-24T22:31:48.000Z" title="发表于 2020-05-25 06:31:48">2020-05-25</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post$ hexo new “My New Post” More info: Writing Run server$ hexo server More info: Server Generate static files$ hexo generate More info: Generating Deploy to remote sites$ hexo deploy More info: Deployment </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Renjm</div><div class="author-info-description">记录学习与生活</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:your-email@example.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/04/%E5%8D%9A%E5%AE%A2%E5%A4%8D%E6%B4%BB/" title="博客复活">博客复活</a><time datetime="2023-12-04T05:30:00.000Z" title="发表于 2023-12-04 13:30:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/react%E6%84%9F%E6%83%B3/" title="react感想">react感想</a><time datetime="2022-04-23T05:31:48.000Z" title="发表于 2022-04-23 13:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" title="docker mongo 异常崩溃后">docker mongo 异常崩溃后</a><time datetime="2022-04-23T04:31:48.000Z" title="发表于 2022-04-23 12:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" title="上海疫情">上海疫情</a><time datetime="2022-04-23T03:31:48.000Z" title="发表于 2022-04-23 11:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" title="后端开发的一些想法">后端开发的一些想法</a><time datetime="2022-04-23T02:31:48.000Z" title="发表于 2022-04-23 10:31:48">2022-04-23</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">技术笔记</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/GitHub-Pages/" style="font-size: 1.1em; color: #999">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">博客</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
+    <ul class="card-archive-list">
   
-    <article id="post-对港区国安法的看法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E5%AF%B9%E6%B8%AF%E5%8C%BA%E5%9B%BD%E5%AE%89%E6%B3%95%E7%9A%84%E7%9C%8B%E6%B3%95/" class="article-date">
-  <time class="dt-published" datetime="2020-06-30T22:38:08.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2023/12/">
+          <span class="card-archive-list-date">十二月 2023</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
     
-  </div>
-  <div class="article-inner">
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/04/">
+          <span class="card-archive-list-date">四月 2022</span>
+          <span class="card-archive-list-count">10</span>
+        </a>
+      </li>
     
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2021/01/">
+          <span class="card-archive-list-date">一月 2021</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E5%AF%B9%E6%B8%AF%E5%8C%BA%E5%9B%BD%E5%AE%89%E6%B3%95%E7%9A%84%E7%9C%8B%E6%B3%95/">对港区国安法的看法</a>
-    </h1>
-  
-
-      </header>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2020/07/">
+          <span class="card-archive-list-date">七月 2020</span>
+          <span class="card-archive-list-count">22</span>
+        </a>
+      </li>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>港区国安法就这样迅雷之势发布了，头条也推送了相关的新闻。</p>
-<p>这次的国家媒体有点上道，还记得之前香港局势紧张之际，国家媒体的动作给人强烈的用力过猛的感觉，把群众基本看做猩猩，清一色的政治正确。</p>
-<p>现在这种淡然处之的报道反而效果才是最佳。</p>
-<p>赞同自然是赞同的，很简单，作为  后，成长在大陆，从小耳濡目染，接受爱国教育，当我看到香港那些人，把自己围成一个劫匪模样，手持棍棒，打砸抢，然后标语 “时代革命，光复香港”（这个我觉得还不错，只是光复这个用词很奇怪，难道被殖民是光荣的？</p>
-<p>如果这样，需要我们只需要香港这个地方，这个地方的人我们都不需要的），然后还有 英国国旗，美国国旗，”特朗普总统解放香港”,然后唱”天佑女王” 的时候，我当时就觉得需要管制他们了，也许真的吃的太饱了。</p>
-<p>大陆的不自由的确令人感慨，失望，但是想要通过请外国同盟来帮助自己的，莫不是忘记了中国屈辱的近代史吧。</p>
-<p>苏联干涉使外蒙古独立，英国干涉使西藏事实上脱离了中央管辖。</p>
-<p>详述中国千年的历史让我们国家的政治土壤乌漆嘛黑，没想到现在我觉得我们的政治制度大体上和历史的封建王朝的制度没有本质差别，当然，最大的差别还是有的，汉人当家做主和异族人当家做主还是有极大差别的。</p>
-<p>也许是我们国家的古装剧思想深度匮乏导致我产生这种感觉吧。</p>
-<p>各个朝代的政治斗争一个模子刻出来的。</p>
-<p>但是就近代而言，我相信就算党媒如何宣传，捏造，依然没人敢真的歪曲历史的脉络，那就是我们国家的近代史就是一个追求独立，一个想要站起来的国家在做的事情。</p>
-<p>现在我越发认为清朝的灭亡和他时代局限性有关，更加和他落后于世界有关，如果说在大航海之前，你的落后没人管，那么在清朝末年的时候，你的落后就会引来群狼环绕，也就是现在香港这些青年想要的外国友好人士。</p>
-<p>近代中国变革真的让人热血沸腾，众多人物轮番登场，学德国，学苏联，学日本，各种主义也是眼花缭乱。</p>
-<p>最终共产党活了下来，这个的确值得吹。</p>
-<p>现在共产党被骂成共匪啦，惨无人道，没有人权啦，当初的共产党必定在各方面都是最强的，这么简单的道理，到了那些诋毁中国的人那边就视而不见了，感觉在他们那边，共产党从没有辉煌过，不过现在国内的舆论形势的确是江河日下，这个倒也不可否认，不过总的来说这是先辈们的选择，作为后人，就静观其变即可，事物是在发展的，只要曾经初心纯良，未来可期。</p>
-<p>乱说一气，偏题了，主要就是看香港那些想要找外国友人帮助，宣传自己的外国人脉关系的大佬不爽，这种纯粹卖国叛国的行为无论给自己披什么样高尚的外衣都是无法隐藏的，这些伎俩百年前就被各色人等玩过了，都是玩剩下的，这些所谓大佬估计死后被自己的祖宗嘲笑。</p>
-<p>首先，想要自由民主，第一种靠自己，靠流血牺牲，这都是先辈血的经验，第二种，就是正常的抗议游行，可以学习印度甘地。</p>
-<p>其他的路线都是玩火，任何宣传其他路线的，也是非常简单直白，从中获取金钱名利等好处，倒霉的是一线的人，炮灰，而且是无用的，因为路线不对，炮灰做的也毫无意义。</p>
-<p>对于那些从中获取极大利益人的呀，这次港区国安法应该就是量身定制的了。</p>
-<p>根据国家现在的一贯尿性，这次港区国安法应该在做正事的同时也夹带了私货了，这个只能依靠香港人民重新甄别，努力去抵抗了，毕竟一国两制真的还是不错的，完全可以去据理力争。</p>
-<p>中国近代抗争史，就是最佳的自由抗争史，现在那些内战国家情况根本不够看。</p>
-<p>彼时香港呢，靠着殖民地的优势，成为孕育革命的摇篮。</p>
-<p>所以，其实大陆人才应该牛气哄哄的好不，小粉红那是有骄傲的资本的，中国近代的每一步试错，都是人命堆出来的，共和国的今天，是抗争出来的。</p>
-<p>认为现在中国极其糟糕的，可以考虑下如果我们输掉了 中印战争，抗美援朝，中越战争，或者抗日战争之后的情形吧。</p>
-<p>想想如果抗日战争失败，大陆人现在也许就和香港人一样了，动不动来个追求民主，自由，也许能够得到一定的安慰。</p>
-<p>然而，最大的自由早已不可求。</p>
-<p>大陆人现在的沉默只是觉得，现在其实已经可以了，要求也不高。</p>
-<p>这个不高是相对而言的哦，你让世界其他国家为了自由也选择中国经历的战争去打一下看看，能够打赢再来对比。</p>
-<p>总结香港的一国两制真的不错，中央肯定也无意改变。</p>
-<p>不过，就好像家里的孩子很厉害，然后想要搞事情，外人自然是劝和，居心不良之人劝分，那么家里的家长呢，首先，得把孩子打一顿，然后继续培养喽，国安法就是那根棍子。</p>
-<p>总的来说，会哭的孩子有奶喝，其实香港要是一直坚持游行啥的，不搞这些暴力活动，最终也会得到想要的东西的，哎，还是太心急了。</p>
-<p>然后赶紧的，把那些之前占领道德高地，然后现在国安法刚要出来，就忙不迭的抽身撤退的人给抓了吧，吃相真的太难看了，外国友人看了，都会觉得这帮跳梁小丑当初是怎么被看上的。</p>
-<p>杀身成仁尚且没有胆量，何谈 革命，光复，还是老老实实游行抗议为好，别随便给自己披上外衣，那是血与火的试炼，徒然让以前的革命先辈们蒙羞</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E5%AF%B9%E6%B8%AF%E5%8C%BA%E5%9B%BD%E5%AE%89%E6%B3%95%E7%9A%84%E7%9C%8B%E6%B3%95/" data-id="cm49fvwoe000l50vv1nvphmoi" data-title="对港区国安法的看法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-redis数据类型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="article-date">
-  <time class="dt-published" datetime="2020-06-30T22:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">redis数据类型</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>string,hash,set ,zset,list,hset,get</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-id="cm49fvwoa000c50vvg8xf8tgp" data-title="redis数据类型" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-论软件系统架构评估和引用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2020-06-30T22:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/">论软件系统架构评估和引用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>笔记SAAM 和 ATAM SAAM 是一种非功能质量属性的体系架构分析方法，最初用于比较不同的体系架构,最初用于比较不同的体系架构，分析架构的可修改性，后来用于其他的质量属性，如可移植性，可扩展性 特定目标，对描述应用程序属性的文档，验证本体系结构假设和原则，saam不仅能够评估体系结构对于特定系统需求的适用能力 评估活动，saam 的过程包括五个步骤，就是场景开发，体系结构描述，单个场景评估，场景交互和总体评估 ATAM 在SAAM的基础上发展起来的，主要针对性能，实用性，安全性和可修改性，在系统开发之前，对这些质量属性进行评价和这种 特定目标：在考虑多个相互影响的质量属性的情况下，从原则上提供一种理解软件体系结构的能力的方法，使用该方法确定在多个质量属性之间折中的必要性 评估活动：分为四个主要的活动领域，分别是场景和需求收集，体系结构视图和场景实现，属性模型构造和分析，折中 质量属性，分析多个相互竞争的质量属性，开始时，考虑的是系统的可修改性，安全性，性能和可用性架构复审 来自于absd，在absd中，架构设计，文档化和复审是一个迭代过程，在一个主版本的架构分析之后，要安排一次由外部人员参加的复审 风险，非风险，敏感点和权衡点 敏感点是构件之间的关系特性，让设计人员搞清楚实现质量目标时候需要注意什么 权衡点则是对于质量属性之间的比较，感觉权衡点相比较于敏感点，属于上层建筑 风险点和非风险点属于常规概念，可能引起风险的因素，就是风险点 构建分类方法 关键字分类法：不可分解的原子级别关键字包含隶属于他的某些构建 刻面分类法：定义若干用于刻画构建特征的面，每个面包含若干概念，这些概念表述构建在面上的特征 超文本组织方法：基于全文检索技术EJB 分为会话Bean，实体，消息驱动 会话 主要实现数据访问，实现业务逻辑，可以有状态，也可以无状态 实体，主要是映射数据库中的表 消息驱动，只能接受客户端发送的消息然后处理，实际上是一个异步的构件和对象的概念 构件：独立部署单元，第三方的组装单元，没有可见状态， 对象：实例单元，具有唯一标识，可能具有状态，封装了自身状态和行为对象管理组织基于CORBA定义了四种构建 实体，加工，属于需要容器管理其持久化的，服务构件是没有状态，会话构件需要构件本身来管理状态CRM(客户关系管理) 通过人力资源，业务流程，专业技术进行有效的整合。</p>
-<p>主要模块包括销售自动化，营销自动化，客户服务与支持，商业智能 数据仓库模式 星型的交互方式，文件或者模型作为数据结构，业务功能驱动，模型适配作为扩展。</p>
-<p>模型，数据库，语法结构树，编辑器，编译器，调试器，适配器，应用模拟器工具 MVC架构 用业务逻辑，数据，界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面和用户交互的同事，不需要重新编写业务逻辑。</p>
-<p>系统分为模型，视图，控制器三个不分离，模型负责维护和保存具有持久性的业务数据，实现业务处理功能，并将业务数据的变化情况及时通知视图，视图负责呈现模型中包含的业务数据，响应模型变化，更新呈现方式，并且向控制器传递用户的页面动作，控制器负责键用户的界面动作映射为模型中的业务处理功能并实际调用。</p>
-<p>比如 监控管理系统中。</p>
-<p>监控组件 是 M，属于底层模块，业务逻辑，V是控制终端，作为用户操作和数据展示， 管理模块是C 负责调用 监控组件 对称加密 机密性，发送者利用对称秘钥对要发送的数据进行加密，只有拥有相同秘钥的接受者才能将数据正确解密，从而提高机密性 完整性，发送者根据要发送的数据生成 消息摘要， 利用对称秘钥对摘要进行加密，并附加到数据上一起发送，接受者受到消息后使用秘钥解密，然后，根据收到的信息部分生成摘要，对比传过来摘要，验证两者是否一致，来确认完整性。</p>
-<p>公钥加密 发送者利用接受者的公钥对要发送的数据进行加密，只有拥有对应私钥的接受者才能将数据正确解密，从而提供机密性 完整性，发送者生成摘要，利用私钥对于摘要加密并附加到数据上发送，接收者利用对方发送的消息摘要解密，并根据受到的数据重新生成消息认证，比较摘要是否相同以验证数据的完整性 公钥私钥总结 公钥和私钥都可以加密解密，不过两者的用途不同。</p>
-<p>核心说法是，公钥加密的数据，只有私钥可以解开，这个时候保证了数据的机密性。</p>
-<p>私钥加密的数据，所有持有公钥的人都可以解开，这个则是叫做签名，签名的唯一性 主程序-子程序 所有的计算构建作为子程序，所有的计算构建作为子程序协作工作，并且由一个主程序顺序调用，构件通过共享存储区交换数据 管道过滤器风格中，每个构件都有一组输入和输出，构件接受数据输入，产生输出. ESB 主要功能 应用程序的位置透明，传输协议转换，消息格式转换，消息路由，消息增强，安全支持，监控和管理 需要共享系统的功能，并且系统运行平台，采用面向服务的方式进行功能集成，将工具的功能包装成服务，实现跨语言与跨平台访问。</p>
-<p>工具支持的通信协议和数据格式各不相同，需要实现工具之间的灵活通信协议和数据格式交换，因此应该基于消息纵向，以协议和数据适配器的方式实现灵活的通信协议和数据格式转换 集成框架需要根据实际的软件系统开发流程，灵活，动态的定义系统设计与开发工具之间的协作关系，引入工作流定义语言和引擎来动态描述工具之间的协作关系。</p>
-<p>采用界面集成的方法对第三方工具 进行集成，绕过工具内部复杂处理逻辑 在实现工具之间数据格式的灵活转换时，通常采用适配器设计模式，首先定义一个统一的数据转换接口类，然后针对不同的数据格式转换需求定义对应的实际转换类，实际转换类需要继承数据转换接口类，并实现接口转换类定义的接口。</p>
-<p>数据流图 数据流图中的处理过程可并行，系统流程图在某个时间点只能处于一个处理过程 数据流图体现系统的数据流，系统流程展示系统的控制流 数据流图展现全局的处理过程，过程之间遵循不同的计时标准，系统流程图，遵循一致的计时标准 实体和类 实体用于数据建模，类用于面向对象建模，实体只有属性，类有属性和操作 抽象用例用于分析阶段，基础用例用于设计阶段，抽象用例描述本质属性，基础用例描述的是用例的实现方式，表达了 设计和实现用例的方法和技术 用例关系 面向对象系统建模中，用例之间的关系有 包含，扩展，泛化 “登录系统” 和 “注册课程” 之间的关系为 包含关系 参加考试 和参加补考之间的关系，扩展关系 在面向对象系统建模，类之间的关系 有 关联，聚合，组合，依赖。</p>
-<p>类university和类student 是聚合关系，类university和类department是组合关系，类student和course是关联关系 数据流图 数据流 是数据再系统内传播的路径，因此由一组成分固定的数据组成 外部实体，代表系统之外的实体，人，物，或者其他软件系统 加工，加工是对数据进行处理的单元，接受数据输入，进行处理，产生输出 数据存储，表示信息的静态存储，可以是文件，数据库元素，文件一部分 设计模式 创建型，结构型，行为型 创建型用于创建对象，为设计类实例化新对象提供指南。</p>
-<p>结构型模式主要用于处理类和对象的组合，对类如何设计以形成更大的结构提供指南。</p>
-<p>行为型 主要用于描述类的交互和职责分配，对类的交互以及分配责任的方式提供指南 创建型 构造器模式，原型模式 结构型 适配器模式，外观模式，代理模式 行为型 命令模式，中介模式，状态模式，策略模式 策略模式，在独立类中定义每个计算，利用该模式创建 ODP架构 企业业务架构 逻辑信息架构 计算接口架构 分布式工程架构 技术选择架构 项目计划书 项目背景 项目经理，项目经理的主管领导，客户方联系人，客户方的主管领导，项目领导小组，项目实施人员 项目的总体技术解决方案 所选择的项目管理过程和执行水平 对这些过程的工具，技术和输入输出的描述 项目的生命周期，和项目阶段的描述 项目的最终目标和阶段性目标 进度计划 项目预算 变更流程和变更控制委员会 对于内容，范围，和时间的关键管理评审，便于确定悬流问题和未来决策</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/" data-id="cm49fvwoi000v50vvex30djon" data-title="论软件系统架构评估和引用" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-首次搭建hexo博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/05/25/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" class="article-date">
-  <time class="dt-published" datetime="2020-05-25T02:31:48.000Z" itemprop="datePublished">2020-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/05/25/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/">首次搭建hexo博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>之前尝试了用亚马逊服务器，自己写前端，后端，但是还整了个定时爬虫，每周去爬漫画海贼王漫画图片，然后转成pdf版本。</p>
-<p>效果其实蛮好，运行正常，然而后来亚马逊不是免费试用期年嘛，后来到期了之后再用就比较贵了。</p>
-<p>这次就尝试了这个hexo 加 github的模式，想想只要github不被墙，然后也不想再去自己折腾了，就简简单单专注博客吧，认真记录我的现在，我想这才是我的真正需求，原先的折腾更多的还有技术尝试的因素在内。</p>
-<p>用的博客主题是ayer，还是蛮干净清爽的，给作者掌声，欢迎大家去使用这个主题。</p>
-<p>我的页尾也没改，大家可以直接链接过去。</p>
-<p>现在作为一个react+koa的程序员，应该会开始记录日常技术积累，感想，应该还会有孩子的图片呀啥的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/05/25/%E9%A6%96%E6%AC%A1%E6%90%AD%E5%BB%BAhexo%E5%8D%9A%E5%AE%A2/" data-id="cm49fvwok001150vv97k9cd8r" data-title="首次搭建hexo博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-加入gitalk评论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/05/25/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/" class="article-date">
-  <time class="dt-published" datetime="2020-05-25T01:31:48.000Z" itemprop="datePublished">2020-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/05/25/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/">加入 gitalk 评论</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>给博客添加 Gitalk valine 一开始我是想要用这个的，毕竟我用的 ayer 主题，人家也推荐使用 valine，不过我去注册账号，结果到实名认证那给我掉链子，我填好身份证号，然后报错，看上去是说我的用户类型没有选择，不过页面上也没有什么用户类型选择的地方，就是简单的填名字，填身份证号，太气人了，谷歌了报错也没找出啥解决方法，就只能放弃了。</p>
-<p>然后就是用 gitalk 了。</p>
-<p>这个就是比较简单了，用的人也还行，主要就两个点，就是一开始可以新建一个仓库作为评论存放的地点，我感觉不新建也行，因为其实这个 gitalk 只是用到了 issue 区域，所以应该和你部署的博客仓库一个地址也行。</p>
-<p>然后就是按照指导去创建一个 oauth application 了，获取对应的 client secret，然后就成功了，这个本地查看好像不行，得部署了才正常，我这边是这个情况，会报 network error 不过呢感觉有点不够好的地方就是这个 gitalk 是需要 github 登陆之后才能评论的，要么你只能看评论，感觉要是有匿名就好了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/05/25/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/" data-id="cm49fvwoc000g50vvaatiezsv" data-title="加入 gitalk 评论" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-git记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/05/25/git%E8%AE%B0%E5%BD%95/" class="article-date">
-  <time class="dt-published" datetime="2020-05-25T00:31:48.000Z" itemprop="datePublished">2020-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/05/25/git%E8%AE%B0%E5%BD%95/">git 记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>git 学习 惊呆了，今天偶然掘金上看到有人写到关于 git log 的命令，才恍然觉得自己和文盲差不多，git 只会一些皮毛，一直没有深入去了解过，这次看到 git log 这么详细的参数命令，感觉很有用，赶紧记录一下 在一行显示提交信息 git log –oneline 根据日期查询 git log –since&#x3D;”..” –until&#x3D;”..” 根据提交人汇总 git short log 掘金那位提供的一个炫酷使用版本 git log –graph –pretty&#x3D;format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –date&#x3D;relative 对应的别名设置，感觉蛮实用 git config –global alias.lg “log –graph –pretty&#x3D;format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit –date&#x3D;relative” 搜索 git log –grep&#x3D;’测试’ –oneline –abbrev&#x3D; 显示 hash 值的前几位，具体 不过这个感觉得配合–oneline 使用，一般的 git log –abbrev&#x3D; 不起效果git-log掘金文章 之后几篇应该都会去学习 crawlab 这个开源项目，有我感兴趣的 go，ks 还有 docker 部署的流程，满满的干货样子先贴上链接crawlab 还有一个 nodejs 版本的 craw，也会一并学习。</p>
-<p>apify</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/05/25/git%E8%AE%B0%E5%BD%95/" data-id="cm49fvwo5000450vv9xbh8kmi" data-title="git 记录" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hexo图片加载" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/05/25/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" class="article-date">
-  <time class="dt-published" datetime="2020-05-24T23:31:48.000Z" itemprop="datePublished">2020-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/05/25/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/">hexo 图片加载</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>搭建 hexo 选在 ayer 也碰到了图片加载问题，这个就需要 f 慢慢看路径了，就是去查看一下请求的路径是什么样子的，然后慢慢调试一下，其实但凡没显示出来，不要慌，就是图片路径不正确，然后我后来又用了七牛云的存储服务，他们有免费额度，感觉对于一般的博客来说，完全够用。</p>
-<p>然后就是如果想要一个好的体验的博客，还是建议用图片存储服务的，优点很明显，就是加载快，一般对方会有 cdn 缓存，从别的地方打开好很多，一开始我没用这个，结果手机端打开，加载第一个背景加载了半天，因为图片略大。</p>
-<p>这个服务的选择就比较多样了，除了七牛，还有图床啥的，我没去看，我七牛这条路走通了，就没管其他的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/05/25/hexo%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" data-id="cm49fvwo6000550vv86fl4wri" data-title="hexo 图片加载" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/05/25/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2020-05-24T22:31:48.000Z" itemprop="datePublished">2020-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/05/25/hello-world/">部署hexo</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post$ hexo new “My New Post” More info: Writing Run server$ hexo server More info: Server Generate static files$ hexo generate More info: Generating Deploy to remote sites$ hexo deploy More info: Deployment</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/05/25/hello-world/" data-id="cm49fvwo6000650vvdd5odwhe" data-title="部署hexo" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/">react感想</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2020/05/">
+          <span class="card-archive-list-date">五月 2020</span>
+          <span class="card-archive-list-count">5</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">39</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-12-04T06:28:01.459Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Renjm</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

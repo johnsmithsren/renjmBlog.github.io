@@ -1,573 +1,194 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>RenjmBlog - 技术分享</title><meta name="author" content="Renjm"><meta name="copyright" content="Renjm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="记录学习与生活">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RenjmBlog">
 <meta property="og:url" content="http://example.com/page/3/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="og:site_name" content="RenjmBlog">
+<meta property="og:description" content="记录学习与生活">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.png">
+<meta property="article:author" content="Renjm">
+<meta property="article:tag" content="技术,博客,前端,后端,JavaScript,Node.js">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/avatar.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'RenjmBlog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">RenjmBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">RenjmBlog</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:your-email@example.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC/" title="整数反转 &amp; 回文数">整数反转 &amp; 回文数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T09:31:48.000Z" title="发表于 2020-07-01 17:31:48">2020-07-01</time></span></div><div class="content">原题链接思路主要就是转换成字符串，主要因为字符串是有反转的方法的 然后思路我对的，不过没想到math有这几个方法，看到别人是这样用math的，受教。 就是学习了math的两个用法，一个是sign 获取正负的，pow 平方 var reverse &#x3D; function(x) { let sign &#x3D; Math.sign(x) let res &#x3D; (Math.abs(x) + ‘’).split(‘’).reverse().join(‘’) * sign if (res &gt; Math.pow(2, 31) - 1 || res &lt; Math.pow(2, 31) * -1) res &#x3D; 0 return res}; 原题链接这个思路就是在上面的数字反转基础上添加符号判断即可let sign &#x3D; Math.sign(x)let res &#x3D; (Math.abs(x) + ‘’).split(‘’).reverse().join(‘’) * signif (res &#x3D;&#x3D;&#x3D;x...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="三数之和">三数之和</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T08:31:48.000Z" title="发表于 2020-07-01 16:31:48">2020-07-01</time></span></div><div class="content">题目 原题链接 参考了思路双指针，然后自己练习，发现去重是这个题目的重点。 。 然后别人简单的去重没记住，就做了一个 map 来去重，结果速度比较慢，但是通过了 var threeSum &#x3D; function(nums) { nums.sort((a, b) &#x3D;&gt; a - b) let len &#x3D; nums.length let res &#x3D; []; let map &#x3D; {} for(let i &#x3D; ;i&lt;len-;i++){ let right &#x3D; i+; let left &#x3D; len- while(left &gt; right){ let sum &#x3D; nums[i]+nums[left]+nums[right] if(sum&#x3D;&#x3D;){ let mapValue &#x3D; $&#123;nums[i]&#125;-$&#123;nums[right]&#125;-$&#123;nums[left]&#125;...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" title="数据存储方式">数据存储方式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T07:31:48.000Z" title="发表于 2020-07-01 15:31:48">2020-07-01</time></span></div><div class="content">小小抄 数组的存储方式主要为数组和链表 散列表通过散列函数吧键映射到一个大数组中，不过需要考虑解决散列冲突树用数组实现就是堆，因为堆是一个完全二叉树，用数组存储不需要节点指针。 用链表表示，会衍生出巧妙的设计，比如二叉搜索树，avl树，红黑树 数组的优点: 可以随机访问，通过索引快速找到对应元素，相对而言，链表不支持随机访问，也就是通过索无法快速找到对应元素，主要因为链表需要通过顺序访问，通过前驱或者后继去依次访问表内元素。 链表的优点: 不需要考虑扩容，方便插入和删除元素，如果知道某一个元素的前驱和后驱，插入和删除的时间复杂度就是o() 何为动态规划 动态规划问题的一般形式是求最值，求解动态规划的核心是穷举 重叠子问题，最优子结构，状态转移返程就是动态规划三要素 方法论： 明确base case。 明确状态，明确选择，定义数组或者函数的含义斐波那契数列 暴力递归(什么是递归，是重复调用函数自身来实现循环，迭代是函数内部某段代码实现循环，迭代中当前循环的结果会作为下次循环的初始值) 代码低效，主要原因在于出现大量的重复计算，比如f() &#x3D; f()+f(),f()...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" title="环形链表">环形链表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T06:31:48.000Z" title="发表于 2020-07-01 14:31:48">2020-07-01</time></span></div><div class="content">原题链接 主要思路是对于节点 val 修改数值，那么如果出现 节点 next 存在，但是 val 不存在，那就是环形，然而这个明显不对的解，居然通过了 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } &#x2F;&#x2F;* * @param {ListNode} head * @return {boolean} *&#x2F;var hasCycle &#x3D; function(head) { let current &#x3D; new ListNode() current.next &#x3D; head while(current.next &amp;&amp; current.val){ current.val &#x3D; false current &#x3D; current.next } if(current.next){ return true }...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/" title="数组异或操作">数组异或操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T05:31:48.000Z" title="发表于 2020-07-01 13:31:48">2020-07-01</time></span></div><div class="content">原题链接 关键在于首先设置头 &#x2F;** * @param {number} n * @param {number} start * @return {number} *&#x2F;var xorOperation &#x3D; function(n, start) { let sum &#x3D;start; let nums &#x3D;[] let i &#x3D; while(i&lt;n){ sum &#x3D; sum ^ (start + *(i)) i++ } return sum}; 这个简单，也没啥好说的 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/" title="链表中间节点">链表中间节点</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T04:31:48.000Z" title="发表于 2020-07-01 12:31:48">2020-07-01</time></span></div><div class="content">原题链接 这个一开始我自然只会用最笨的方法了 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } &#x2F;&#x2F;* * @param {ListNode} head * @return {ListNode} *&#x2F;var middleNode &#x3D; function(head) { let current &#x3D; head let totalIndex &#x3D;  let index &#x3D;  while(current.next){ totalIndex &#x3D; totalIndex+ current &#x3D; current.next } if(totalIndex%&#x3D;&#x3D;){ totalIndex &#x3D; totalIndex&#x2F; }else{...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/" title="好数对的数目">好数对的数目</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T03:31:48.000Z" title="发表于 2020-07-01 11:31:48">2020-07-01</time></span></div><div class="content">原题链接 基础题&#x2F;** * @param {number[]} nums * @return {number} *&#x2F;var numIdenticalPairs &#x3D; function(nums) { let end &#x3D; nums.length- let start &#x3D;  let total &#x3D;  while(start!&#x3D;nums.length-){ if(nums[start]&#x3D;&#x3D;&#x3D;nums[end]){ total++ } end– if(end&#x3D;&#x3D;start){ end&#x3D;nums.length- start++ } } return total}; </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" title="旋转链表">旋转链表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T02:31:48.000Z" title="发表于 2020-07-01 10:31:48">2020-07-01</time></span></div><div class="content">原题链接 思路的话第一步找到链表的总长度，然后 k 取余总长度，获取真实移动步第二步根据移动步数，打断链表第三步将打断后的链表重新拼接 然后输出 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } &#x2F;&#x2F;* * @param {ListNode} head * @param {number} k * @return {ListNode} *&#x2F;var rotateRight &#x3D; function(head, k) { if(!head){return head} let current &#x3D; head let second &#x3D; head let tmp &#x3D; null let total &#x3D;  while (current) { total++ if (!current.next) { break }...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" title="排序列表">排序列表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T01:31:48.000Z" title="发表于 2020-07-01 09:31:48">2020-07-01</time></span></div><div class="content">原题链接 应该是基础的简单排序吧 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } &#x2F;&#x2F;* * @param {ListNode} head * @return {ListNode} *&#x2F;var sortList &#x3D; function(head) { let slow &#x3D; head let fast &#x3D; head let temp while(slow){ while(fast){ if(slow.val&gt;fast.val){ temp &#x3D; slow.val slow.val &#x3D; fast.val fast.val &#x3D; temp } fast &#x3D; fast.next } slow &#x3D; slow.next fast &#x3D; slow } return head};...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/07/01/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" title="移除链表元素">移除链表元素</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-07-01T00:31:48.000Z" title="发表于 2020-07-01 08:31:48">2020-07-01</time></span></div><div class="content">原题链接 这道题最大的困难在于如何处理表头在掌握了 js 的传递引用之后，处理链表就慢慢走上正轨。 但是在遍历之后会发现表头无法处理，所以就想出了虚拟一个表头来解决这个问题，在官方题解中，这个做法被认为是 哨兵节点 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } &#x2F;&#x2F;* * @param {ListNode} head * @param {number} val * @return {ListNode} *&#x2F;var removeElements &#x3D; function(head, val) { let nextNode &#x3D; null let preNode &#x3D;new ListNode() preNode.next &#x3D; head let current &#x3D; preNode...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Renjm</div><div class="author-info-description">记录学习与生活</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren/"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="fab fa-github"><i class="Github"></i></a><a class="social-icon" href="mailto:your-email@example.com" target="_blank" title="fas fa-envelope"><i class="E-Mail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/12/04/%E5%8D%9A%E5%AE%A2%E5%A4%8D%E6%B4%BB/" title="博客复活">博客复活</a><time datetime="2023-12-04T05:30:00.000Z" title="发表于 2023-12-04 13:30:00">2023-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/react%E6%84%9F%E6%83%B3/" title="react感想">react感想</a><time datetime="2022-04-23T05:31:48.000Z" title="发表于 2022-04-23 13:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" title="docker mongo 异常崩溃后">docker mongo 异常崩溃后</a><time datetime="2022-04-23T04:31:48.000Z" title="发表于 2022-04-23 12:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" title="上海疫情">上海疫情</a><time datetime="2022-04-23T03:31:48.000Z" title="发表于 2022-04-23 11:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" title="后端开发的一些想法">后端开发的一些想法</a><time datetime="2022-04-23T02:31:48.000Z" title="发表于 2022-04-23 10:31:48">2022-04-23</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">技术笔记</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/GitHub-Pages/" style="font-size: 1.1em; color: #999">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 1.1em; color: #999">Hexo</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">博客</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
+    <ul class="card-archive-list">
   
-    <article id="post-三数之和" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T08:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2023/12/">
+          <span class="card-archive-list-date">十二月 2023</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
     
-  </div>
-  <div class="article-inner">
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2022/04/">
+          <span class="card-archive-list-date">四月 2022</span>
+          <span class="card-archive-list-count">10</span>
+        </a>
+      </li>
     
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2021/01/">
+          <span class="card-archive-list-date">一月 2021</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">三数之和</a>
-    </h1>
-  
-
-      </header>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2020/07/">
+          <span class="card-archive-list-date">七月 2020</span>
+          <span class="card-archive-list-count">22</span>
+        </a>
+      </li>
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>题目 原题链接 参考了思路双指针，然后自己练习，发现去重是这个题目的重点。</p>
-<p>。</p>
-<p>然后别人简单的去重没记住，就做了一个 map 来去重，结果速度比较慢，但是通过了 var threeSum &#x3D; function(nums) { nums.sort((a, b) &#x3D;&gt; a - b) let len &#x3D; nums.length let res &#x3D; []; let map &#x3D; {} for(let i &#x3D; ;i&lt;len-;i++){ let right &#x3D; i+; let left &#x3D; len- while(left &gt; right){ let sum &#x3D; nums[i]+nums[left]+nums[right] if(sum&#x3D;&#x3D;){ let mapValue &#x3D; <code>$&#123;nums[i]&#125;-$&#123;nums[right]&#125;-$&#123;nums[left]&#125;</code> if(map[mapValue]&#x3D;&#x3D; ){ right++; left–; continue } map[mapValue] &#x3D;  res.push([nums[i],nums[right],nums[left]]) left–; right++; }else if (sum&gt;){ left– }else { right++ } } } return res};</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" data-id="cm49fvwoa000d50vvdz0abqkv" data-title="三数之和" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据存储方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T07:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/">数据存储方式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>小小抄 数组的存储方式主要为数组和链表 散列表通过散列函数吧键映射到一个大数组中，不过需要考虑解决散列冲突树用数组实现就是堆，因为堆是一个完全二叉树，用数组存储不需要节点指针。</p>
-<p>用链表表示，会衍生出巧妙的设计，比如二叉搜索树，avl树，红黑树 数组的优点: 可以随机访问，通过索引快速找到对应元素，相对而言，链表不支持随机访问，也就是通过索无法快速找到对应元素，主要因为链表需要通过顺序访问，通过前驱或者后继去依次访问表内元素。</p>
-<p>链表的优点: 不需要考虑扩容，方便插入和删除元素，如果知道某一个元素的前驱和后驱，插入和删除的时间复杂度就是o() 何为动态规划 动态规划问题的一般形式是求最值，求解动态规划的核心是穷举 重叠子问题，最优子结构，状态转移返程就是动态规划三要素 方法论： 明确base case。</p>
-<p>明确状态，明确选择，定义数组或者函数的含义斐波那契数列 暴力递归(什么是递归，是重复调用函数自身来实现循环，迭代是函数内部某段代码实现循环，迭代中当前循环的结果会作为下次循环的初始值) 代码低效，主要原因在于出现大量的重复计算，比如f() &#x3D; f()+f(),f() &#x3D; f()+ f(), f() 会被算两次，后面其他数字也是重复计算，这还只是f()，如果是更加大的数值，那么计算量会非常庞大。</p>
-<p>这个也就是 重叠子问题 递归算法的时间复杂度是子问题的个数乘以一个子问题需要的时间，所以子问题的个数为 ^n ,子问题时间的话，是 o() 因为就一个加法int fib(int N) { if (N &#x3D;&#x3D;  || N &#x3D;&#x3D; ) return ; return fib(N - ) + fib(N - );} 优化算法，带备忘录的递归算法 最终的时间复杂度为o(n) 这个和动态规划的解法也差不多了， 这个是自顶向下，动态规划一般是自底向上int fib(int N) { if (N &lt; ) return ; &#x2F;&#x2F; 备忘录全初始化为  vector<int> memo(N + , ); &#x2F;&#x2F; 进行带备忘录的递归 return helper(memo, N);}int helper(vector<int>&amp; memo, int n) { &#x2F;&#x2F; base case if (n &#x3D;&#x3D;  || n &#x3D;&#x3D; ) return ; &#x2F;&#x2F; 已经计算过 if (memo[n] !&#x3D; ) return memo[n]; memo[n] &#x3D; helper(memo, n - ) + helper(memo, n - ); return memo[n];}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/" data-id="cm49fvwof000o50vv4prldpd6" data-title="数据存储方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-环形链表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T06:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/">环形链表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 主要思路是对于节点 val 修改数值，那么如果出现 节点 next 存在，但是 val 不存在，那就是环形，然而这个明显不对的解，居然通过了 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } <em>&#x2F;&#x2F;</em>* * @param {ListNode} head * @return {boolean} *&#x2F;var hasCycle &#x3D; function(head) { let current &#x3D; new ListNode() current.next &#x3D; head while(current.next &amp;&amp; current.val){ current.val &#x3D; false current &#x3D; current.next } if(current.next){ return true } return false}; 正解,使用双指针，也就是龟兔赛跑的想法，对于环形链表，总会追上if (head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null) { return false; } ListNode slow &#x3D; head; ListNode fast &#x3D; head.next; while (slow !&#x3D; fast) { if (fast &#x3D;&#x3D; null || fast.next &#x3D;&#x3D; null) { return false; } slow &#x3D; slow.next; fast &#x3D; fast.next.next; } return true;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" data-id="cm49fvwoh000t50vv8u5xdl87" data-title="环形链表" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数组异或操作" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T05:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/">数组异或操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 关键在于首先设置头 &#x2F;** * @param {number} n * @param {number} start * @return {number} *&#x2F;var xorOperation &#x3D; function(n, start) { let sum &#x3D;start; let nums &#x3D;[] let i &#x3D; while(i&lt;n){ sum &#x3D; sum ^ (start + *(i)) i++ } return sum}; 这个简单，也没啥好说的</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E6%95%B0%E7%BB%84%E5%BC%82%E6%88%96%E6%93%8D%E4%BD%9C/" data-id="cm49fvwof000p50vv03a20se2" data-title="数组异或操作" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-链表中间节点" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T04:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/">链表中间节点</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 这个一开始我自然只会用最笨的方法了 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } <em>&#x2F;&#x2F;</em>* * @param {ListNode} head * @return {ListNode} *&#x2F;var middleNode &#x3D; function(head) { let current &#x3D; head let totalIndex &#x3D;  let index &#x3D;  while(current.next){ totalIndex &#x3D; totalIndex+ current &#x3D; current.next } if(totalIndex%&#x3D;&#x3D;){ totalIndex &#x3D; totalIndex&#x2F; }else{ totalIndex&#x3D;(totalIndex+)&#x2F; } while(head){ if(index &#x3D;&#x3D;totalIndex){ break } index+&#x3D; head &#x3D; head.next } return head}; 然后看到了官方的优化方法，也就是快慢指针 var middleNode &#x3D; function(head) { slow &#x3D; fast &#x3D; head; while (fast &amp;&amp; fast.next) { slow &#x3D; slow.next; fast &#x3D; fast.next.next; } return slow;}; 基本就是匀速前进，一个人速度是你的两倍，走过的距离也是你的两倍，就是这样。</p>
-<p>这个就简单很多了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E9%93%BE%E8%A1%A8%E4%B8%AD%E9%97%B4%E8%8A%82%E7%82%B9/" data-id="cm49fvwoi000x50vvhvdl3emi" data-title="链表中间节点" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-好数对的数目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T03:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/">好数对的数目</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 基础题&#x2F;** * @param {number[]} nums * @return {number} *&#x2F;var numIdenticalPairs &#x3D; function(nums) { let end &#x3D; nums.length- let start &#x3D;  let total &#x3D;  while(start!&#x3D;nums.length-){ if(nums[start]&#x3D;&#x3D;&#x3D;nums[end]){ total++ } end– if(end&#x3D;&#x3D;start){ end&#x3D;nums.length- start++ } } return total};</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E5%A5%BD%E6%95%B0%E5%AF%B9%E7%9A%84%E6%95%B0%E7%9B%AE/" data-id="cm49fvwod000j50vv1gxhdi3v" data-title="好数对的数目" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-旋转链表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T02:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">旋转链表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 思路的话第一步找到链表的总长度，然后 k 取余总长度，获取真实移动步第二步根据移动步数，打断链表第三步将打断后的链表重新拼接 然后输出 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } <em>&#x2F;&#x2F;</em>* * @param {ListNode} head * @param {number} k * @return {ListNode} *&#x2F;var rotateRight &#x3D; function(head, k) { if(!head){return head} let current &#x3D; head let second &#x3D; head let tmp &#x3D; null let total &#x3D;  while (current) { total++ if (!current.next) { break } current &#x3D; current.next } k &#x3D; k % total console.log(k) while (k++ &lt; total) { if(k &#x3D;&#x3D;&#x3D; total){ tmp &#x3D; second.next; second.next&#x3D; null } second &#x3D; second.next } console.log(tmp) if(!tmp){return head} let tmp&#x3D; tmp while(tmp){ if(!tmp.next){ tmp.next &#x3D; head break } tmp&#x3D;tmp.next } return tmp};</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" data-id="cm49fvwog000r50vv6yn0hmv6" data-title="旋转链表" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-排序列表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T01:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/">排序列表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 应该是基础的简单排序吧 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } <em>&#x2F;&#x2F;</em>* * @param {ListNode} head * @return {ListNode} *&#x2F;var sortList &#x3D; function(head) { let slow &#x3D; head let fast &#x3D; head let temp while(slow){ while(fast){ if(slow.val&gt;fast.val){ temp &#x3D; slow.val slow.val &#x3D; fast.val fast.val &#x3D; temp } fast &#x3D; fast.next } slow &#x3D; slow.next fast &#x3D; slow } return head}; 这个速度很慢</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" data-id="cm49fvwof000n50vvbowecaf1" data-title="排序列表" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-移除链表元素" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" class="article-date">
-  <time class="dt-published" datetime="2020-07-01T00:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">移除链表元素</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>原题链接 这道题最大的困难在于如何处理表头在掌握了 js 的传递引用之后，处理链表就慢慢走上正轨。</p>
-<p>但是在遍历之后会发现表头无法处理，所以就想出了虚拟一个表头来解决这个问题，在官方题解中，这个做法被认为是 哨兵节点 &#x2F;** * Definition for singly-linked list. * function ListNode(val) { * this.val &#x3D; val; * this.next &#x3D; null; * } <em>&#x2F;&#x2F;</em>* * @param {ListNode} head * @param {number} val * @return {ListNode} *&#x2F;var removeElements &#x3D; function(head, val) { let nextNode &#x3D; null let preNode &#x3D;new ListNode() preNode.next &#x3D; head let current &#x3D; preNode while(current.next){ nextNode &#x3D; current.next if(nextNode &amp;&amp; nextNode.val&#x3D;&#x3D;&#x3D;val){ current.next &#x3D; nextNode.next }else{ current &#x3D; current.next } } return preNode.next};</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" data-id="cm49fvwoh000u50vv2v0xhai4" data-title="移除链表元素" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-架构风格" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/07/01/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/" class="article-date">
-  <time class="dt-published" datetime="2020-06-30T23:31:48.000Z" itemprop="datePublished">2020-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/07/01/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/">架构风格</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>五大分类，数据流风格，独立构件风格，虚拟机风格和仓库风格 数据流风格包括批处理序列风格，管道过滤器风格 调用返回风格包括主程序&#x2F;子程序架构风格，数据抽象和面向对象风格和层次结构风格 独立构件包括进程通信架构风格和事件驱动的架构风格 虚拟机风格包括 解释器架构 和基于规则的系统 仓库风格包括数据库架构风格和黑板架构风格</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/07/01/%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC/" data-id="cm49fvwog000s50vvhhyv0dfd" data-title="架构风格" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/">react感想</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a>
-          </li>
-        
-          <li>
-            <a href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2020/05/">
+          <span class="card-archive-list-date">五月 2020</span>
+          <span class="card-archive-list-count">5</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">39</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-12-04T06:28:01.459Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Renjm</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
