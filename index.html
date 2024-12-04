@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-react感想" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T05:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/react%E6%84%9F%E6%83%B3/">react感想</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。</p>
+<p>用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。</p>
+<p>以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑暂时涉及不到。</p>
+<p>最近碰到的问题主要就是关于状态传递的，父组件如何传递状态给子组件，子组件中再嵌套子组件的情况下，内容传递的一致性，同时还要考虑代码的简洁。</p>
+<p>我发现，useref这些对于一层父子组件来说，还是比较直观，可靠的。</p>
+<pre><code class="javascript">import React,
+  &#123;
+  forwardRef,
+  useImperativeHandle,
+  useState 
+&#125;
+from &quot;react&quot;;
+import &#123;
+  Button,
+  DatePicker,
+  Divider 
+&#125;
+from &quot;antd&quot;;
+import &#123;
+  useObserver 
+&#125;
+from &quot;mobx-react&quot;;
+import ComponentStore from &quot;store/ComponentStore&quot;;
+const &#123;
+  RangePicker 
+&#125;
+= DatePicker;
+import moment from &quot;moment&quot;;
+const _ = require(&quot;lodash&quot;);
+export const RangePickCondition = forwardRef((props,
+  ref) =&gt; &#123;
+  const [startTime,
+  setStartTime] = useState();
+const [endTime,
+  setEndTime] = useState();
+const [regTime,
+  setRegTime] = useState();
+const type = _.get(props,
+  &quot;type&quot;);
+useImperativeHandle(ref,
+  () =&gt; (&#123;
+  startTime: _.toNumber(moment(startTime).format(&quot;X&quot;)),
+  endTime: _.toNumber(moment(endTime).format(&quot;X&quot;)),
+  regTime: _.toNumber(moment(regTime).format(&quot;X&quot;)),
+  &#125;
+));
+return useObserver(() =&gt; ( &lt;&gt; &#123;
+  type == &quot;needReg&quot; ? ( &lt;div&gt; &lt;Button type=&quot;primary&quot;&gt;注册时间&lt;/Button&gt; &lt;Divider type=&quot;vertical&quot; /&gt; &lt;DatePicker showTime format=&quot;YYYY-MM-DD HH:mm:ss&quot; onChange=&#123;
+  (dates: any,
+  dateStrings: any[]) =&gt; &#123;
+  setRegTime(dates.valueOf());
+ComponentStore.rangePickRegtime = _.toNumber( moment(regTime).format(&quot;X&quot;) );
+&#125;
+
+&#125;
+/&gt; &lt;/div&gt; ) : ( [] )
+&#125;
+&lt;Button type=&quot;primary&quot;&gt;时间范围&lt;/Button&gt; &lt;Divider type=&quot;vertical&quot; /&gt; &lt;RangePicker format=&quot;YYYY-MM-DD HH:mm:ss&quot; placeholder=&#123;
+  [&quot;开始时间&quot;,
+  &quot;结束时间&quot;]
+&#125;
+onChange=&#123;
+  (dates: any,
+  dateStrings: any[]) =&gt; &#123;
+  setStartTime(dates[].valueOf());
+setEndTime(dates[].valueOf());
+ComponentStore.rangePickStartTime = _.toNumber( moment(dates[].valueOf()).format(&quot;X&quot;) );
+ComponentStore.rangePickEndTime = _.toNumber( moment(dates[].valueOf()).format(&quot;X&quot;) );
+&#125;
+
+&#125;
+/&gt; &lt;/&gt; ));
+&#125;
+);
+export default RangePickCondition;
+但是我尝试在这个子组件中再加上一个小的子组件时候，用ref就会发现初始值出现延迟的问题，连续点击按钮两次，才能够获得正确数值，第一次只会获取这个useref定义的初始默认值。
+
+期间考虑了使用usecontext，然而效果依然不佳 最终想了想，这种传值还是只限于两层的父子组件中可以尝试，如果涉及多层，我还是决定引入mobx来作为统一的存储。
+
+这样就能够自如的进行组件的组合拼接，而不再去通过props，ref这些去做深层次的数值传递。
+
+因为看到大家一般使用也是作为控件的简单操作会引入。
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/" data-id="cm49dnfrc000a14vvdtkjhj3x" data-title="react感想" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mongo异常崩溃后" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T04:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>前言不得不说被吓到了，测试告诉我平台挂了，我看了下 docker 日志，好像没啥问题，然后看到数据库好像链接不了了，顿感疑惑，docker mongo 服务一直很正常，没出过啥问题，换言之，我也没处理过异常。</p>
+<p>查看 mongo 日志，看到一堆报错，关键报错就是 disk out 的感觉，估计是存储空间不够了 df -h 果然，存放 mongo 数据的盘满了 Filesystem Size Used Avail Use% Mounted onudev .G  .G % &#x2F;atmpfs M M M % &#x2F;b&#x2F;e G G  % &#x2F;tmpfs .G  .G % &#x2F;xtmpfs .M  .M % &#x2F;ytmpfs .G  .G % &#x2F;z&#x2F;f G .G G % &#x2F;wtmpfs M  M % &#x2F;z （都是化名） 也就是 这里的根目录 我错了，因为一开始挂载的时候，就是用的默认路径，一般来说，这个盘应该类似 windows 的 C 盘，不放项目的，谁让我菜鸡呢。</p>
+<p>。</p>
+<p>应该正常放在 w 那边 解决首先 移动所有的数据内容 到 w 目录下 mv &#x2F;db&#x2F;* &#x2F;w&#x2F;db 然后我就开心的重启，一堆报错，继续挂，这我就开始冷汗了。</p>
+<p>照例谷歌，发现 如果是正常关闭的，这个时候重启是没问题，感觉像是废话，没事我正常关闭数据库做什么？</p>
+<p>当然，缺乏运维知识的我哪有资格吐槽 然后就是非正常关闭 . rm -rf mongo.lock &#x2F;&#x2F; 删除mongod.lock文件. .&#x2F;mongod –dbpath&#x3D;&#x2F;opt&#x2F;rh&#x2F;mongodbData –repair &#x2F;&#x2F;对数据库进行修复 大概说法就是 这个文件会记录异常状态，不删除会导致重启失效。</p>
+<p>第二步不适合我，因为我是 docker 启动的，所以 sudo docker run -d -v &#x2F;x&#x2F;db:&#x2F;data&#x2F;db -p x: mongo:latest –wiredTigerCacheSizeGB . –auth –repair 因为我启动 mongo 一般是这样的，所以就直接在后面加了–repair 即可，这样就会正常开始修复数据，等待这个过程结束，然后再次启动，就不会报错。</p>
+<p>然后我还对 cachesize 做了限制，结果触发了另外一个问题，内存不够。</p>
+<p>因为曾经我在这个测试环境的数据库里面备份了一次线上的日志数据，大概  千万条，导致这个时候恢复数据的时候内存不够了，然后我就修改了原先的限制，扩大到了 .，就好了。</p>
+<p>总结如果是线上出现这个问题，首先避免出现，测试环境出现后我第一时间去看了线上的剩余磁盘空间，然后发现其实还有非常多，暂时没问题。</p>
+<p>然后如果出现异常关闭，我感觉应该还是以恢复备份为最佳，直接修复数据感觉消耗的时间也是非常慢的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" data-id="cm49dnfra000714vvea8zc38q" data-title="docker mongo 异常崩溃后" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-上海疫情" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T03:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>疫情封控的大概一个月后原来能够自由的出去呼吸新鲜空气是这么的好，想要去吃个烤肉了！</p>
+<p>！</p>
+<p>！</p>
+<p>这么长的封控时间里面，了解了管理一个两千多万人口的大型城市的艰难。</p>
+<p>不过在一个月之后的今天，还是得说这次上海没有把脸漏出来，大概率是漏了屁股出来了。</p>
+<p>之前的舆论都是防疫优等生，现在才发现，上海的市民素质的确还可以，不过管理者的水平并不高，之前的优异表现是因为所有人都在配合着政府，一旦当政府要独舞的时候，乱象丛生了。</p>
+<p>非常能够理解，天灾百年难遇，乱是很正常的，不过持续一个多月的物资供应乱象就掉分了，比如物流渠道不畅通，物资质量问题，在一个多月之后的今天，依然占据大家的日常聊天，只能说，上海的管理水平不过尔尔了。</p>
+<p>起码是被深圳比了下去，深圳封城初始，便着重强调物资供应。</p>
+<p>兵马未动粮草先行，这个是最简单的道理，不过在上海，依然要经过重重的挫折才能被重新认识。</p>
+<p>其实还是万分庆幸能够暴露出来这些问题的，原来上海的市和区和基层街道是分割的。</p>
+<p>市里的政策下面其实不是一条心的，但凡没个分解说明，就能够出现幺蛾子。</p>
+<p>如果齐心协力，这些事情都不会发生，因为全都被解决了。</p>
+<p>各个村镇街道的利益勾当已经根深蒂固到利益相关人员无视疫情防控下食品安全的重要性，明目张胆的从中获利，最终需要市里对这个简单至极的食品安全问题下发正式说明。</p>
+<p>并且需要动用政府公信力来为这些行为兜底，毕竟，这个时候必须得是对的，否则市里如何继续开展工作呢，也能理解，但是希望之后能够重视这个问题，事后亡羊补牢。</p>
+<p>为什么说是简单至极呢，一些平常百姓不会买的食品品牌，政府采购人员，保供单位会直接大批量购买。</p>
+<p>我就好奇，这些人平常家里会缺油缺食品的时候是怎么买的，也是买的这些不入流的食品品牌，一些成立没多久的贴牌经销商的食品吗？</p>
+<p>莫不都是些不食人间烟火之辈吧！</p>
+<p>说各区的财力不够我是不相信的，我家附近的道路，每年整修，我看着其实质量还不错的道路，只是有些微开裂，每年都是全部扒掉，重新铺上，雷打不动。</p>
+<p>这种财力气势，说没钱买物资我是万万不信的。</p>
+<p>那就是审核严格嘛，新闻上各个物流公司，卡车司机为了拿证，想尽办法，流程走遍，让人感动，不过按理说物流紧张，大公司的物质通过物流进来都极为困难，日常买个东西基本都是没法发货，但这些保供小公司的物资进入却没问题，有点滑稽。</p>
+<p>瓜田李下，君子不立危墙之下，我想，作为政府应该理解这个更加深刻，但是依然发生了食品安全被质疑的事情，不禁让人遐想中间存在贪污腐败，利益输送。</p>
+<p>的确，这都是从app，抖音这些谣言居多的平台传出来的，七分假，三分真，但我认为这些质疑其实是可以避免的。</p>
+<p>上海政府的公信力受到了质疑，群众的眼睛是雪亮的，物资供应本就是这次上海的短板，有人还要在上面钻几个孔，无论因为什么原因，其心可诛。</p>
+<p>食品安全，物资供应，本来应该是市政府一个抗疫高潮中锦上添花的举措，这些反落得需要利用政府背书来结束，只能说区里和街道打了市政府的脸，打的很响，在信息爆炸时代，尤其响。</p>
+<p>有一些事实是，我们街道发的物资的确不是日常生活中会购买的，我家拿到上一次的物资中的确有四分之一的包菜。</p>
+<p>免费的物资，本不该抱怨。</p>
+<p>其实能够理解，没有人来做这些事情，各个区的发放不均，其实政府可以大大方方的说，物流供应不畅通，物资数量不足，可以不发的，如果没有资金，也可以明着说。</p>
+<p>我想只要如实说，有些地方直接不发，大家能说什么呢？</p>
+<p>不过准备不足，强行推进，只能授人以柄了，让人觉得要么市里自说自话，不了解基层，只会拍脑袋发布指令，下级根本没法反馈问题，只能强制执行。</p>
+<p>要么基层无视上级意志，私自利益输送，本着天灾不发财，天理难容的态度，强行刷政府公信力来获利。</p>
+<p>参考资料</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" data-id="cm49dnfre000e14vvg2a929mz" data-title="上海疫情" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-后端开发的一些想法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T02:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>后端开发中，参数判断容易让人忽视，很多时候，参数判断出现遗漏，然后不得不在业务处理中作出补丁，其实现在想来，违反了编码的规则和优雅度。</p>
+<p>参数判断作为任何一个接口开发的首要步骤，是万万不能省略的，任何接口的第一层，就是参数判断，参数数量，字段是否存在，这些判断，是业务逻辑开始的前提，业务逻辑是构建在这个基础上的，业务逻辑中不该再出现补丁一样的参数判断。</p>
+<p>业务逻辑开发中需要时刻关注重构，当然，不是说任何时候都建议重构，一旦代码上线，任何形式的重构都是需要谨慎对待的，毕竟一旦出现错漏，会出现严重的生产事故。</p>
+<p>在开发中应该秉持着时刻重构的心，为啥这么说呢，因为业务逻辑的抽象是一个渐进发展，循环往复的过程。</p>
+<p>很多时候都需要代码升级，但是不会有人提议说项目伊始就整个无比复杂的代码，各种安全措施全部加上，因为安全措施越多，代码维护越难，需要的基础工作也越多，感觉还是符合二八定律的，可能做百分之八十的隐藏工作，才能够保护百分之二十的功能代码，真正起作用的就那百分之二十代码，剩下的百分之八十代码都是没用的，这个没用是指在安全的操作前提下。</p>
+<p>所以，为了更快的响应变化，这百分之八十的代码是否需要加，什么时候加，自然就变成一个渐进过程了，当业务量增大到一定程度，会发现，增加那百分之八十的代码，会带来超过百分之八十的工作量的回报，那这个时候就是动手的时候了。</p>
+<p>那如何才能更好的重构呢，感觉需要对方法进行专用化，一个方法尽可能解决一个问题，但是这个方法粒度同样也需要掌握分寸。</p>
+<p>就是如果这个方法的复用性很高，那么这个方法就需要尽可能做到细粒度，做到细粒度就说明这个方法出问题的概率低，因为方法本身极为纯粹，简单，那么重构时候，只需要直接引用该方法即可，这个方法本身基本不需要修改，重构的是使用这个方法的上层方法。</p>
+<p>如果一个方法四五个输入，七八种组合，十来种输出，那么，每次重构都会提心吊胆了，生怕哪个环节出错，拆了东墙坏了西墙。</p>
+<p>这个是有点难的，因为人的逻辑思维是连贯的，一杆到底是很正常的，在写业务的时候，还要想着拆分，是有考验的，同时，维护的人也不想修bug时候看个业务逻辑，往下跳个十来个下级方法吧，那种看着看着就不知道在看啥的感觉，导致代码可读性很差。</p>
+<p>所以要形成关键方法细粒度化，同时业务逻辑方法整体分层控制在几层之内，也就是，几层方法中，某些层是极为精简的，这些方法可以被其他业务复用，有些方法则是和本身业务逻辑高度绑定的，可复用性差，又没有差到完全无法复用。</p>
+<p>感觉这既是编码的高级阶段了，可读性，复用性相互平衡。</p>
+<p>参考资料</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" data-id="cm49dnfrf000i14vv040cbc2j" data-title="后端开发的一些想法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-宝宝百日" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T01:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>宝宝百日啦唯一的唯一，希望宝宝身体健康，对于宝宝的期望是能够健康成长 以后等宝宝长大一点，一定要把他拉过来看看这个记录，哈哈哈 好啦，下面奉上大图 萌照  萌照</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/" data-id="cm49dnfrg000k14vvaw932m8z" data-title="宝宝百日" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-redis-ts-nodejs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/redis-ts-nodejs/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T00:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/redis-ts-nodejs/">redis,ts,nodejs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近碰到一个技术问题，就是现在做的平台需要提供日志分析 最初的想法就是简单的mongo查询，然后恶补了一下聚合查询的方式，基本解决了最初的需求，然后发现一旦采用lookup会特别慢，感觉和索引有啥关系之类，得设置一下，才能够联表查询。</p>
+<p>所以改写了原先的写法，非常蠢的先查询一个表，找到符合的例如uuid之类，然后通$in查询，速度提升了一些，但是这个方法其实还是蛮致命的，如果用户级数上升到十万百万级别，到时候单纯的数据存储查询uuid估计是不行的，所以后续还得改进，应该还是得走lookup那条路。</p>
+<p>然后现在遇到了另一个问题，就算现在的测试用户数量只有可怜的万人级别，日活跃用户千人的级别，生成的日志数量依然达到了千万条的级别，一旦跨日期查询，还是需要等待几十秒，这个实在是不能忍，于是乎产生了另外一个想法，就是采用redis的缓存机制来减少和数据库的交互，想法也很简单，就是数据库交互时间总归要大于内存查询时间。</p>
+<p>平台使用的技术栈就是react，koa。</p>
+<p>然后语言是typescript，node版本用的吧，现在node都是async，await了嘛，有时候都有点感觉不到异步了。</p>
+<p>。</p>
+<p>。</p>
+<p>习惯性await了，这个时候才发现redis那边暂时还不支持async，await。</p>
+<p>也不是完全不支持，我的意思是stream方式。</p>
+<p>因为我想要缓存日志信息，就是根据日期，玩家id，还有指定条目，去缓存玩家的使用数值，大概这样流程，然后就涉及到遍历key，谷歌一番，首先解决方法不多，大多是采用额外插件来做这个redis。</p>
+<p>幸好看到一个人说可以采用node新特性解决，然后我就是试了下，是可以打出key，就是下面这个，不过不知道还有没有坑，后续会进行数据校验，看看是否真的可以 let uuidList &#x3D; [];var stream &#x3D; RedisStore.redis.scanStream({ &#x2F;&#x2F; only returns keys following the pattern of <code>user:*</code> match: <code>*$&#123;currentDay&#125;:$&#123;this.radioValue&#125;</code>, &#x2F;&#x2F; returns approximately  elements per call count: ,});for await (let x of stream) { console.log(x);} 希望这次采用promise.all + redis 缓存辅助的方式能够让日志分析突破一下，为后续平台处理更大规模日志做准备。</p>
+<p>当然还得继续学习mongo看看聚合查询针对数组数据处理的方法，这样要是能够大部分运算都在mongo引擎内处理掉，也能够接受。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> allTask = [];</span><br><span class="line"><span class="keyword">await</span> cursor.<span class="title function_">eachAsync</span>(<span class="function">(<span class="params">actionInfo</span>) =&gt;</span> &#123;</span><br><span class="line">  allTask.<span class="title function_">push</span>(<span class="variable language_">this</span>.<span class="title function_">xxxx</span>(xxx,</span><br><span class="line">  xxx));</span><br><span class="line">&#125;</span><br><span class="line">);</span><br><span class="line"><span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(allTask);</span><br><span class="line">如果这些路都走不通，依然扛不住大规模推广产生的用户日志数据分析的话，也许就得采用elk啥的，把日志搞到kibana上面去，不过我还是觉得能够在平台查看自然是最方便的，接到kibana就属于下策了</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/redis-ts-nodejs/" data-id="cm49dnfrc000b14vv3kqkgoif" data-title="redis,ts,nodejs" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-eggjs-开发总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2022-04-22T23:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">eggjs+umi 总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>开头先聊一些废话吧，从年月入职，接手koa项目的前后台，后台koa+rpc 前台是react使用下来有一些累，比如日志的统一，定时类的添加这些，才感觉到框架的一些好处，就是一些通用的业务处理方法如果能够规范化，对于开发效率的提高是显著的，比如日志，和定时，都是一个业务开发中必不可少的部分，还有应用的稳定性处理，任何业务都无法避免。</p>
+<p>所以在项目伊始，就开始考虑使用框架，按照之前长期使用antd的惯性，这次就采用了eggjs来作为后台，然后 umijs来作为前台，通信方式变成了 http+nats，nats主要负责和后端各个应用间通讯，http负责前后台通讯。</p>
+<p>不过有点调查不严的地方在于，当umi用完的时候才看到大家说umi在年已经被阿里放弃维护了。</p>
+<p>。</p>
+<p>。</p>
+<p>瞬间黑线，感觉又给自己埋下了一个坑。</p>
+<p>不过umi这边也只是对react做了一些外部封装，感觉弃用也还好。</p>
+<p>后台这边其实eggjs还是学习了一些的，首先，官方文档还不错，但是没到好的地步，给我一种官方文档有点老的感觉，egg的配置和官网给出的代码配置已经不大一样了。</p>
+<p>不过好在有万能的github 可以借鉴，还是很好的。</p>
+<p>岔开一下，百度真的是不争气，不是一般的废，谷歌一个国外的搜索引擎，搜中文居然比百度还方便，基本上想搜啥，绝大部分时候不需要翻页的。</p>
+<p>你让我怎么能忍，真就地主家的儿子，靠着国内人口流量，百度能成为巨头，但是就技术能力，真就没用，中文搜索都比不过谷歌，何谈出去竞争呢。</p>
+<p>日常开发还是推荐谷歌+github，很省事，github的搜索更加有效，但是也有些难度，毕竟浏览器的搜索属于文字类，还能加入一些理解，github 的搜索更加注重 关键字和对于代码的理解了，当然好处是相当直接，大家的代码是不会欺骗你的，基本上传上去的代码都是可以解决问题和提供思路的，也没人传压根不能运行的上去，关键就在于能不能理解运用了。</p>
+<p>回到eggjs开发，好的思路就是直接抄插件了，egg本身就是提倡插件化的，所以当我想要把项目中通用的代码抽出来，比如nats的通信解码部分，鉴权，这块抽出来，就是直接打开node_modules找到egg_xxx 这些插件看看，基本就知道插件应该怎样布局了，毕竟egg也是强调约定的框架，换言之，不照着他的路，你走不通。</p>
+<p>所以顺利解决了插件，然后就豁然开朗，感觉插件真的非常好，能够省略很多的代码。</p>
+<p>当然如果只有一个项目，也没啥感觉了，不过我这边后续可能有多个项目，这个时候，抽出通用部分就相当的重要了，首先代码复用，其次维护的便利性，修bug的便利性，开发的便利性都提升了，只要改一个地方的幸福感，想必大家都是深有体会的。</p>
+<p>umi 的话，感觉没啥特别的，有个关键点，就是打包优化.umirc import { defineConfig } from ‘umi’;const CompressionPlugin &#x3D; require(‘compression-webpack-plugin’);export default defineConfig({ nodeModulesTransform: { type: ‘none’, }, hash: true, exportStatic: {}, dynamicImport: {}, antd: { }, externals: { react: ‘window.React’, bizcharts: “BizCharts”, ‘@antv&#x2F;data-set’: ‘DataSet’, }, headScripts: [‘<a target="_blank" rel="noopener" href="https://unpkg.com/react@../umd/react.production.min.js']">https://unpkg.com/react@../umd/react.production.min.js&#39;]</a>, scripts: [‘<a target="_blank" rel="noopener" href="https://g.alicdn.com/code/lib/BizCharts.js">https://g.alicdn.com/code/lib/bizcharts/../BizCharts.js</a>‘, ‘<a target="_blank" rel="noopener" href="https://g.alicdn.com/code/lib/BizCharts.min.js">https://g.alicdn.com/code/lib/bizcharts/../BizCharts.min.js</a>‘, “<a target="_blank" rel="noopener" href="https://unpkg.com/@antv/data-set@../build/data-set.js%22]">https://unpkg.com/@antv/data-set@../build/data-set.js&quot;]</a>, chainWebpack(config) { if (process.env.NODE_ENV &#x3D;&#x3D;&#x3D; ‘production’) { config.merge({ optimization: { minimize: true, splitChunks: { chunks: ‘async’, minSize: , minChunks: , automaticNameDelimiter: ‘.’, cacheGroups: { vendor: { name: ‘vendors’, test: &#x2F;^.<em>node_modules<a href="?!ag-grid-%7Clodash%7Cwangeditor%7Creact-virtualized%7Crc-select%7Crc-drawer%7Crc-time-picker%7Crc-tree%7Crc-table%7Crc-calendar%7Cantd">\&#x2F;</a>.</em>$&#x2F;, chunks: “all”, priority: , }, virtualized: { name: “virtualized”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]react-virtualized&#x2F;, chunks: “all”, priority:  }, rcselect: { name: “rc-select”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]rc-select&#x2F;, chunks: “all”, priority:  }, rcdrawer: { name: “rcdrawer”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]rc-drawer&#x2F;, chunks: “all”, priority:  }, rctimepicker: { name: “rctimepicker”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]rc-time-picker&#x2F;, chunks: “all”, priority:  }, ag: { name: “ag”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]ag-grid-&#x2F;, chunks: “all”, priority:  }, antd: { name: “antd”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]antd[\&#x2F;]&#x2F;, chunks: “all”, priority:  }, rctree: { name: “rctree”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]rc-tree&#x2F;, chunks: “all”, priority: - }, rccalendar: { name: “rccalendar”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]rc-calendar[\&#x2F;]&#x2F;, chunks: “all”, priority: - }, rctable: { name: “rctable”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]rc-table[\&#x2F;]es[\&#x2F;]&#x2F;, chunks: “all”, priority: - }, wang: { name: “wang”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]wangeditor[\&#x2F;]&#x2F;, chunks: “all”, priority: - }, lodash: { name: “lodash”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]lodash[\&#x2F;]&#x2F;, chunks: “all”, priority: - }, bizcharts: { name: “bizcharts”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]bizcharts[\&#x2F;]&#x2F;, chunks: “all”, priority:  }, xlsx: { name: “xlsx”, test: &#x2F;[\&#x2F;]node_modules[\&#x2F;]xlsx[\&#x2F;]&#x2F;, chunks: “async”, priority:  } } } } }), config.plugin(‘compression-webpack-plugin’).use(CompressionPlugin, [ { test: &#x2F;.js$|.html$|.css$&#x2F;, &#x2F;&#x2F;匹配文件名 threshold: , &#x2F;&#x2F;对超过k的数据压缩 deleteOriginalAssets: false, &#x2F;&#x2F;不删除源文件 algorithm: ‘gzip’, &#x2F;&#x2F; 指定生成gzip格式 minRatio: . &#x2F;&#x2F; 压缩比例，值为 ~  }, ]); } }, routes: [ { path: ‘&#x2F;‘, component: ‘@&#x2F;layouts&#x2F;home’, exact: true, redirect: ‘&#x2F;home&#x2F;introduce’, }, { path: ‘&#x2F;login’, component: ‘@&#x2F;pages&#x2F;login’ }, { path: ‘&#x2F;home’, component: ‘@&#x2F;layouts&#x2F;home’, routes: [ { path: ‘&#x2F;home&#x2F;introduce’, component: ‘@&#x2F;pages&#x2F;shortLinkIntroduce’, }, { path: ‘&#x2F;home&#x2F;terms’, component: ‘@&#x2F;pages&#x2F;terms’, }, { path: ‘&#x2F;home&#x2F;privacy’, component: ‘@&#x2F;pages&#x2F;privacy’, }, { path: ‘&#x2F;home&#x2F;pricing’, component: ‘@&#x2F;pages&#x2F;pricing’, }, ], }, { path: ‘&#x2F;dashboard’, component: ‘@&#x2F;layouts&#x2F;index’, wrappers: [‘@&#x2F;wrappers&#x2F;auth’], routes: [ { path: ‘&#x2F;dashboard&#x2F;order’, component: ‘@&#x2F;pages&#x2F;order’, }, ], }, ], proxy: { ‘&#x2F;api’: { target: ‘http:&#x2F;&#x2F;…:&#x2F;‘, }, }, fastRefresh: {}, mfsu: {},}); external 是关键，虽然设置打包流程也很有用，但是实实在在的体积是没法减少的，只是把加载流程给换了。</p>
+<p>但是外部external的话，一下子包体积就骤降了，不过这个有利有弊，引入外部会增加流量。</p>
+<p>引入qiankun主应用：.umirc.ts qiankun: { master: { &#x2F;&#x2F; 注册子应用信息 apps: [ { name: ‘xxxx’, &#x2F;&#x2F; 唯一 id entry: process.env.NODE_ENV &#x3D;&#x3D;&#x3D; ‘production’ ? ‘&#x2F;&#x2F;xxxx:&#x2F;‘ : ‘&#x2F;&#x2F;…:&#x2F;‘, }, ], }, }, 分应用 qiankun: { slave: {} }, 关于egg插件app.ts ‘use strict’;module.exports &#x3D; app &#x3D;&gt; { if (app.config.ops.app) { require(‘.&#x2F;lib&#x2F;nats’)(app) } if (app.config.ops.checkLogin) { app.config.coreMiddlewares.push(‘xxxxx’); }}; 这里就两个关键，一个是中间件的添加，一个是app的挂载，app启动应用的挂载直接参考egg-mongoose的写法。</p>
+<p>中间件的挂载主要就是在这个app这边push进去才能启动，注意egg这边对于 文件名是很敏感的，文件名尽量保持统一，如果遇到一些启动不了，无法触发的问题，记得查看文件名。</p>
+<p>umi 引入qiankun 之后 和后台的链接 主要依靠nginx server { listen ; index index.html index.htm index.nginx-debian.html; add_header ‘Access-Control-Allow-Origin’ ‘<em>‘; add_header ‘Access-Control-Allow-Headers’ ‘DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type’; add_header ‘Access-Control-Allow-Methods’ ‘PUT, POST, GET, DELETE, OPTIONS’; server_name _; location &#x2F; { root &#x2F;work&#x2F;xxxx; index index.html; } gzip on; gzip_min_length k; gzip_comp_level ; gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;xml text&#x2F;javascript application&#x2F;json; gzip_static on; gzip_vary on;}server { listen ; index index.html index.htm index.nginx-debian.html; add_header ‘Access-Control-Allow-Origin’ ‘</em>‘; add_header ‘Access-Control-Allow-Headers’ ‘DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type’; add_header ‘Access-Control-Allow-Methods’ ‘PUT, POST, GET, DELETE, OPTIONS’; server_name _; location &#x2F; { root &#x2F;work&#x2F;xxxx; index index.html; } location &#x2F;api&#x2F;v { proxy_http_version .; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection “upgrade”; proxy_set_header X-Real-IP $remote_addr; proxy_pass <a target="_blank" rel="noopener" href="http://xxx/">http://xxx</a>:; } location &#x2F;api&#x2F;v { proxy_http_version .; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection “upgrade”; proxy_set_header X-Real-IP $remote_addr; proxy_pass <a target="_blank" rel="noopener" href="http://xxxxx/">http://xxxxx</a>:; } gzip on; gzip_min_length k; gzip_comp_level ; gzip_types text&#x2F;plain application&#x2F;javascript application&#x2F;x-javascript text&#x2F;css application&#x2F;xml text&#x2F;xml text&#x2F;javascript application&#x2F;json; gzip_static on; gzip_vary on; gzip_buffers  k;} 依靠监听端口的变化来处理 前端文件的映射，然后通过主应用的入口 通过 &#x2F;api&#x2F;v, &#x2F;api&#x2F;v 来分发主应用和分应用，这个处理挺挫的。</p>
+<p>。</p>
+<p>。</p>
+<p>但是我查了一下，没有找到qiankun那边的处理方式，蛮奇怪的。</p>
+<p>之后再看吧，暂时感觉也没啥问题。</p>
+<p>感觉proto那边的文章也不多，就加一些nats消息的proto处理方式吧,记得初解除proto解析真的是折腾我好半天，这个protobuf 一种是这个直接读proto的，还有一种就是 解析protojson的。</p>
+<p>其实这种nats感觉也就是定时器监听，通过消息号来判断信息一一对应的样子了。</p>
+<p>protojson这条路，之前我也走过 import * as protobuf from “protobufjs”;const dayjs &#x3D; require(‘dayjs’);const path &#x3D; require(‘path’);export default class NatClient { nc: any; logger: any; protobuf: protobuf.Root; topicList: Map&lt;string, NatTopic&gt;; constructor(instance, fileName, app) { this.nc &#x3D; instance; this.topicList &#x3D; new Map(); this.logger &#x3D; app.logger; this.protobuf &#x3D; new protobuf.Root().loadSync(path.join(path.join(app.baseDir, ‘protos’), fileName), { keepCase: false, }); } getTopic(sub: string) { if (this.topicList.get(sub)) { return this.topicList.get(sub) } return null; } createTopic(sub, pub, messageName) { let topic &#x3D; new NatTopic(this.nc, messageName, sub, pub, this.logger, this.protobuf) this.topicList.set(pub, topic); return topic }}class NatTopic { _subj: any; _instance: any; _topic: string; _reqSequence: number; _messageMap: Map&lt;number, any&gt;; _logger: any; _messageName: string; _protobufInfo: protobuf.Root; constructor(instance, messageName, subscribe, publish, logger, protoBuf) { this._subj &#x3D; instance.subscribe(subscribe); this._instance &#x3D; instance; this._topic &#x3D; publish; this.subscription(); this._reqSequence &#x3D; ; this._messageMap &#x3D; new Map(); this._logger &#x3D; logger; this._messageName &#x3D; messageName; this._protobufInfo &#x3D; protoBuf; } firsLowerCase(str: string) { return str.replace(&#x2F;^\S&#x2F;, (s) &#x3D;&gt; { return s.toLowerCase(); }); }; &#x2F;&#x2F; proto返回数据解析 deserializer(msg: any) { let request &#x3D; this._protobufInfo.lookupType(this._messageName); let message &#x3D; request.decode( msg ); &#x2F;&#x2F; 接口名称 &#x2F;&#x2F;@ts-ignore let apiName &#x3D; message.body.bodyOneof; &#x2F;&#x2F; 因为 long 型在js中表示不方便，然后就统一转为string型号显示 &#x2F;&#x2F;@ts-ignore message &#x3D; request.toObject(message, { enums: String, &#x2F;&#x2F; 以字符串名称进行枚举 longs: String, &#x2F;&#x2F; 将 longs 作为字符串 (需要 long.js) defaults: true, &#x2F;&#x2F; 包含默认值 }) &#x2F;&#x2F;@ts-ignore this._logger.info(<code>返回:$&#123;apiName&#125;:rsp:$&#123;message.head.rspSequence&#125;</code>) &#x2F;&#x2F;@ts-ignore if (message.head.errorCode &#x3D;&#x3D; ) { &#x2F;&#x2F;@ts-ignore let info &#x3D; Reflect.get(message.body, apiName) &#x2F;&#x2F;@ts-ignore this._messageMap.set(message.head.rspSequence, info) } else { this._logger.error(JSON.stringify(message)) } } &#x2F;&#x2F; proto 数据二进制化，方便传输 serializer<T>(opsMsg: T, reqSequence: number) { let info &#x3D; { head: { token: “xxxx”, timestamp: dayjs().valueOf(), errorCode: , reqSequence: reqSequence }, body: { [this.firsLowerCase(opsMsg.constructor.name)]: opsMsg }, }; let request &#x3D; this._protobufInfo.lookupType(this._messageName); let result &#x3D; request.create(info) let paramBuffer &#x3D; request.encode(result).finish(); return paramBuffer } &#x2F;&#x2F; 监听nats通道，解析返回数据，通过reqsequence来确保接口一一对应 async subscription() { for await (const m of this._subj) { this.deserializer(m.data) } this._logger.info(“subscription closed”); } &#x2F;&#x2F; 发送接口，然后通过定时器去获取返回数据 async publish(data?: any) { let reqSeq &#x3D; this._reqSequence + ; this._reqSequence +&#x3D; ; &#x2F;&#x2F;@ts-ignore this._logger.info(<code>发送:$&#123;data.constructor.name&#125;:req:$&#123;reqSeq&#125;</code>) this._instance.publish(this._topic, this.serializer(data, reqSeq)); const result: any &#x3D; await new Promise((resolve, rejecet) &#x3D;&gt; { let count &#x3D; ; const interval &#x3D; setInterval(() &#x3D;&gt; { count++; if (this._messageMap.get(reqSeq)) { clearInterval(interval); resolve(this._messageMap.get(reqSeq)); } if (count &gt; ) { clearInterval(interval); rejecet({ errorCode:  }); } }, ); }); this._messageMap.delete(reqSeq) return result; }} 从protojson解析的代码，不过是我另外一个项目的，和这个egg项目倒是没关系，egg那个是后端的解析。</p>
+<p>这一套解析有局限性！</p>
+<p>！</p>
+<p>！</p>
+<p>！</p>
+<p>这个是前端的解析过程，用websocket通讯，其中有和服务端的特殊约定，比如buffer的前多少个字符是要截取出来的，作为方法号的方式，来单独解析，以此做到返回数据的一一对应，buffer的后面是通过proto的解码方式来的，所以，需要理解后改造！</p>
+<p>！</p>
+<p>！</p>
+<p>！</p>
+<p>PS: lodash 最好弃用 moment替换成dayjs 这两个包都太大，而且lodash 的方法，其实js本身已经实现的差不多了，而且lodash 的防报错能力太好，有种用多了之后 一般代码写不来的感觉了，还是不大好的。</p>
+<p>我已经弃用了哈，看到网上蛮多人也是这么建议的，就拿来学习主义了。</p>
+<pre><code class="javascript">import &#123;
+  protoInfoMap 
+&#125;
+from &quot;./ProtoService&quot;;
+import protoJson from &quot;../proto/proto.json&quot;;
+import xxxxlocalStorage from &quot;./Localstorage&quot;;
+import * as protobuf from &quot;protobufjs/light&quot;;
+import moment from &quot;moment&quot;;
+const _ = require(&quot;lodash&quot;);
+const protobufInfo = protobuf.Root.fromJSON(protoJson);
+class WebsocketProvider &#123;
+  retryCount: number;
+provider: any;
+ws: WebSocket | undefined;
+loading: boolean;
+messageMap: &#123;
+  
+&#125;
+;
+timeInterval: any;
+messageInterval: any;
+constructor() &#123;
+  this.retryCount = ;
+this.ws = undefined;
+this.loading = false;
+this.connect();
+this.messageMap = &#123;
+  
+&#125;
+;
+this.timeInterval = null;
+this.messageInterval = null;
+&#125;
+checkPing() &#123;
+  if (this.timeInterval &gt; ) &#123;
+  clearInterval(this.timeInterval);
+&#125;
+this.timeInterval = setInterval(() =&gt; &#123;
+  if (this.ws &amp;&amp; this.ws.readyState === ) &#123;
+  this.send(xxxx,
+  &#123;
+  
+&#125;
+);
+&#125;
+else &#123;
+  this.retryCount++;
+if (this.retryCount &gt; ) &#123;
+  clearInterval(this.timeInterval);
+this.retryCount = ;
+&#125;
+
+&#125;
+
+&#125;
+,
+  );
+&#125;
+connect() &#123;
+  const serverIp = xxxlocalStorage.getCookie(&quot;serverIp&quot;);
+try &#123;
+  console.log(&quot;发起链接&quot;);
+this.ws = new WebSocket(`ws://$&#123;
+  serverIp
+&#125;
+`);
+// @ts-ignore this.ws.binaryType = &quot;arraybuffer&quot;;
+this.init();
+&#125;
+catch (e) &#123;
+  console.log(&quot;无法连接，重连中&quot;);
+&#125;
+
+&#125;
+init() &#123;
+  if (this.ws) &#123;
+  this.ws.onclose = (e) =&gt; &#123;
+  console.log( `$&#123;
+  e.code
+&#125;
+,
+  $&#123;
+  e.reason
+&#125;
+,
+  $&#123;
+  e.wasClean
+&#125;
+,
+  onclose被调用,
+  链接关闭` );
+&#125;
+;
+this.ws.onerror = () =&gt; &#123;
+  console.log(&quot;发生异常了&quot;);
+&#125;
+;
+&#125;
+
+&#125;
+async onOpen() &#123;
+  return new Promise((resolve) =&gt; &#123;
+  if (this.ws) &#123;
+  this.ws.onopen = (e) =&gt; &#123;
+  console.log(&quot;已经连接了&quot;);
+if (this.ws?.readyState === ) &#123;
+  resolve(&#123;
+  
+&#125;
+);
+&#125;
+
+&#125;
+;
+&#125;
+
+&#125;
+);
+&#125;
+get readyState() &#123;
+  if (this.ws) &#123;
+  return this.ws.readyState;
+&#125;
+else &#123;
+  return ;
+&#125;
+
+&#125;
+getMessage() &#123;
+  if (this.ws &amp;&amp; this.ws.readyState === ) &#123;
+  if (_.keys(this.messageMap).length &gt; ) &#123;
+  this.messageMap = &#123;
+  
+&#125;
+;
+&#125;
+this.ws.onmessage = (event) =&gt; &#123;
+  const num = event.data.slice(,
+  );
+const _apiNumber = new IntArray(num).toString();
+const method = _.get(protoInfoMap,
+  _apiNumber);
+if (!method) &#123;
+  return;
+&#125;
+const request: any = protobufInfo.lookupType(`xxxx.$&#123;
+  method
+&#125;
+`);
+if (request) &#123;
+  const message = request.decode( new UintArray(event.data.slice(,
+  event.data.byteLength)) );
+_.set(this.messageMap,
+  _apiNumber,
+  message);
+&#125;
+
+&#125;
+;
+&#125;
+
+&#125;
+async closeWebsocket() &#123;
+  // console.log(`checkping：` + this.timeInterval);
+return new Promise((resolve,
+  rejecet) =&gt; &#123;
+  if (this.ws &amp;&amp; (this.ws.readyState ===  || this.ws.readyState === )) &#123;
+  this.ws.close(,
+  &quot;normal-close&quot;);
+console.log(&quot;连接关闭&quot;);
+clearInterval(this.timeInterval);
+resolve(&#123;
+  
+&#125;
+);
+&#125;
+else &#123;
+  clearInterval(this.timeInterval);
+resolve(&#123;
+  
+&#125;
+);
+&#125;
+
+&#125;
+);
+&#125;
+async send(apiNumber: number,
+  param: any = &#123;
+  
+&#125;
+) &#123;
+  const paramBuffer = await this.getParamBuffer(apiNumber,
+  param);
+_.unset(this.messageMap,
+  `$&#123;
+  apiNumber + 
+&#125;
+`);
+if (this.ws &amp;&amp; this.ws.readyState ===  &amp;&amp; paramBuffer) &#123;
+  const sendTime = moment().format(&quot;YYYY-MM-DD HH:mm:ss&quot;);
+console.log(`$&#123;
+  sendTime
+&#125;
+-$&#123;
+  apiNumber
+&#125;
+`,
+  param);
+this.ws.send(paramBuffer);
+this.getMessage();
+const result: any = await new Promise((resolve,
+  rejecet) =&gt; &#123;
+  let count = ;
+const interval = setInterval(() =&gt; &#123;
+  count++;
+if (_.get(this.messageMap,
+  apiNumber + )) &#123;
+  clearInterval(interval);
+resolve(_.get(this.messageMap,
+  apiNumber + ));
+&#125;
+if (count &gt; ) &#123;
+  clearInterval(interval);
+rejecet(&#123;
+  errorCode:  
+&#125;
+);
+&#125;
+
+&#125;
+,
+  );
+&#125;
+);
+return result;
+&#125;
+return [];
+&#125;
+async getParamBuffer(apiNumber: number,
+  param: any) &#123;
+  const method = _.get(protoInfoMap,
+  _.toString(apiNumber));
+if (!method) &#123;
+  return &quot;&quot;;
+&#125;
+const request: any = protobufInfo.lookupType(`xxxx.$&#123;
+  method
+&#125;
+`);
+if (request) &#123;
+  let header = new IntArray([apiNumber]).buffer;
+const result = request.create(param);
+let paramBuffer = request.encode(result).finish();
+paramBuffer = Buffer.from(paramBuffer);
+header = Buffer.from(header);
+return Buffer.concat([header,
+  paramBuffer]);
+&#125;
+else &#123;
+  return;
+&#125;
+
+&#125;
+
+&#125;
+const websocketProvider = new WebsocketProvider();
+export default websocketProvider;
+另外，拼凑出自己需要的代码，也是很重要的，很多时候一些数据格式不符合我们的要求，通过脚本形式来自动生成一个新的文件还是很有必要的,
+  下面这个只是简单的拼凑出我要的proto json 的方法号对应文件，但其实，只要有这个思路，可以自动生成很多东西，希望抛砖引玉。
+
+拼凑.sh #!/bin/bashdefultPath=$(pwd)projectPath=$(dirname &quot;$PWD&quot;)cd $projectPath/xxx &amp;&amp; git pull origin xxxcd $projectPath/xxxcp -r $projectPath/xxx/Proto/. $defultPath/proto/pbjs -t json ./proto/manager.proto -o ./src/proto/proto.jsonnode protoGen.js 拼凑.js &quot;use strict&quot;;
+const path = require(&quot;path&quot;);
+const fs = require(&quot;fs&quot;);
+let managetProtoPath = path.join(__dirname,
+  &quot;./manager.proto&quot;);
+let savePath = path.join(__dirname,
+  &quot;./xxxx.tsx&quot;);
+const data = fs.readFileSync(managetProtoPath,
+  &quot;utf-&quot;);
+const lines = data.split(/\r?\n/);
+let jsonMap = &#123;
+  
+&#125;
+;
+let key,
+  value = &quot;&quot;;
+for (let line of lines) &#123;
+  if (line.startsWith(&quot;// &quot;)) &#123;
+  key = line.split(&quot; &quot;)[];
+&#125;
+if (line.startsWith(&quot;//&quot;)) &#123;
+  key = line.split(&quot;/&quot;)[];
+&#125;
+if (line.startsWith(&quot;message&quot;)) &#123;
+  value = line.split(&quot; &quot;)[];
+jsonMap[key] = value;
+&#125;
+
+&#125;
+let inputData = `// Code AutoGenerate. DO NOT EDIT.\n export const protoInfoMap = $&#123;
+  JSON.stringify( jsonMap,
+  null,
+  &quot;\t&quot;)
+&#125;
+`;
+fs.writeFile(savePath,
+  inputData,
+  (err) =&gt; &#123;
+  if (err) &#123;
+  throw err;
+&#125;
+console.log(&quot;autoGenerate proto method map success&quot;);
+&#125;
+);
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" data-id="cm49dnfr7000314vvekw12gtf" data-title="eggjs+umi 总结" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-抖音弹幕获取的另一种方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2022-04-22T22:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/">抖音弹幕获取的另一种方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>公司最近需要做一个直播尝试，需要获取抖音弹幕的信息，没想到抖音的直播开放平台没有相关的接口开放出来，感觉这个绝对是有问题的，作为开发者，获取自己直播间的相关信息，是个很正常的需求。</p>
+<p>然后诉诸网络，有人做了付费的服务来获取弹幕，比较贵，不过感觉挺厉害的，好像就是破解了算法，接口信息很详细，不过抖音也会换算法，这个接口估计也得跟着改，所以人家这个付费好像也能够理解。</p>
+<p>所以公司考虑自己做，然后我就上场了 .第一步github找思路，发现都是广告，没有可利用的，不过在大量的信息中还是能够了解到只鳞片爪的，大家的思路基本是硬钢算法。</p>
+<p>.分析抖音的网页直播间的请求，发现弹幕信息是个定时请求，返回数据是protobuf形式的，没有加密，只要protobuf序列化即可。</p>
+<p>然后请求的关键在于请求中需要计算signature，还有什么x-xx啥的字段，然后结合github，发现还是么法找出前端的加密算法。</p>
+<p>不过找到了protobuf的定义获取方式，这个还是比较关键的，有所了解的同学会方向，定义的proto 中的顺序是要相同的，也就是需要做到前后端的proto一致，才能拿到对应的数据，否则会偏差。</p>
+<p>. 参考文章 . 参考文章 syntax &#x3D; “proto”;package DouyinPack;message WebcastChatMessage { Common common &#x3D; ; User user &#x3D; ; string content &#x3D; ;}message WebcastGiftMessage { Common common &#x3D; ; int repeatCount &#x3D;; GiftUser user &#x3D; ; Gift gift &#x3D; ;}message WebcastLikeMessage { Common common &#x3D; ; int count &#x3D;; int total &#x3D;; int color &#x3D;; User user &#x3D; ;};message Chat { repeated WebcastChatMessage data &#x3D; ;}message User { int id &#x3D;; int shortId &#x3D;; string nickname &#x3D; ; &#x2F;&#x2F; int gender &#x3D; ; &#x2F;&#x2F; string signature &#x3D;; &#x2F;&#x2F; int level &#x3D;; &#x2F;&#x2F; int birthday &#x3D;; &#x2F;&#x2F; string telephone &#x3D; ; &#x2F;&#x2F; string city &#x3D; ; &#x2F;&#x2F; int createTime &#x3D; ; &#x2F;&#x2F; AvatarThumb avatarThumb &#x3D;;}message GiftUser { int id &#x3D;; int shortId &#x3D;; string nickname &#x3D; ; &#x2F;&#x2F; AvatarThumb avatarThumb &#x3D;;}message Gift { string describe &#x3D; ; }message AvatarThumb { repeated string url_list &#x3D;; string uri &#x3D;;}message ApiResult { repeated message messages &#x3D; ; string cursor &#x3D; ; int fetch_interval &#x3D; ; uint now &#x3D; ; string internal_ext &#x3D; ;}message message { string method &#x3D;  ; bytes payload &#x3D; ; uint message_id &#x3D; ;}message Common { string method &#x3D; ; int msgId &#x3D; ; int roomId &#x3D; ; &#x2F;&#x2F; bool isShowMsg &#x3D;; &#x2F;&#x2F; optional int createTime &#x3D; ; &#x2F;&#x2F; string priority_score &#x3D;;}message Image { string uri &#x3D; ;}message PublicAreaCommon { string userLabel &#x3D; ; int userConsumeInRoom &#x3D; ; int userSendGiftCntInRoom &#x3D; ;} 我这边只要求获取弹幕信息，所以只拿了这部分，其他的数据其实原理都是一致的。</p>
+<p>这样就拿到了解析数据，下一步就是如何持续获取这些数据，这个时候想到了我司的直播其实只是简单的网页直播，所以就想到爬虫伪造一个浏览器的状态，然后抓包，解析返回数据，让抖音的前端帮我做签名。</p>
+<p>。</p>
+<p>。</p>
+<p>这样一个low爆的做法。</p>
+<p>应对简单的弹幕获取需求，乃至于其他接口的获取，都是一样的。</p>
+<p>最后可以docker部署。</p>
+<pre><code class="javascript">import &#123;
+  transformBuffer,
+  processMessage 
+&#125;
+from &quot;../utils/commonFunction&quot;;
+import &#123;
+  cronFactory 
+&#125;
+from &quot;../utils/cron&quot;;
+import DouyinMessageModel from &quot;../models/douyinMessage&quot;;
+import &#123;
+  redis 
+&#125;
+from &quot;../utils/redisStore&quot;;
+import moment from &#39;moment&#39;const &#123;
+  chromium 
+&#125;
+= require(&#39;playwright&#39;);
+const _ = require(&#39;lodash&#39;)class OnlineApiController &#123;
+  async start(ctx,
+  next) &#123;
+  let &#123;
+  roomId 
+&#125;
+= ctx.request.query;
+let browser = await chromium.launch(&#123;
+  headless: true,
+  slowMo:  
+&#125;
+);
+let page = await browser.newPage();
+let url = `https://live.douyin.com/$&#123;
+  roomId
+&#125;
+`;
+await page.goto(url);
+await page.waitForTimeout();
+let content = await page.content();
+let roomExist = await redis.get(`$&#123;
+  roomId
+&#125;
+:exist`);
+if (_.includes(content,
+  &#39;直播已结束&#39;)) &#123;
+  browser.close();
+if (roomExist) &#123;
+  await redis.set(`$&#123;
+  roomId
+&#125;
+:exist`,
+  &#39;neExist&#39;);
+&#125;
+
+&#125;
+else &#123;
+  if (roomExist) &#123;
+  browser.close();
+await redis.set(`$&#123;
+  roomId
+&#125;
+:exist`,
+  &#39;neExist&#39;);
+return ctx.rest(&#123;
+  
+&#125;
+);
+&#125;
+else &#123;
+  await redis.set(`$&#123;
+  roomId
+&#125;
+:exist`,
+  &#39;exist&#39;);
+&#125;
+let result = [] page.on(&quot;response&quot;,
+  async (response) =&gt; &#123;
+  let header = response.url() if (_.startsWith(header,
+  &#39;https://live.douyin.com/webcast/im/fetch&#39;)) &#123;
+  let info = await response.body();
+let callback = transformBuffer(roomId,
+  info) if (!_.isEmpty(callback)) &#123;
+  result.push(callback) 
+&#125;
+if (result.length &gt; ) &#123;
+  await redis.set(`$&#123;
+  roomId
+&#125;
+-dy`,
+  &#39;&#39;);
+await redis.expire(`$&#123;
+  roomId
+&#125;
+-dy`,
+  );
+await DouyinMessageModel.insertMany(result,
+  &#123;
+  ordered: false 
+&#125;
+) result = [];
+&#125;
+else &#123;
+  await redis.set(`$&#123;
+  roomId
+&#125;
+-dy`,
+  JSON.stringify(result));
+await redis.expire(`$&#123;
+  roomId
+&#125;
+-dy`,
+  );
+&#125;
+
+&#125;
+
+&#125;
+) cronFactory.startCron(roomId,
+  browser,
+  page) 
+&#125;
+return ctx.rest(&#123;
+  
+&#125;
+);
+&#125;
+async getMessage(ctx,
+  next) &#123;
+  let &#123;
+  id 
+&#125;
+= ctx.params;
+let roomMessage = await redis.get(`$&#123;
+  id
+&#125;
+-dy`);
+if (roomMessage) &#123;
+  roomMessage = JSON.parse(roomMessage);
+return ctx.rest(processMessage(id,
+  roomMessage));
+&#125;
+else &#123;
+  let currentTime = moment().utcOffset().subtract(,
+  &#39;seconds&#39;).valueOf() let result = await DouyinMessageModel.find(&#123;
+  roomId: id,
+  createTime: &#123;
+  $gte: currentTime 
+&#125;
+
+&#125;
+).lean();
+return ctx.rest(processMessage(id,
+  result));
+&#125;
+
+&#125;
+
+&#125;
+export default new OnlineApiController();
+这个烂代码就是一个思路借鉴，获取数据后，超过一定数量就存到mongo中，然后平常获取都是通过redis。
+
+倒是没发现漏弹幕，我一直感觉会少弹幕来着，毕竟是抓包，不是正规的通过cursor啥的去请求接口，不过应对我司这个试水的直播需求，感觉应该不会漏弹幕信息。
+
+因为看到有说法就是手机上的热门直播间的弹幕会hash发送啥的，并不会显示所有弹幕，避免满屏幕弹幕影响观感，我还是比较担心这个的。
+
+用了微软的playwright，还是蛮好用的，这个接口挺丰富。
+
+这个思路的优点就是避免的了签名困扰。
+
+其实这个完善下去，基本你想获取啥都可以。
+
+缺点就是可能遗漏一些信息，不如算法破解来的准确。
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/" data-id="cm49dnfrh000m14vvcwda91rt" data-title="抖音弹幕获取的另一种方式" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-nodejs-kafka-docker-部署遇到的坑" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="article-date">
+  <time class="dt-published" datetime="2022-04-22T21:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">nodejs kafka docker 部署遇到的坑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这个nodejs去链接 docker 部署的kafka 主要的坑点就一个，dockerhub 主要就是 bitanami&#x2F;kafka 他们家的镜像比较好的样子，我暂时就只用一个kafka。</p>
+<p>唯一坑点就是 KAFKA_CFG_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;xxx.xxx.xxx.xxx: 这个参数的配置需要 填内网ip，我看到有人说填外网ip也可以，不过我这边测试发现内网ip也就可以成功链接了。</p>
+<p>废话不多说，直接代码吧docker-compose文件 version: “”networks: kafka-net: driver: bridgeservices: zookeeper-server: image: “bitnami&#x2F;zookeeper:latest” networks: - kafka-net ports: - “:” environment: - ALLOW_ANONYMOUS_LOGIN&#x3D;yes kafdrop: image: obsidiandynamics&#x2F;kafdrop networks: - kafka-net restart: “no” ports: - “:” environment: # KAFKA_BROKERCONNECT: “PLAINTEXT:&#x2F;&#x2F;kafka-server:,PLAINTEXT:&#x2F;&#x2F;kafka-server:,PLAINTEXT:&#x2F;&#x2F;kafka-server:” KAFKA_BROKERCONNECT: “PLAINTEXT:&#x2F;&#x2F;kafka-server:” JVM_OPTS: “-XmsM -XmxM -XssK -XX:-TieredCompilation -XX:+UseStringDeduplication -noverify” depends_on: - “kafka-server” # - “kafka-server” # - “kafka-server” kafka-server: image: “bitnami&#x2F;kafka:latest” networks: - kafka-net ports: - “:” environment: - KAFKA_CFG_ZOOKEEPER_CONNECT&#x3D;zookeeper-server: - ALLOW_PLAINTEXT_LISTENER&#x3D;yes - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE&#x3D;true - KAFKA_CFG_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;…: depends_on: - zookeeper-server # kafka-server: # image: “bitnami&#x2F;kafka:latest” # networks: # - kafka-net # ports: # - “:” # environment: # - KAFKA_CFG_ZOOKEEPER_CONNECT&#x3D;zookeeper-server: # - ALLOW_PLAINTEXT_LISTENER&#x3D;yes # - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE&#x3D;true # depends_on: # - zookeeper-server # kafka-server: # image: “bitnami&#x2F;kafka:latest” # networks: # - kafka-net # ports: # - “:” # environment: # - KAFKA_CFG_ZOOKEEPER_CONNECT&#x3D;zookeeper-server: # - ALLOW_PLAINTEXT_LISTENER&#x3D;yes # - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE&#x3D;true # depends_on: # - zookeeper-server egg版本 ‘use strict’;import * as kafka from ‘kafka-node’const JSONbig &#x3D; require(‘json-bigint’);module.exports &#x3D; app &#x3D;&gt; { app.beforeStart(async () &#x3D;&gt; { const ctx &#x3D; app.createAnonymousContext(); const Producer &#x3D; kafka.Producer; const client &#x3D; new kafka.KafkaClient({ kafkaHost: app.config.kafkaHost }); const producer &#x3D; new Producer(client, app.config.producerConfig); producer.on(‘error’, function (err) { console.error(‘ERROR: [Producer] ‘ + err); }); producer.on(‘ready’, function () { console.error(‘kafka ready ‘); }); app.producer &#x3D; producer; const consumer &#x3D; new kafka.Consumer(client, app.config.consumerTopics, { autoCommit: false, }); consumer.on(‘message’, async function (message) { try { await ctx.service.userAction.insertUserAction(JSONbig.parse(message.value)); consumer.commit(true, (err, data) &#x3D;&gt; { if (err) { console.error(‘commit:’, err, data); } else { console.log(data) } }); } catch (error) { console.error(‘ERROR: [GetMessage] ‘, message, error); } }); consumer.on(‘error’, function (err) { console.error(‘ERROR: [Consumer] ‘ + err); }); });}; &#x2F;* * @Auther: renjm * @Date: – :: * @LastEditTime: – :: * @Description: *&#x2F;import { EggAppConfig, EggAppInfo, PowerPartial } from “egg”;export default (appInfo: EggAppInfo) &#x3D;&gt; { const config &#x3D; {} as PowerPartial<EggAppConfig>; &#x2F;&#x2F; override config from framework &#x2F; plugin &#x2F;&#x2F; use for cookie sign key, should change to your own and keep security config.keys &#x3D; appInfo.name + ‘__’; &#x2F;&#x2F; add your egg config in here config.middleware &#x3D; []; const topic &#x3D; ‘actionLog’; &#x2F;&#x2F; kafka config config.kafkaHost &#x3D; ‘…:’; config.topic &#x3D; topic; config.producerConfig &#x3D; { partitionerType: , }; config.consumerTopics &#x3D; [ { topic, partition:  }, { topic, partition:  }, { topic, partition:  }, ]; &#x2F;&#x2F; add your special config in here const bizConfig &#x3D; { sourceUrl: <code>https://github.com/eggjs/examples/tree/master/$&#123;appInfo.name&#125;</code>, security: { csrf: { enable: false, }, }, }; &#x2F;&#x2F; the return config will combines to EggAppConfig return { …config, …bizConfig, };}; 其实出去网络链接的坑点以外，其他人的博客已经很详细的描述了如何去起服务和后续进程，只不过大家都遗漏或者都没碰到这个外面链接的情况，一堆人都是直接docker里面通过sh脚本去作为成功的结尾，弄的我很无奈。</p>
+<p>同时注意去dockerhub中去查看官方文档，里面的参数很详细，关注这个KAFKA_CFG_ADVERTISED_LISTENERS 然后去查看相关的解释，会更好的理解</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" data-id="cm49dnfrb000914vv948dg9jd" data-title="nodejs kafka docker 部署遇到的坑" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-egg-mongoose-多数据库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time class="dt-published" datetime="2022-04-22T19:44:43.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/">egg-mongoose 多数据库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>因为业务中涉及到多分支运维平台开发。</p>
+<p>因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。</p>
+<p>感觉网络上相关的记录不是很多。</p>
+<p>第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access the client instance by app.mongooseDB.get(‘clientId’) local: { url: ‘mongodb:&#x2F;&#x2F;xxx:xxx@xxx:&#x2F;xxx-s?authSource&#x3D;admin’, options: { useUnifiedTopology: true, useNewUrlParser: true, poolSize: , serverSelectionTimeoutMS: , connectTimeoutMS:  }, }, master: { url: ‘mongodb:&#x2F;&#x2F;xxxx:xxx@xxxxx:&#x2F;xxxx?authSource&#x3D;admin&amp;authMechanism&#x3D;SCRAM-SHA-‘, options: { useUnifiedTopology: true, useNewUrlParser: true, serverSelectionTimeoutMS: , connectTimeoutMS:  } }, v: { url: ‘mongodb:&#x2F;&#x2F;xxx:xxx@xxxx:&#x2F;xxxx?authSource&#x3D;admin&amp;authMechanism&#x3D;SCRAM-SHA-‘, options: { useUnifiedTopology: true, useNewUrlParser: true, serverSelectionTimeoutMS: , connectTimeoutMS:  } }, }, } 第二步生成model这里就和单例有差异，需要指定链接的数据库，切记，这里一定需要生成这个schema，schema中的字段可以为空，感觉为空只是对于具体增删改查操作有影响，但是对于单纯查询没啥差异，但是如果不使用model，直接操作的话，会无法使用mongoose加载的一些插件方法，比如lean之类的，而这些方法还是很方便的。</p>
+<p>所以需要生成，可以看到，我这里是自动生成的，因为我的业务中，对于远程数据库的数据只有查询，没有其余操作，所以我这边只生成了空schema。</p>
+<p>&#x2F;&#x2F; Code AutoGenerate. DO NOT EDIT. import { Application } from “egg”; module.exports &#x3D; (app: Application) &#x3D;&gt; { const mongoose &#x3D; app.mongoose; const Schema &#x3D; mongoose.Schema; const GameUserSchema &#x3D; new Schema({}); const conn &#x3D; app.mongooseDB.get(‘v’); const GameUserModel &#x3D; conn.model(‘nnnn’, GameUserSchema); return GameUserModel;}; 数据查询使用业务这边使用了统一的getmodel方法来查询.这里是统一的处理方法，展示的是个简单的分页查询操作。</p>
+<p>其实如果真正的业务使用的话，感觉还是可以同步到平台的本地表中，增加各种索引来的实际，我这个是初期版本，并且还只是内网开发中，所以没有存储本地哈。</p>
+<p>只是个最基础的查询 import BaseService from “..&#x2F;base”;export default class GameUser extends BaseService { public async index(pageSize, skipSize) { let data &#x3D; await this.getModel(‘dddd’).find({}, { dddd: , ddee: , }).find({}) .sort({ _id: - }) .skip(skipSize) .limit(pageSize).lean(); let total &#x3D; await this.getModel(‘dddd’).find({}).countDocuments(); return { total, data } }} 这个就是那个统一处理model 的地方，有点设计模式那个味道了。</p>
+<p>。</p>
+<p>。</p>
+<p>我这里是和登陆者选择的nat服务器逻辑关联了，不过读者应该可以大概了解思路，进行改造。</p>
+<p>getModel(dbName: string) { let config &#x3D; NATENDPOINT.find(nat &#x3D;&gt; nat.port &#x3D;&#x3D; this.ctx.natServer); if (!config) { throw new Error( ‘内部异常’ ) } let mongooseConfig &#x3D; config.mongoose.find((_mongo) &#x3D;&gt; _mongo.dbName &#x3D;&#x3D; dbName); if (!mongooseConfig) { throw new Error( ‘内部异常’ ) } return this.ctx.model[mongooseConfig.fileName] } 附加自动生成model 的代码非常简单，只是为了文章的完整性，班门弄斧了. egg这边的model获取方式依赖命名，好像自动大写了。</p>
+<p>所以需要注意下 import { dddd } from “.&#x2F;app&#x2F;utils&#x2F;constants”;const fs &#x3D; require(“fs”);const path &#x3D; require(“path”);for (let server of dddd) { if (!server.mongodb) { continue; } for (let mongooseConfig of server.mongoose) { let savePath &#x3D; path.join( __dirname, <code>./app/model/$&#123;mongooseConfig.fileName&#125;.ts</code> ); let inputData &#x3D; <code>// Code AutoGenerate. DO NOT EDIT.\n \import &#123; Application &#125; from &quot;egg&quot;; \n \module.exports = (app: Application) =&gt; &#123; \n \ const mongoose = app.mongoose; \n \ const Schema = mongoose.Schema; \n \ const $&#123;mongooseConfig.schemaName&#125;Schema = new Schema(&#123;&#125;); \n \ const conn = app.mongooseDB.get(&#39;$&#123;server.mongodb&#125;&#39;); \n \ const $&#123;mongooseConfig.schemaName&#125;Model = conn.model(&#39;$&#123;mongooseConfig.dbName&#125;&#39;, $&#123;mongooseConfig.schemaName&#125;Schema); return $&#123;mongooseConfig.schemaName&#125;Model;&#125;;</code>; fs.writeFile(savePath, inputData, (err) &#x3D;&gt; { if (err) { throw err; } console.log(“autoGenerate modal success”); }); }} 这个自动生成代码也还是偶然看到项目组的其他项目有这么搞，发现其实还真的蛮有用的，拼接组合，是程序员的必备技能，极为实用，能够自动生成的，一定要去做，否则，手动去增加超级累哈 参考资料</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="cm49dnfr7000214vv5raiaqly" data-title="egg-mongoose 多数据库" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/">react感想</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>react感想 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。 用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。 以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react感想">
+<meta property="og:url" content="http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。 用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。 以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-23T05:31:48.000Z">
+<meta property="article:modified_time" content="2024-12-04T03:40:47.598Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-react感想" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/" class="article-date">
+  <time class="dt-published" datetime="2022-04-23T05:31:48.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      react感想
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。</p>
+<p>用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。</p>
+<p>以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑暂时涉及不到。</p>
+<p>最近碰到的问题主要就是关于状态传递的，父组件如何传递状态给子组件，子组件中再嵌套子组件的情况下，内容传递的一致性，同时还要考虑代码的简洁。</p>
+<p>我发现，useref这些对于一层父子组件来说，还是比较直观，可靠的。</p>
+<pre><code class="javascript">import React,
+  &#123;
+  forwardRef,
+  useImperativeHandle,
+  useState 
+&#125;
+from &quot;react&quot;;
+import &#123;
+  Button,
+  DatePicker,
+  Divider 
+&#125;
+from &quot;antd&quot;;
+import &#123;
+  useObserver 
+&#125;
+from &quot;mobx-react&quot;;
+import ComponentStore from &quot;store/ComponentStore&quot;;
+const &#123;
+  RangePicker 
+&#125;
+= DatePicker;
+import moment from &quot;moment&quot;;
+const _ = require(&quot;lodash&quot;);
+export const RangePickCondition = forwardRef((props,
+  ref) =&gt; &#123;
+  const [startTime,
+  setStartTime] = useState();
+const [endTime,
+  setEndTime] = useState();
+const [regTime,
+  setRegTime] = useState();
+const type = _.get(props,
+  &quot;type&quot;);
+useImperativeHandle(ref,
+  () =&gt; (&#123;
+  startTime: _.toNumber(moment(startTime).format(&quot;X&quot;)),
+  endTime: _.toNumber(moment(endTime).format(&quot;X&quot;)),
+  regTime: _.toNumber(moment(regTime).format(&quot;X&quot;)),
+  &#125;
+));
+return useObserver(() =&gt; ( &lt;&gt; &#123;
+  type == &quot;needReg&quot; ? ( &lt;div&gt; &lt;Button type=&quot;primary&quot;&gt;注册时间&lt;/Button&gt; &lt;Divider type=&quot;vertical&quot; /&gt; &lt;DatePicker showTime format=&quot;YYYY-MM-DD HH:mm:ss&quot; onChange=&#123;
+  (dates: any,
+  dateStrings: any[]) =&gt; &#123;
+  setRegTime(dates.valueOf());
+ComponentStore.rangePickRegtime = _.toNumber( moment(regTime).format(&quot;X&quot;) );
+&#125;
+
+&#125;
+/&gt; &lt;/div&gt; ) : ( [] )
+&#125;
+&lt;Button type=&quot;primary&quot;&gt;时间范围&lt;/Button&gt; &lt;Divider type=&quot;vertical&quot; /&gt; &lt;RangePicker format=&quot;YYYY-MM-DD HH:mm:ss&quot; placeholder=&#123;
+  [&quot;开始时间&quot;,
+  &quot;结束时间&quot;]
+&#125;
+onChange=&#123;
+  (dates: any,
+  dateStrings: any[]) =&gt; &#123;
+  setStartTime(dates[].valueOf());
+setEndTime(dates[].valueOf());
+ComponentStore.rangePickStartTime = _.toNumber( moment(dates[].valueOf()).format(&quot;X&quot;) );
+ComponentStore.rangePickEndTime = _.toNumber( moment(dates[].valueOf()).format(&quot;X&quot;) );
+&#125;
+
+&#125;
+/&gt; &lt;/&gt; ));
+&#125;
+);
+export default RangePickCondition;
+但是我尝试在这个子组件中再加上一个小的子组件时候，用ref就会发现初始值出现延迟的问题，连续点击按钮两次，才能够获得正确数值，第一次只会获取这个useref定义的初始默认值。
+
+期间考虑了使用usecontext，然而效果依然不佳 最终想了想，这种传值还是只限于两层的父子组件中可以尝试，如果涉及多层，我还是决定引入mobx来作为统一的存储。
+
+这样就能够自如的进行组件的组合拼接，而不再去通过props，ref这些去做深层次的数值传递。
+
+因为看到大家一般使用也是作为控件的简单操作会引入。
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/" data-id="cm49dnfrc000a14vvdtkjhj3x" data-title="react感想" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">docker mongo 异常崩溃后</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/">react感想</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

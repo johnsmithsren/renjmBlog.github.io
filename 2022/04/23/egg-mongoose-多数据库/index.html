@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>egg-mongoose 多数据库 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="因为业务中涉及到多分支运维平台开发。 因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。 感觉网络上相关的记录不是很多。 第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="egg-mongoose 多数据库">
+<meta property="og:url" content="http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="因为业务中涉及到多分支运维平台开发。 因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。 感觉网络上相关的记录不是很多。 第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access th">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-22T19:44:43.000Z">
+<meta property="article:modified_time" content="2024-12-04T03:10:29.931Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-egg-mongoose-多数据库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time class="dt-published" datetime="2022-04-22T19:44:43.000Z" itemprop="datePublished">2022-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      egg-mongoose 多数据库
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>因为业务中涉及到多分支运维平台开发。</p>
+<p>因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。</p>
+<p>感觉网络上相关的记录不是很多。</p>
+<p>第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access the client instance by app.mongooseDB.get(‘clientId’) local: { url: ‘mongodb:&#x2F;&#x2F;xxx:xxx@xxx:&#x2F;xxx-s?authSource&#x3D;admin’, options: { useUnifiedTopology: true, useNewUrlParser: true, poolSize: , serverSelectionTimeoutMS: , connectTimeoutMS:  }, }, master: { url: ‘mongodb:&#x2F;&#x2F;xxxx:xxx@xxxxx:&#x2F;xxxx?authSource&#x3D;admin&amp;authMechanism&#x3D;SCRAM-SHA-‘, options: { useUnifiedTopology: true, useNewUrlParser: true, serverSelectionTimeoutMS: , connectTimeoutMS:  } }, v: { url: ‘mongodb:&#x2F;&#x2F;xxx:xxx@xxxx:&#x2F;xxxx?authSource&#x3D;admin&amp;authMechanism&#x3D;SCRAM-SHA-‘, options: { useUnifiedTopology: true, useNewUrlParser: true, serverSelectionTimeoutMS: , connectTimeoutMS:  } }, }, } 第二步生成model这里就和单例有差异，需要指定链接的数据库，切记，这里一定需要生成这个schema，schema中的字段可以为空，感觉为空只是对于具体增删改查操作有影响，但是对于单纯查询没啥差异，但是如果不使用model，直接操作的话，会无法使用mongoose加载的一些插件方法，比如lean之类的，而这些方法还是很方便的。</p>
+<p>所以需要生成，可以看到，我这里是自动生成的，因为我的业务中，对于远程数据库的数据只有查询，没有其余操作，所以我这边只生成了空schema。</p>
+<p>&#x2F;&#x2F; Code AutoGenerate. DO NOT EDIT. import { Application } from “egg”; module.exports &#x3D; (app: Application) &#x3D;&gt; { const mongoose &#x3D; app.mongoose; const Schema &#x3D; mongoose.Schema; const GameUserSchema &#x3D; new Schema({}); const conn &#x3D; app.mongooseDB.get(‘v’); const GameUserModel &#x3D; conn.model(‘nnnn’, GameUserSchema); return GameUserModel;}; 数据查询使用业务这边使用了统一的getmodel方法来查询.这里是统一的处理方法，展示的是个简单的分页查询操作。</p>
+<p>其实如果真正的业务使用的话，感觉还是可以同步到平台的本地表中，增加各种索引来的实际，我这个是初期版本，并且还只是内网开发中，所以没有存储本地哈。</p>
+<p>只是个最基础的查询 import BaseService from “..&#x2F;base”;export default class GameUser extends BaseService { public async index(pageSize, skipSize) { let data &#x3D; await this.getModel(‘dddd’).find({}, { dddd: , ddee: , }).find({}) .sort({ _id: - }) .skip(skipSize) .limit(pageSize).lean(); let total &#x3D; await this.getModel(‘dddd’).find({}).countDocuments(); return { total, data } }} 这个就是那个统一处理model 的地方，有点设计模式那个味道了。</p>
+<p>。</p>
+<p>。</p>
+<p>我这里是和登陆者选择的nat服务器逻辑关联了，不过读者应该可以大概了解思路，进行改造。</p>
+<p>getModel(dbName: string) { let config &#x3D; NATENDPOINT.find(nat &#x3D;&gt; nat.port &#x3D;&#x3D; this.ctx.natServer); if (!config) { throw new Error( ‘内部异常’ ) } let mongooseConfig &#x3D; config.mongoose.find((_mongo) &#x3D;&gt; _mongo.dbName &#x3D;&#x3D; dbName); if (!mongooseConfig) { throw new Error( ‘内部异常’ ) } return this.ctx.model[mongooseConfig.fileName] } 附加自动生成model 的代码非常简单，只是为了文章的完整性，班门弄斧了. egg这边的model获取方式依赖命名，好像自动大写了。</p>
+<p>所以需要注意下 import { dddd } from “.&#x2F;app&#x2F;utils&#x2F;constants”;const fs &#x3D; require(“fs”);const path &#x3D; require(“path”);for (let server of dddd) { if (!server.mongodb) { continue; } for (let mongooseConfig of server.mongoose) { let savePath &#x3D; path.join( __dirname, <code>./app/model/$&#123;mongooseConfig.fileName&#125;.ts</code> ); let inputData &#x3D; <code>// Code AutoGenerate. DO NOT EDIT.\n \import &#123; Application &#125; from &quot;egg&quot;; \n \module.exports = (app: Application) =&gt; &#123; \n \ const mongoose = app.mongoose; \n \ const Schema = mongoose.Schema; \n \ const $&#123;mongooseConfig.schemaName&#125;Schema = new Schema(&#123;&#125;); \n \ const conn = app.mongooseDB.get(&#39;$&#123;server.mongodb&#125;&#39;); \n \ const $&#123;mongooseConfig.schemaName&#125;Model = conn.model(&#39;$&#123;mongooseConfig.dbName&#125;&#39;, $&#123;mongooseConfig.schemaName&#125;Schema); return $&#123;mongooseConfig.schemaName&#125;Model;&#125;;</code>; fs.writeFile(savePath, inputData, (err) &#x3D;&gt; { if (err) { throw err; } console.log(“autoGenerate modal success”); }); }} 这个自动生成代码也还是偶然看到项目组的其他项目有这么搞，发现其实还真的蛮有用的，拼接组合，是程序员的必备技能，极为实用，能够自动生成的，一定要去做，否则，手动去增加超级累哈 参考资料</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="cm49dnfr7000214vv5raiaqly" data-title="egg-mongoose 多数据库" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/04/23/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          nodejs kafka docker 部署遇到的坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/01/2021%E7%AC%AC%E4%B8%80%E7%AF%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2021第一篇</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/04/23/react%E6%84%9F%E6%83%B3/">react感想</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/">docker mongo 异常崩溃后</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/">上海疫情</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">后端开发的一些想法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/">宝宝百日</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
