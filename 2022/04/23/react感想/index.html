@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>react感想 | RenjmBlog</title><meta name="author" content="Renjm"><meta name="copyright" content="Renjm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。 用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。 以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react感想">
+<meta property="og:url" content="http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/index.html">
+<meta property="og:site_name" content="RenjmBlog">
+<meta property="og:description" content="关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。 用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。 以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2022-04-23T05:31:48.000Z">
+<meta property="article:modified_time" content="2024-12-04T12:23:20.071Z">
+<meta property="article:author" content="Renjm">
+<meta property="article:tag" content="技术,博客,前端,后端,JavaScript,Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'react感想',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">RenjmBlog</span></a><a class="nav-page-title" href="/"><span class="site-name">react感想</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">react感想</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-23T05:31:48.000Z" title="发表于 2022-04-23 13:31:48">2022-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-04T12:23:20.071Z" title="更新于 2024-12-04 20:23:20">2024-12-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>关于react的感想 .就我现在的做的这个对内使用的管理平台的内容来说，单纯的使用 usestate, useeffect,再辅助以少量的useref也就差不多了。</p>
+<p>用的antd的组件，只需要针对部分做样式简单的调整 .比较关键的问题，就是组件的状态传递，也就是增加组件的复用程度，对于一些组件进行拆分，重组。</p>
+<p>以达到复用的情况时候，就碰到了状态传递的问题，对我现在这个简单的项目而言，性能方面的考虑暂时涉及不到。</p>
+<p>最近碰到的问题主要就是关于状态传递的，父组件如何传递状态给子组件，子组件中再嵌套子组件的情况下，内容传递的一致性，同时还要考虑代码的简洁。</p>
+<p>我发现，useref这些对于一层父子组件来说，还是比较直观，可靠的。</p>
+<pre><code class="javascript">import React,
+  &#123;
+  forwardRef,
+  useImperativeHandle,
+  useState 
+&#125;
+from &quot;react&quot;;
+import &#123;
+  Button,
+  DatePicker,
+  Divider 
+&#125;
+from &quot;antd&quot;;
+import &#123;
+  useObserver 
+&#125;
+from &quot;mobx-react&quot;;
+import ComponentStore from &quot;store/ComponentStore&quot;;
+const &#123;
+  RangePicker 
+&#125;
+= DatePicker;
+import moment from &quot;moment&quot;;
+const _ = require(&quot;lodash&quot;);
+export const RangePickCondition = forwardRef((props,
+  ref) =&gt; &#123;
+  const [startTime,
+  setStartTime] = useState();
+const [endTime,
+  setEndTime] = useState();
+const [regTime,
+  setRegTime] = useState();
+const type = _.get(props,
+  &quot;type&quot;);
+useImperativeHandle(ref,
+  () =&gt; (&#123;
+  startTime: _.toNumber(moment(startTime).format(&quot;X&quot;)),
+  endTime: _.toNumber(moment(endTime).format(&quot;X&quot;)),
+  regTime: _.toNumber(moment(regTime).format(&quot;X&quot;)),
+  &#125;
+));
+return useObserver(() =&gt; ( &lt;&gt; &#123;
+  type == &quot;needReg&quot; ? ( &lt;div&gt; &lt;Button type=&quot;primary&quot;&gt;注册时间&lt;/Button&gt; &lt;Divider type=&quot;vertical&quot; /&gt; &lt;DatePicker showTime format=&quot;YYYY-MM-DD HH:mm:ss&quot; onChange=&#123;
+  (dates: any,
+  dateStrings: any[]) =&gt; &#123;
+  setRegTime(dates.valueOf());
+ComponentStore.rangePickRegtime = _.toNumber( moment(regTime).format(&quot;X&quot;) );
+&#125;
+
+&#125;
+/&gt; &lt;/div&gt; ) : ( [] )
+&#125;
+&lt;Button type=&quot;primary&quot;&gt;时间范围&lt;/Button&gt; &lt;Divider type=&quot;vertical&quot; /&gt; &lt;RangePicker format=&quot;YYYY-MM-DD HH:mm:ss&quot; placeholder=&#123;
+  [&quot;开始时间&quot;,
+  &quot;结束时间&quot;]
+&#125;
+onChange=&#123;
+  (dates: any,
+  dateStrings: any[]) =&gt; &#123;
+  setStartTime(dates[].valueOf());
+setEndTime(dates[].valueOf());
+ComponentStore.rangePickStartTime = _.toNumber( moment(dates[].valueOf()).format(&quot;X&quot;) );
+ComponentStore.rangePickEndTime = _.toNumber( moment(dates[].valueOf()).format(&quot;X&quot;) );
+&#125;
+
+&#125;
+/&gt; &lt;/&gt; ));
+&#125;
+);
+export default RangePickCondition;
+但是我尝试在这个子组件中再加上一个小的子组件时候，用ref就会发现初始值出现延迟的问题，连续点击按钮两次，才能够获得正确数值，第一次只会获取这个useref定义的初始默认值。
+
+期间考虑了使用usecontext，然而效果依然不佳 最终想了想，这种传值还是只限于两层的父子组件中可以尝试，如果涉及多层，我还是决定引入mobx来作为统一的存储。
+
+这样就能够自如的进行组件的组合拼接，而不再去通过props，ref这些去做深层次的数值传递。
+
+因为看到大家一般使用也是作为控件的简单操作会引入。
+</code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Renjm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/">http://example.com/2022/04/23/react%E6%84%9F%E6%83%B3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">RenjmBlog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2024/12/04/%E5%8D%9A%E5%AE%A2%E5%A4%8D%E6%B4%BB/" title="博客复活"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">博客复活</div></div><div class="info-2"><div class="info-item-1">前言时隔多年，终于决定重新启用我的个人博客。 技术栈 Hexo: 静态博客框架 GitHub Pages: 网站托管 Butterfly: 主题 js.org: 免费域名  搭建过程1. 环境准备 Node.js 环境配置 Git 安装与配置  2. Hexo 安装与配置 Hexo 框架安装 基本配置调整 主题选择与安装  3. 部署相关 GitHub Pages 配置 自动部署流程 域名设置  遇到的问题与解决方案后续计划  完善博客功能  添加评论系统  优化SEO  编写更多技术文章  总结博客重启之旅时隔两年重启博客，面临着许多挑战。最初的 Hexo 环境已经无法找到，但这反而给了我一个重新开始的机会。在这个过程中，我深刻体会到了技术发展的日新月异，特别是 AI 技术的突飞猛进。 AI 辅助开发的新体验从最初使用 ChatGPT 到现在的 AI 编辑器，这种变化令人惊叹：  早期 AI 辅助体验  需要手动复制代码到 OpenAI 网页 虽然比传统搜索引擎效率高，但交互过程仍然繁琐 需要非常精确的问题描述才能获得准确答案   AI...</div></div></div></a><a class="pagination-related" href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" title="docker mongo 异常崩溃后"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">docker mongo 异常崩溃后</div></div><div class="info-2"><div class="info-item-1">前言不得不说被吓到了，测试告诉我平台挂了，我看了下 docker 日志，好像没啥问题，然后看到数据库好像链接不了了，顿感疑惑，docker mongo 服务一直很正常，没出过啥问题，换言之，我也没处理过异常。 查看 mongo 日志，看到一堆报错，关键报错就是 disk out 的感觉，估计是存储空间不够了 df -h 果然，存放 mongo 数据的盘满了 Filesystem Size Used Avail Use% Mounted onudev .G  .G % &#x2F;atmpfs M M M % &#x2F;b&#x2F;e G G  % &#x2F;tmpfs .G  .G % &#x2F;xtmpfs .M  .M % &#x2F;ytmpfs .G  .G % &#x2F;z&#x2F;f G .G G % &#x2F;wtmpfs M  M % &#x2F;z （都是化名） 也就是 这里的根目录 我错了，因为一开始挂载的时候，就是用的默认路径，一般来说，这个盘应该类似 windows 的 C 盘，不放项目的，谁让我菜鸡呢。 。 应该正常放在 w 那边...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Renjm</div><div class="author-info-description">记录学习与生活</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/04/%E5%8F%8D%E8%BD%AC%E6%95%B0%E7%BB%84k%E4%B8%AA%E5%85%83%E7%B4%A0/" title="反转数组k个元素">反转数组k个元素</a><time datetime="2024-12-04T06:30:00.000Z" title="发表于 2024-12-04 14:30:00">2024-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/04/%E5%8D%9A%E5%AE%A2%E5%A4%8D%E6%B4%BB/" title="博客复活">博客复活</a><time datetime="2024-12-04T05:30:00.000Z" title="发表于 2024-12-04 13:30:00">2024-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/react%E6%84%9F%E6%83%B3/" title="react感想">react感想</a><time datetime="2022-04-23T05:31:48.000Z" title="发表于 2022-04-23 13:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" title="docker mongo 异常崩溃后">docker mongo 异常崩溃后</a><time datetime="2022-04-23T04:31:48.000Z" title="发表于 2022-04-23 12:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" title="上海疫情">上海疫情</a><time datetime="2022-04-23T03:31:48.000Z" title="发表于 2022-04-23 11:31:48">2022-04-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Renjm</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>egg-mongoose 多数据库 | RenjmBlog</title><meta name="author" content="Renjm"><meta name="copyright" content="Renjm"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="因为业务中涉及到多分支运维平台开发。 因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。 感觉网络上相关的记录不是很多。 第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="egg-mongoose 多数据库">
+<meta property="og:url" content="http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+<meta property="og:site_name" content="RenjmBlog">
+<meta property="og:description" content="因为业务中涉及到多分支运维平台开发。 因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。 感觉网络上相关的记录不是很多。 第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access th">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2022-04-22T19:44:43.000Z">
+<meta property="article:modified_time" content="2024-12-04T12:23:20.069Z">
+<meta property="article:author" content="Renjm">
+<meta property="article:tag" content="技术,博客,前端,后端,JavaScript,Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'egg-mongoose 多数据库',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">RenjmBlog</span></a><a class="nav-page-title" href="/"><span class="site-name">egg-mongoose 多数据库</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">egg-mongoose 多数据库</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-22T19:44:43.000Z" title="发表于 2022-04-23 03:44:43">2022-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-04T12:23:20.069Z" title="更新于 2024-12-04 20:23:20">2024-12-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>因为业务中涉及到多分支运维平台开发。</p>
+<p>因为多分支链接的数据库也会有所不同，所以，平台链接的数据库也需要进行相应切换，才能配合数据的查看，这里，做了一些匹配工作，记录一下，方便有需要的人可以借鉴。</p>
+<p>感觉网络上相关的记录不是很多。</p>
+<p>第一步eggjs config 配置config.mongoose &#x3D; { clients: { &#x2F;&#x2F; clientId, access the client instance by app.mongooseDB.get(‘clientId’) local: { url: ‘mongodb:&#x2F;&#x2F;xxx:xxx@xxx:&#x2F;xxx-s?authSource&#x3D;admin’, options: { useUnifiedTopology: true, useNewUrlParser: true, poolSize: , serverSelectionTimeoutMS: , connectTimeoutMS:  }, }, master: { url: ‘mongodb:&#x2F;&#x2F;xxxx:xxx@xxxxx:&#x2F;xxxx?authSource&#x3D;admin&amp;authMechanism&#x3D;SCRAM-SHA-‘, options: { useUnifiedTopology: true, useNewUrlParser: true, serverSelectionTimeoutMS: , connectTimeoutMS:  } }, v: { url: ‘mongodb:&#x2F;&#x2F;xxx:xxx@xxxx:&#x2F;xxxx?authSource&#x3D;admin&amp;authMechanism&#x3D;SCRAM-SHA-‘, options: { useUnifiedTopology: true, useNewUrlParser: true, serverSelectionTimeoutMS: , connectTimeoutMS:  } }, }, } 第二步生成model这里就和单例有差异，需要指定链接的数据库，切记，这里一定需要生成这个schema，schema中的字段可以为空，感觉为空只是对于具体增删改查操作有影响，但是对于单纯查询没啥差异，但是如果不使用model，直接操作的话，会无法使用mongoose加载的一些插件方法，比如lean之类的，而这些方法还是很方便的。</p>
+<p>所以需要生成，可以看到，我这里是自动生成的，因为我的业务中，对于远程数据库的数据只有查询，没有其余操作，所以我这边只生成了空schema。</p>
+<p>&#x2F;&#x2F; Code AutoGenerate. DO NOT EDIT. import { Application } from “egg”; module.exports &#x3D; (app: Application) &#x3D;&gt; { const mongoose &#x3D; app.mongoose; const Schema &#x3D; mongoose.Schema; const GameUserSchema &#x3D; new Schema({}); const conn &#x3D; app.mongooseDB.get(‘v’); const GameUserModel &#x3D; conn.model(‘nnnn’, GameUserSchema); return GameUserModel;}; 数据查询使用业务这边使用了统一的getmodel方法来查询.这里是统一的处理方法，展示的是个简单的分页查询操作。</p>
+<p>其实如果真正的业务使用的话，感觉还是可以同步到平台的本地表中，增加各种索引来的实际，我这个是初期版本，并且还只是内网开发中，所以没有存储本地哈。</p>
+<p>只是个最基础的查询 import BaseService from “..&#x2F;base”;export default class GameUser extends BaseService { public async index(pageSize, skipSize) { let data &#x3D; await this.getModel(‘dddd’).find({}, { dddd: , ddee: , }).find({}) .sort({ _id: - }) .skip(skipSize) .limit(pageSize).lean(); let total &#x3D; await this.getModel(‘dddd’).find({}).countDocuments(); return { total, data } }} 这个就是那个统一处理model 的地方，有点设计模式那个味道了。</p>
+<p>。</p>
+<p>。</p>
+<p>我这里是和登陆者选择的nat服务器逻辑关联了，不过读者应该可以大概了解思路，进行改造。</p>
+<p>getModel(dbName: string) { let config &#x3D; NATENDPOINT.find(nat &#x3D;&gt; nat.port &#x3D;&#x3D; this.ctx.natServer); if (!config) { throw new Error( ‘内部异常’ ) } let mongooseConfig &#x3D; config.mongoose.find((_mongo) &#x3D;&gt; _mongo.dbName &#x3D;&#x3D; dbName); if (!mongooseConfig) { throw new Error( ‘内部异常’ ) } return this.ctx.model[mongooseConfig.fileName] } 附加自动生成model 的代码非常简单，只是为了文章的完整性，班门弄斧了. egg这边的model获取方式依赖命名，好像自动大写了。</p>
+<p>所以需要注意下 import { dddd } from “.&#x2F;app&#x2F;utils&#x2F;constants”;const fs &#x3D; require(“fs”);const path &#x3D; require(“path”);for (let server of dddd) { if (!server.mongodb) { continue; } for (let mongooseConfig of server.mongoose) { let savePath &#x3D; path.join( __dirname, <code>./app/model/$&#123;mongooseConfig.fileName&#125;.ts</code> ); let inputData &#x3D; <code>// Code AutoGenerate. DO NOT EDIT.\n \import &#123; Application &#125; from &quot;egg&quot;; \n \module.exports = (app: Application) =&gt; &#123; \n \ const mongoose = app.mongoose; \n \ const Schema = mongoose.Schema; \n \ const $&#123;mongooseConfig.schemaName&#125;Schema = new Schema(&#123;&#125;); \n \ const conn = app.mongooseDB.get(&#39;$&#123;server.mongodb&#125;&#39;); \n \ const $&#123;mongooseConfig.schemaName&#125;Model = conn.model(&#39;$&#123;mongooseConfig.dbName&#125;&#39;, $&#123;mongooseConfig.schemaName&#125;Schema); return $&#123;mongooseConfig.schemaName&#125;Model;&#125;;</code>; fs.writeFile(savePath, inputData, (err) &#x3D;&gt; { if (err) { throw err; } console.log(“autoGenerate modal success”); }); }} 这个自动生成代码也还是偶然看到项目组的其他项目有这么搞，发现其实还真的蛮有用的，拼接组合，是程序员的必备技能，极为实用，能够自动生成的，一定要去做，否则，手动去增加超级累哈 参考资料</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Renjm</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/">http://example.com/2022/04/23/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">RenjmBlog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2022/04/23/nodejs-kafka-docker-%E9%83%A8%E7%BD%B2%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" title="nodejs kafka docker 部署遇到的坑"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">nodejs kafka docker 部署遇到的坑</div></div><div class="info-2"><div class="info-item-1">这个nodejs去链接 docker 部署的kafka 主要的坑点就一个，dockerhub 主要就是 bitanami&#x2F;kafka 他们家的镜像比较好的样子，我暂时就只用一个kafka。 唯一坑点就是 KAFKA_CFG_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;xxx.xxx.xxx.xxx: 这个参数的配置需要 填内网ip，我看到有人说填外网ip也可以，不过我这边测试发现内网ip也就可以成功链接了。 废话不多说，直接代码吧docker-compose文件 version: “”networks: kafka-net: driver: bridgeservices: zookeeper-server: image: “bitnami&#x2F;zookeeper:latest” networks: - kafka-net ports: - “:” environment: - ALLOW_ANONYMOUS_LOGIN&#x3D;yes kafdrop: image:...</div></div></div></a><a class="pagination-related" href="/2021/01/01/2021%E7%AC%AC%E4%B8%80%E7%AF%87/" title="2021第一篇"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">2021第一篇</div></div><div class="info-2"><div class="info-item-1">年第一篇感想，实在是太懒了，去年考研差了分数线一百多分，令人无比沮丧，然后又以此为借口没有准备换工作，然后发现通货膨胀的厉害，现阶段的工资已经快要变为行业底层，所以，准备到年底开始考虑面试换工作的事宜。 贴一个朋友推荐的刷题链接...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Renjm</div><div class="author-info-description">记录学习与生活</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">40</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/04/%E5%8F%8D%E8%BD%AC%E6%95%B0%E7%BB%84k%E4%B8%AA%E5%85%83%E7%B4%A0/" title="反转数组k个元素">反转数组k个元素</a><time datetime="2024-12-04T06:30:00.000Z" title="发表于 2024-12-04 14:30:00">2024-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/04/%E5%8D%9A%E5%AE%A2%E5%A4%8D%E6%B4%BB/" title="博客复活">博客复活</a><time datetime="2024-12-04T05:30:00.000Z" title="发表于 2024-12-04 13:30:00">2024-12-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/react%E6%84%9F%E6%83%B3/" title="react感想">react感想</a><time datetime="2022-04-23T05:31:48.000Z" title="发表于 2022-04-23 13:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" title="docker mongo 异常崩溃后">docker mongo 异常崩溃后</a><time datetime="2022-04-23T04:31:48.000Z" title="发表于 2022-04-23 12:31:48">2022-04-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" title="上海疫情">上海疫情</a><time datetime="2022-04-23T03:31:48.000Z" title="发表于 2022-04-23 11:31:48">2022-04-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By Renjm</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
