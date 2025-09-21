@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title> - 笔记</title><meta name="author" content="jim"><meta name="copyright" content="jim"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="记录学习与生活">
+<meta property="og:type" content="website">
+<meta property="og:title">
+<meta property="og:url" content="https://johnsmithsren.github.io/renjmBlog.github.io/page/4/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="记录学习与生活">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg">
+<meta property="article:author" content="jim">
+<meta property="article:tag" content="技术,博客,前端,后端,JavaScript,Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg"><link rel="shortcut icon" href="/renjmBlog.github.io/images/favicon.ico"><link rel="canonical" href="https://johnsmithsren.github.io/renjmBlog.github.io/page/4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/renjmBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/renjmBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/renjmBlog.github.io/images/roam.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/renjmBlog.github.io/"><span class="site-name"></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title"></h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2024/12/06/%E6%95%B0%E7%8B%AC%E6%9C%89%E6%84%9F/" title="数独有感">数独有感</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-06T01:16:12.000Z" title="发表于 2024-12-06 09:16:12">2024-12-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">个人随笔</a></span></div><div class="content">基本策略 使用set解决重复，使用回溯法解决，验证数独是否有效是关键函数  下面是一个使用JavaScript实现的数独验证和求解算法，展示了解题的核心思路： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253// 验证数独是否有效的函数function isValidSudoku(board) &#123;    const boxes = Array(9).fill().map(() =&gt; new Set());    for (let i = 0; i &lt; 9; i++) &#123;        let rolSet = new Set()        let colSet = new Set()        for (let j = 0; j &lt; 9; j++) &#123;            if (board[i][j] !== &#x27;.&#x27;) &#123;            ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2024/12/04/%E5%8F%8D%E8%BD%AC%E6%95%B0%E7%BB%84k%E4%B8%AA%E5%85%83%E7%B4%A0/" title="反转数组k个元素">反转数组k个元素</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-04T06:30:00.000Z" title="发表于 2024-12-04 14:30:00">2024-12-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">问题描述给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。 示例: 123456输入: nums = [1,2,3,4,5,6,7], k = 3输出: [5,6,7,1,2,3,4]解释:向右旋转 1 步: [7,1,2,3,4,5,6]向右旋转 2 步: [6,7,1,2,3,4,5]向右旋转 3 步: [5,6,7,1,2,3,4]  解决方案方法一：循环移动这是一个直观的解决方案，通过循环k次，每次将数组最后一个元素移到开头。不过leetcode上提交超时了 1234567891011121314function rotate1(nums, k) &#123;    if (k % nums.length === 0) &#123;        return    &#125;    let n = nums.length    for (let i = 0; i &lt; k; i++) &#123;        let temp = nums[n - 1]        for (let j = n - 2; j &gt;= 0; j--)...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2024/12/04/%E5%8D%9A%E5%AE%A2%E5%A4%8D%E6%B4%BB/" title="博客复活">博客复活</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-04T05:30:00.000Z" title="发表于 2024-12-04 13:30:00">2024-12-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E6%8A%80%E6%9C%AF%E7%AC%94%E8%AE%B0/">技术笔记</a></span></div><div class="content">前言时隔多年，终于决定重新启用我的个人博客。 技术栈 Hexo: 静态博客框架 GitHub Pages: 网站托管 Butterfly: 主题 js.org: 免费域名  搭建过程1. 环境准备 Node.js 环境配置 Git 安装与配置  2. Hexo 安装与配置 Hexo 框架安装 基本配置调整 主题选择与安装  3. 部署相关 GitHub Pages 配置 自动部署流程 域名设置  遇到的问题与解决方案后续计划  完善博客功能  添加评论系统  优化SEO  编写更多技术文章  总结博客重启之旅时隔两年重启博客，面临着许多挑战。最初的 Hexo 环境已经无法找到，但这反而给了我一个重新开始的机会。在这个过程中，我深刻体会到了技术发展的日新月异，特别是 AI 技术的突飞猛进。 AI 辅助开发的新体验从最初使用 ChatGPT 到现在的 AI 编辑器，这种变化令人惊叹：  早期 AI 辅助体验  需要手动复制代码到 OpenAI 网页 虽然比传统搜索引擎效率高，但交互过程仍然繁琐 需要非常精确的问题描述才能获得准确答案   AI...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/23/react%E6%84%9F%E6%83%B3/" title="React 开发实践与组件设计思考">React 开发实践与组件设计思考</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-23T05:31:48.000Z" title="发表于 2022-04-23 13:31:48">2022-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a></span></div><div class="content">项目实践在开发内部管理平台时,主要使用了以下技术栈:  React Hooks (useState, useEffect, useRef) Ant Design 组件库 MobX 状态管理  组件设计经验状态管理对于简单的父子组件通信,使用 props 和 ref 就足够了。但在以下情况需要考虑使用状态管理工具:  组件层级过深 状态需要共享 状态变化复杂  组件拆分原则 功能独立 复用性高 维护方便 职责单一  实际案例12345678910111213141516171819202122// 日期范围选择组件const RangePickCondition = (&#123; onChange &#125;) =&gt; &#123;  const [dates, setDates] = useState([]);  const pickerRef = useRef(null);  useEffect(() =&gt; &#123;    // 初始化逻辑  &#125;, []);  const handleChange = (values) =&gt; &#123;  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/23/mongo%E5%BC%82%E5%B8%B8%E5%B4%A9%E6%BA%83%E5%90%8E/" title="Docker MongoDB 异常崩溃处理指南">Docker MongoDB 异常崩溃处理指南</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-23T04:31:48.000Z" title="发表于 2022-04-23 12:31:48">2022-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">问题背景测试环境的平台突然无法访问,经排查发现是 MongoDB 数据库连接异常。通过日志发现是磁盘空间不足导致的崩溃。 问题排查1. 检查磁盘空间1df -h 输出显示存放 MongoDB 数据的根目录空间已满: 123Filesystem    Size  Used  Avail  Use%  Mounted on/dev/sda1     20G   19G   1G    95%   //dev/sdb1     100G  30G   70G   30%   /data  2. 分析原因 MongoDB 数据默认存储在系统盘 之前的数据备份占用大量空间 日志文件未及时清理 缺乏磁盘监控预警  解决步骤1. 迁移数据目录12# 移动数据到数据盘mv /db/* /w/db  2. 修复数据库由于非正常关闭,需要删除锁文件并修复: 1234567891011# 删除锁文件rm -rf mongo.lock# Docker 环境下修复数据库sudo docker run -d \  -v /x/db:/data/db \  -p x:27017 \ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/23/%E4%B8%8A%E6%B5%B7%E7%96%AB%E6%83%85/" title="上海疫情">上海疫情</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-23T03:31:48.000Z" title="发表于 2022-04-23 11:31:48">2022-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/">生活记录</a></span></div><div class="content">...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/23/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" title="后端开发的一些想法">后端开发的一些想法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-23T02:31:48.000Z" title="发表于 2022-04-23 10:31:48">2022-04-23</time></span></div><div class="content">...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/23/%E5%AE%9D%E5%AE%9D%E7%99%BE%E6%97%A5/" title="宝宝百日">宝宝百日</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-23T01:31:48.000Z" title="发表于 2022-04-23 09:31:48">2022-04-23</time></span></div><div class="content">宝宝百日啦，希望宝宝身体健康，期望是能够健康成长。 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/23/redis-ts-nodejs/" title="Redis + TypeScript 实现日志分析系统">Redis + TypeScript 实现日志分析系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-23T00:31:48.000Z" title="发表于 2022-04-23 08:31:48">2022-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span></div><div class="content">项目背景在开发运维平台时,需要实现日志分析功能。最初采用 MongoDB 直接查询的方式,但随着数据量增长,性能问题逐渐显现。本文记录了使用 Redis 缓存优化查询性能的实践经验。 性能问题分析MongoDB 查询瓶颈 跨日期查询耗时长(几十秒) 日志数据量达到千万级 lookup 联表查询性能差 索引优化效果有限  优化思路 使用 Redis 缓存热点数据 优化 MongoDB 查询方式 合理设置数据过期策略  实现方案Redis 缓存实现12345678910// Redis 扫描实现let uuidList = [];var stream = RedisStore.redis.scanStream(&#123;  match: `*$&#123;currentDay&#125;:$&#123;this.radioValue&#125;`,  count: 1000&#125;);for await (const resultKeys of stream) &#123;  // 处理扫描结果&#125;  MongoDB 查询优化12345const allTask =...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/renjmBlog.github.io/2022/04/22/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/" title="Egg.js + UmiJS 开发总结">Egg.js + UmiJS 开发总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-04-22T23:31:48.000Z" title="发表于 2022-04-23 07:31:48">2022-04-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/renjmBlog.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span></div><div class="content">前言从 Koa 到 Egg.js 的转变让我深刻体会到框架的重要性。框架不仅提供了规范化的开发方式,还解决了日志、定时任务等通用业务问题。本文记录使用 Egg.js + UmiJS 开发过程中的经验总结。 技术栈选择后端框架 Egg.js: 企业级 Node.js 框架 NATS: 微服务通信 HTTP: 前后端通信  前端框架 UmiJS: 可插拔的企业级 React 应用框架 Ant Design: UI 组件库  项目优化经验1. 打包优化UmiJS 配置示例: 123456789101112131415161718192021222324252627282930313233343536373839404142// .umirc.tsexport default defineConfig(&#123;  nodeModulesTransform: &#123; type: &#x27;none&#x27; &#125;,  hash: true,  exportStatic: &#123;&#125;,  dynamicImport: &#123;&#125;, ...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/renjmBlog.github.io/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/renjmBlog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/renjmBlog.github.io/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/renjmBlog.github.io/page/5/#content-inner">5</a><span class="space">&hellip;</span><a class="page-number" href="/renjmBlog.github.io/page/7/#content-inner">7</a><a class="extend next" rel="next" href="/renjmBlog.github.io/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">jim</div><div class="author-info-description">生活就像青春恋爱物语，总是充满了意外</div><div class="site-data"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验">nextjs初体验</a><time datetime="2025-09-21T13:44:08.000Z" title="发表于 2025-09-21 21:44:08">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题">前端图片缓存，页面闪烁问题</a><time datetime="2025-06-05T10:58:58.000Z" title="发表于 2025-06-05 18:58:58">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/es.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="elasticSearch使用笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记">elasticSearch使用笔记</a><time datetime="2025-05-22T01:55:09.000Z" title="发表于 2025-05-22 09:55:09">2025-05-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/04/14/pokemonInterview/" title="pokemonInterview">pokemonInterview</a><time datetime="2025-04-14T06:27:12.000Z" title="发表于 2025-04-14 14:27:12">2025-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/tailwindCss.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="Tailwind CSS 学习笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记">Tailwind CSS 学习笔记</a><time datetime="2025-03-05T10:11:43.000Z" title="发表于 2025-03-05 18:11:43">2025-03-05</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/renjmBlog.github.io/categories/" title="查看更多">
+      <i class="fas fa-angle-right"></i></a>
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/Backend/"><span class="card-category-list-name">Backend</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/Backend/Message-Queue/"><span class="card-category-list-name">Message Queue</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/Binary/"><span class="card-category-list-name">Binary</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/Blockchain/"><span class="card-category-list-name">Blockchain</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/Blockchain/Development/"><span class="card-category-list-name">Development</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">个人随笔</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><span class="card-category-list-name">前端开发</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/renjmBlog.github.io/categories/%E5%89%8D%E7%AB%AF%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">前端技术</span><span class="card-category-list-count">1</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/renjmBlog.github.io/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 1.15em; color: rgb(55, 178, 197);">年度总结</a><a href="/renjmBlog.github.io/tags/%E8%81%8C%E4%B8%9A%E5%8F%91%E5%B1%95/" style="font-size: 1.15em; color: rgb(50, 137, 50);">职业发展</a><a href="/renjmBlog.github.io/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 1.15em; color: rgb(100, 197, 98);">系统架构</a><a href="/renjmBlog.github.io/tags/%E8%BD%AF%E4%BB%B6%E6%BC%94%E8%BF%9B/" style="font-size: 1.15em; color: rgb(191, 144, 67);">软件演进</a><a href="/renjmBlog.github.io/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" style="font-size: 1.15em; color: rgb(50, 131, 155);">架构设计</a><a href="/renjmBlog.github.io/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 1.19em; color: rgb(158, 125, 50);">游戏开发</a><a href="/renjmBlog.github.io/tags/AI/" style="font-size: 1.15em; color: rgb(50, 50, 50);">AI</a><a href="/renjmBlog.github.io/tags/Node-js/" style="font-size: 1.38em; color: rgb(79, 98, 100);">Node.js</a><a href="/renjmBlog.github.io/tags/%E7%AE%97%E6%B3%95/" style="font-size: 1.26em; color: rgb(75, 80, 50);">算法</a><a href="/renjmBlog.github.io/tags/Gateway/" style="font-size: 1.15em; color: rgb(140, 89, 50);">Gateway</a><a href="/renjmBlog.github.io/tags/TypeScript/" style="font-size: 1.26em; color: rgb(166, 70, 50);">TypeScript</a><a href="/renjmBlog.github.io/tags/JavaScript/" style="font-size: 1.45em; color: rgb(185, 66, 50);">JavaScript</a><a href="/renjmBlog.github.io/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" style="font-size: 1.26em; color: rgb(84, 154, 51);">前端开发</a><a href="/renjmBlog.github.io/tags/NestJS/" style="font-size: 1.19em; color: rgb(80, 184, 135);">NestJS</a><a href="/renjmBlog.github.io/tags/BullMQ/" style="font-size: 1.15em; color: rgb(136, 189, 190);">BullMQ</a><a href="/renjmBlog.github.io/tags/Queue/" style="font-size: 1.15em; color: rgb(50, 50, 144);">Queue</a><a href="/renjmBlog.github.io/tags/Egg-js/" style="font-size: 1.22em; color: rgb(50, 163, 81);">Egg.js</a><a href="/renjmBlog.github.io/tags/MongoDB/" style="font-size: 1.22em; color: rgb(50, 113, 123);">MongoDB</a><a href="/renjmBlog.github.io/tags/Mongoose/" style="font-size: 1.15em; color: rgb(52, 143, 78);">Mongoose</a><a href="/renjmBlog.github.io/tags/UmiJS/" style="font-size: 1.15em; color: rgb(128, 93, 128);">UmiJS</a><a href="/renjmBlog.github.io/tags/React/" style="font-size: 1.34em; color: rgb(50, 50, 155);">React</a><a href="/renjmBlog.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" style="font-size: 1.19em; color: rgb(137, 63, 105);">项目实践</a><a href="/renjmBlog.github.io/tags/ElasticSearch/" style="font-size: 1.15em; color: rgb(108, 146, 189);">ElasticSearch</a><a href="/renjmBlog.github.io/tags/Docker/" style="font-size: 1.22em; color: rgb(181, 175, 50);">Docker</a><a href="/renjmBlog.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.19em; color: rgb(107, 96, 82);">数据库</a><a href="/renjmBlog.github.io/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 1.15em; color: rgb(197, 194, 58);">搜索引擎</a><a href="/renjmBlog.github.io/tags/Git/" style="font-size: 1.19em; color: rgb(50, 200, 116);">Git</a><a href="/renjmBlog.github.io/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 1.19em; color: rgb(141, 50, 95);">版本控制</a><a href="/renjmBlog.github.io/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.15em; color: rgb(129, 198, 140);">命令行</a><a href="/renjmBlog.github.io/tags/Hexo/" style="font-size: 1.3em; color: rgb(185, 50, 105);">Hexo</a><a href="/renjmBlog.github.io/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" style="font-size: 1.15em; color: rgb(80, 103, 124);">静态博客</a><a href="/renjmBlog.github.io/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 1.15em; color: rgb(83, 73, 50);">部署</a><a href="/renjmBlog.github.io/tags/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD/" style="font-size: 1.19em; color: rgb(167, 50, 151);">图片加载</a><a href="/renjmBlog.github.io/tags/%E4%B8%83%E7%89%9B%E4%BA%91/" style="font-size: 1.15em; color: rgb(185, 50, 50);">七牛云</a><a href="/renjmBlog.github.io/tags/CDN/" style="font-size: 1.15em; color: rgb(158, 175, 85);">CDN</a><a href="/renjmBlog.github.io/tags/LeetCode/" style="font-size: 1.41em; color: rgb(167, 101, 90);">LeetCode</a><a href="/renjmBlog.github.io/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 1.15em; color: rgb(113, 153, 50);">哈希表</a><a href="/renjmBlog.github.io/tags/%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86/" style="font-size: 1.15em; color: rgb(187, 86, 121);">故障处理</a><a href="/renjmBlog.github.io/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 1.15em; color: rgb(135, 70, 195);">运维</a><a href="/renjmBlog.github.io/tags/FFmpeg/" style="font-size: 1.15em; color: rgb(50, 50, 126);">FFmpeg</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/renjmBlog.github.io/archives/" title="查看更多"><i class="fas fa-angle-right"></i></a>
+    </div>
+    <ul class="card-archive-list">
+  
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/09/">
+          <span class="card-archive-list-date">九月 2025</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/06/">
+          <span class="card-archive-list-date">六月 2025</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/05/">
+          <span class="card-archive-list-date">五月 2025</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/04/">
+          <span class="card-archive-list-date">四月 2025</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/03/">
+          <span class="card-archive-list-date">三月 2025</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/02/">
+          <span class="card-archive-list-date">二月 2025</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2025/01/">
+          <span class="card-archive-list-date">一月 2025</span>
+          <span class="card-archive-list-count">3</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/renjmBlog.github.io/archives/2024/12/">
+          <span class="card-archive-list-date">十二月 2024</span>
+          <span class="card-archive-list-count">24</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">67</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-09-21T14:23:18.498Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By jim</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/renjmBlog.github.io/js/utils.js"></script><script src="/renjmBlog.github.io/js/main.js"></script><div class="js-pjax"></div></div></body></html>

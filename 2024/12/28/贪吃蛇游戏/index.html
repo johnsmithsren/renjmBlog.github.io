@@ -1,0 +1,459 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>贪吃蛇游戏学习 | </title><meta name="author" content="jim"><meta name="copyright" content="jim"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="贪吃蛇游戏                   开始游戏         暂停&#x2F;继续         * {     margin: 0;     padding: 0;     box-sizing: border-box; }  .game-container {     width: 100%;     max-width: 800px;     padding: 10px;     bac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贪吃蛇游戏学习">
+<meta property="og:url" content="https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/28/%E8%B4%AA%E5%90%83%E8%9B%87%E6%B8%B8%E6%88%8F/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="贪吃蛇游戏                   开始游戏         暂停&#x2F;继续         * {     margin: 0;     padding: 0;     box-sizing: border-box; }  .game-container {     width: 100%;     max-width: 800px;     padding: 10px;     bac">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg">
+<meta property="article:published_time" content="2024-12-28T02:22:10.000Z">
+<meta property="article:modified_time" content="2025-09-21T14:23:06.770Z">
+<meta property="article:author" content="jim">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="游戏">
+<meta property="article:tag" content="HTML5">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg"><link rel="shortcut icon" href="/renjmBlog.github.io/images/favicon.ico"><link rel="canonical" href="https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/28/%E8%B4%AA%E5%90%83%E8%9B%87%E6%B8%B8%E6%88%8F/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/renjmBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/renjmBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '贪吃蛇游戏学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/renjmBlog.github.io/images/roam.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/renjmBlog.github.io/"><span class="site-name"></span></a><a class="nav-page-title" href="/renjmBlog.github.io/"><span class="site-name">贪吃蛇游戏学习</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">贪吃蛇游戏学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-28T02:22:10.000Z" title="发表于 2024-12-28 10:22:10">2024-12-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-21T14:23:06.770Z" title="更新于 2025-09-21 22:23:06">2025-09-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/renjmBlog.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="贪吃蛇游戏"><a href="#贪吃蛇游戏" class="headerlink" title="贪吃蛇游戏"></a>贪吃蛇游戏</h1><div class="game-container">
+    <canvas id="gameCanvas"></canvas>
+    <div class="controls">
+        <button onclick="startGame()">开始游戏</button>
+        <button onclick="pauseGame()">暂停/继续</button>
+    </div>
+</div>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+    background: transparent;
+}
+
+#gameCanvas {
+    border: 2px solid #333;
+    background: #000;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 400px;
+}
+
+.controls {
+    margin: 10px 0;
+    text-align: center;
+}
+
+button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+}
+
+button:hover {
+    background: #388E3C;
+}
+</style>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const box = 20;
+let drawInterval = null;
+let defaultSpeed = 500;
+let drawProcess = false;
+
+// 声明为全局变量
+let gridWidth, gridHeight;
+const ctx = canvas.getContext('2d');
+
+function initCanvas() {
+    // 设置canvas的实际大小
+    canvas.width = canvas.offsetWidth;
+    canvas.height = 400;
+    // 重新计算网格数量
+    gridWidth = Math.floor(canvas.width / box);
+    gridHeight = Math.floor(canvas.height / box);
+}
+
+// 初始化canvas
+initCanvas();
+
+let snake = [{ x: Math.floor(gridWidth / 2) * box, y: Math.floor(gridHeight / 2) * box }];
+let food;
+let direction = null;
+
+function generateFood() {
+    do {
+        food = {
+            x: Math.floor(Math.random() * gridWidth) * box,
+            y: Math.floor(Math.random() * gridHeight) * box
+        };
+    } while (snake.some(seg => seg.x === food.x && seg.y === food.y) && isPointWithinBoundary(food.x, food.y, 50));
+}
+
+generateFood();
+
+// 添加窗口大小改变的监听
+window.addEventListener('resize', () => {
+    initCanvas();
+    restartGame();
+});
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'ArrowUp' && direction !== 'DOWN') {
+        direction = 'UP';
+        
+    }
+    if (event.key === 'ArrowDown' && direction !== 'UP') {
+        direction = 'DOWN';
+       
+    }
+    if (event.key === 'ArrowLeft' && direction !== 'RIGHT') {
+        direction = 'LEFT';
+       
+    }
+    if (event.key === 'ArrowRight' && direction !== 'LEFT') {
+        direction = 'RIGHT';
+        
+    }
+});
+
+function draw() {
+    if (drawProcess) {
+        return;
+    }
+    drawProcess = true;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = 'red';
+    ctx.fillRect(food.x, food.y, box, box);
+
+    for (let i = 0; i < snake.length; i++) {
+        ctx.fillStyle = i === 0 ? 'green' : 'lightgreen';
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+    }
+
+    let head = { ...snake[0] };
+
+    if (direction) {
+        if (direction === 'UP') head.y -= box;
+        if (direction === 'DOWN') head.y += box;
+        if (direction === 'LEFT') head.x -= box;
+        if (direction === 'RIGHT') head.x += box;
+
+        if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height || 
+            snake.some(seg => seg.x === head.x && seg.y === head.y)) {
+            clearInterval(drawInterval);
+            alert('Game Over!');
+            restartGame();
+            drawProcess = false;
+            return;
+        }
+
+        if (head.x === food.x && head.y === food.y) {
+            defaultSpeed = Math.max(100, defaultSpeed - 10);
+            generateFood();
+            startDraw();
+        } else {
+            snake.pop();
+        }
+
+        snake.unshift(head);
+    }
+    drawProcess = false;
+}
+
+function isPointWithinBoundary(x, y, margin) {
+    return (
+        x >= margin &&
+        x <= canvas.width - margin &&
+        y >= margin &&
+        y <= canvas.height - margin
+    );
+}
+
+function startDraw() {
+    if (drawInterval) {
+        clearInterval(drawInterval);
+    }
+    drawInterval = setInterval(draw, defaultSpeed);
+}
+
+function restartGame() {
+    clearInterval(drawInterval);
+    defaultSpeed = 500;
+    snake = [{ x: Math.floor(gridWidth / 2) * box, y: Math.floor(gridHeight / 2) * box }];
+    generateFood();
+    direction = null;
+    startDraw();
+}
+
+function pauseGame() {
+    if (drawInterval) {
+        clearInterval(drawInterval);
+        drawInterval = null;
+    } else {
+        startDraw();
+    }
+}
+
+function startGame() {
+    if (!direction) {
+        direction = 'LEFT';
+    }
+    if (!drawInterval) {
+        startDraw();
+    }
+}
+
+// 初始化游戏
+startDraw();
+</script>
+
+<h2 id="游戏说明"><a href="#游戏说明" class="headerlink" title="游戏说明"></a>游戏说明</h2><ol>
+<li>点击”开始游戏”按钮开始</li>
+<li>使用键盘方向键控制蛇的移动方向</li>
+<li>吃到红色食物可以得分，速度会逐渐加快</li>
+<li>撞到墙壁或自己的身体游戏结束</li>
+<li>可以随时暂停&#x2F;继续游戏</li>
+<li>canvas上面最好不要加width和height，用css控制能够更好的动态控制宽高</li>
+</ol>
+<h2 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h2><p>这个游戏主要使用了以下技术：</p>
+<ul>
+<li>HTML5 Canvas：用于游戏画面的渲染</li>
+<li>JavaScript：实现游戏逻辑</li>
+<li>CSS：页面样式和布局</li>
+</ul>
+<p>游戏的核心功能包括：</p>
+<ol>
+<li>蛇的移动控制</li>
+<li>碰撞检测</li>
+<li>食物生成</li>
+<li>速度控制</li>
+<li>游戏状态管理</li>
+</ol>
+<h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><p>让我们详细解释游戏的核心代码实现：</p>
+<h3 id="1-基础设置和变量"><a href="#1-基础设置和变量" class="headerlink" title="1. 基础设置和变量"></a>1. 基础设置和变量</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;gameCanvas&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> box = <span class="number">20</span>;  <span class="comment">// 每个网格的大小</span></span><br><span class="line"><span class="keyword">let</span> drawInterval = <span class="literal">null</span>;  <span class="comment">// 游戏循环的计时器</span></span><br><span class="line"><span class="keyword">let</span> defaultSpeed = <span class="number">500</span>;  <span class="comment">// 游戏初始速度（毫秒）</span></span><br><span class="line"><span class="keyword">let</span> drawProcess = <span class="literal">false</span>;  <span class="comment">// 防止重复绘制的标志</span></span><br></pre></td></tr></table></figure>
+
+<p>这些是游戏的基本配置。我们使用 20x20 像素的网格作为基本单位，<code>defaultSpeed</code> 控制游戏速度，初始设置为 500 毫秒更新一次。</p>
+<h3 id="2-Canvas-初始化"><a href="#2-Canvas-初始化" class="headerlink" title="2. Canvas 初始化"></a>2. Canvas 初始化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">initCanvas</span>(<span class="params"></span>) &#123;</span><br><span class="line">    canvas.<span class="property">width</span> = canvas.<span class="property">offsetWidth</span>;</span><br><span class="line">    canvas.<span class="property">height</span> = <span class="number">400</span>;</span><br><span class="line">    gridWidth = <span class="title class_">Math</span>.<span class="title function_">floor</span>(canvas.<span class="property">width</span> / box);</span><br><span class="line">    gridHeight = <span class="title class_">Math</span>.<span class="title function_">floor</span>(canvas.<span class="property">height</span> / box);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数负责初始化 Canvas 的尺寸。它会：</p>
+<ul>
+<li>根据容器宽度设置 Canvas 的实际像素宽度</li>
+<li>设置固定的高度（400像素）</li>
+<li>计算网格的行数和列数</li>
+</ul>
+<h3 id="3-蛇和食物的数据结构"><a href="#3-蛇和食物的数据结构" class="headerlink" title="3. 蛇和食物的数据结构"></a>3. 蛇和食物的数据结构</h3><ul>
+<li>这里蛇需要理解，上下左右给蛇加个新头，然后去掉尾巴，就能够完成蛇的移动了，这是个关键因素。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> snake = [&#123; <span class="attr">x</span>: <span class="title class_">Math</span>.<span class="title function_">floor</span>(gridWidth / <span class="number">2</span>) * box, <span class="attr">y</span>: <span class="title class_">Math</span>.<span class="title function_">floor</span>(gridHeight / <span class="number">2</span>) * box &#125;];</span><br><span class="line"><span class="keyword">let</span> food;</span><br><span class="line"><span class="keyword">let</span> direction = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>蛇被表示为一个对象数组，每个对象包含 x 和 y 坐标</li>
+<li>初始时蛇只有一个节点，位于画布中心</li>
+<li><code>direction</code> 表示蛇的移动方向（UP、DOWN、LEFT、RIGHT）</li>
+</ul>
+<h3 id="4-食物生成"><a href="#4-食物生成" class="headerlink" title="4. 食物生成"></a>4. 食物生成</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">generateFood</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        food = &#123;</span><br><span class="line">            <span class="attr">x</span>: <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * gridWidth) * box,</span><br><span class="line">            <span class="attr">y</span>: <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * gridHeight) * box</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125; <span class="keyword">while</span> (snake.<span class="title function_">some</span>(<span class="function"><span class="params">seg</span> =&gt;</span> seg.<span class="property">x</span> === food.<span class="property">x</span> &amp;&amp; seg.<span class="property">y</span> === food.<span class="property">y</span>) &amp;&amp; </span><br><span class="line">             <span class="title function_">isPointWithinBoundary</span>(food.<span class="property">x</span>, food.<span class="property">y</span>, <span class="number">50</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数负责在随机位置生成食物：</p>
+<ul>
+<li>使用 do-while 循环确保食物不会生成在蛇身上</li>
+<li><code>isPointWithinBoundary</code> 函数确保食物不会太靠近边界</li>
+</ul>
+<h3 id="5-游戏主循环"><a href="#5-游戏主循环" class="headerlink" title="5. 游戏主循环"></a>5. 游戏主循环</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">draw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (drawProcess) <span class="keyword">return</span>;</span><br><span class="line">    drawProcess = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清空画布</span></span><br><span class="line">    ctx.<span class="property">fillStyle</span> = <span class="string">&#x27;#000&#x27;</span>;</span><br><span class="line">    ctx.<span class="title function_">fillRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制食物</span></span><br><span class="line">    ctx.<span class="property">fillStyle</span> = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">    ctx.<span class="title function_">fillRect</span>(food.<span class="property">x</span>, food.<span class="property">y</span>, box, box);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制蛇</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; snake.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        ctx.<span class="property">fillStyle</span> = i === <span class="number">0</span> ? <span class="string">&#x27;green&#x27;</span> : <span class="string">&#x27;lightgreen&#x27;</span>;</span><br><span class="line">        ctx.<span class="title function_">fillRect</span>(snake[i].<span class="property">x</span>, snake[i].<span class="property">y</span>, box, box);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移动蛇</span></span><br><span class="line">    <span class="keyword">if</span> (direction) &#123;</span><br><span class="line">        <span class="keyword">let</span> head = &#123; ...snake[<span class="number">0</span>] &#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 根据方向更新蛇头位置</span></span><br><span class="line">        <span class="keyword">if</span> (direction === <span class="string">&#x27;UP&#x27;</span>) head.<span class="property">y</span> -= box;</span><br><span class="line">        <span class="keyword">if</span> (direction === <span class="string">&#x27;DOWN&#x27;</span>) head.<span class="property">y</span> += box;</span><br><span class="line">        <span class="keyword">if</span> (direction === <span class="string">&#x27;LEFT&#x27;</span>) head.<span class="property">x</span> -= box;</span><br><span class="line">        <span class="keyword">if</span> (direction === <span class="string">&#x27;RIGHT&#x27;</span>) head.<span class="property">x</span> += box;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 碰撞检测</span></span><br><span class="line">        <span class="keyword">if</span> (head.<span class="property">x</span> &lt; <span class="number">0</span> || head.<span class="property">x</span> &gt;= canvas.<span class="property">width</span> || </span><br><span class="line">            head.<span class="property">y</span> &lt; <span class="number">0</span> || head.<span class="property">y</span> &gt;= canvas.<span class="property">height</span> || </span><br><span class="line">            snake.<span class="title function_">some</span>(<span class="function"><span class="params">seg</span> =&gt;</span> seg.<span class="property">x</span> === head.<span class="property">x</span> &amp;&amp; seg.<span class="property">y</span> === head.<span class="property">y</span>)) &#123;</span><br><span class="line">            <span class="built_in">clearInterval</span>(drawInterval);</span><br><span class="line">            <span class="title function_">alert</span>(<span class="string">&#x27;Game Over!&#x27;</span>);</span><br><span class="line">            <span class="title function_">restartGame</span>();</span><br><span class="line">            drawProcess = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查是否吃到食物</span></span><br><span class="line">        <span class="keyword">if</span> (head.<span class="property">x</span> === food.<span class="property">x</span> &amp;&amp; head.<span class="property">y</span> === food.<span class="property">y</span>) &#123;</span><br><span class="line">            defaultSpeed = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">100</span>, defaultSpeed - <span class="number">50</span>);  <span class="comment">// 加快速度</span></span><br><span class="line">            <span class="title function_">generateFood</span>();</span><br><span class="line">            <span class="title function_">startDraw</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            snake.<span class="title function_">pop</span>();  <span class="comment">// 如果没吃到食物，移除尾部</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        snake.<span class="title function_">unshift</span>(head);  <span class="comment">// 添加新的头部</span></span><br><span class="line">    &#125;</span><br><span class="line">    drawProcess = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>游戏主循环是最复杂的部分，它负责：</p>
+<ol>
+<li>清空并重绘画布</li>
+<li>绘制食物和蛇</li>
+<li>根据方向移动蛇</li>
+<li>处理碰撞检测</li>
+<li>处理食物收集</li>
+<li>控制游戏速度</li>
+</ol>
+<h3 id="6-游戏控制函数"><a href="#6-游戏控制函数" class="headerlink" title="6. 游戏控制函数"></a>6. 游戏控制函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">startDraw</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (drawInterval) <span class="built_in">clearInterval</span>(drawInterval);</span><br><span class="line">    drawInterval = <span class="built_in">setInterval</span>(draw, defaultSpeed);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">restartGame</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(drawInterval);</span><br><span class="line">    defaultSpeed = <span class="number">500</span>;</span><br><span class="line">    snake = [&#123; <span class="attr">x</span>: <span class="title class_">Math</span>.<span class="title function_">floor</span>(gridWidth / <span class="number">2</span>) * box, <span class="attr">y</span>: <span class="title class_">Math</span>.<span class="title function_">floor</span>(gridHeight / <span class="number">2</span>) * box &#125;];</span><br><span class="line">    <span class="title function_">generateFood</span>();</span><br><span class="line">    direction = <span class="literal">null</span>;</span><br><span class="line">    <span class="title function_">startDraw</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">pauseGame</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (drawInterval) &#123;</span><br><span class="line">        <span class="built_in">clearInterval</span>(drawInterval);</span><br><span class="line">        drawInterval = <span class="literal">null</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">startDraw</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">startGame</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!direction) &#123;</span><br><span class="line">        direction = <span class="string">&#x27;LEFT&#x27;</span>;  <span class="comment">// 设置初始方向</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!drawInterval) &#123;</span><br><span class="line">        <span class="title function_">startDraw</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些函数处理游戏的各种状态：</p>
+<ul>
+<li><code>startDraw</code>: 启动游戏循环</li>
+<li><code>restartGame</code>: 重置游戏状态</li>
+<li><code>pauseGame</code>: 暂停&#x2F;继续游戏</li>
+<li><code>startGame</code>: 开始新游戏</li>
+</ul>
+<h3 id="7-事件监听"><a href="#7-事件监听" class="headerlink" title="7. 事件监听"></a>7. 事件监听</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;resize&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">initCanvas</span>();</span><br><span class="line">    <span class="title function_">restartGame</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;keydown&#x27;</span>, <span class="function"><span class="params">event</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="property">key</span> === <span class="string">&#x27;ArrowUp&#x27;</span> &amp;&amp; direction !== <span class="string">&#x27;DOWN&#x27;</span>) direction = <span class="string">&#x27;UP&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="property">key</span> === <span class="string">&#x27;ArrowDown&#x27;</span> &amp;&amp; direction !== <span class="string">&#x27;UP&#x27;</span>) direction = <span class="string">&#x27;DOWN&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="property">key</span> === <span class="string">&#x27;ArrowLeft&#x27;</span> &amp;&amp; direction !== <span class="string">&#x27;RIGHT&#x27;</span>) direction = <span class="string">&#x27;LEFT&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (event.<span class="property">key</span> === <span class="string">&#x27;ArrowRight&#x27;</span> &amp;&amp; direction !== <span class="string">&#x27;LEFT&#x27;</span>) direction = <span class="string">&#x27;RIGHT&#x27;</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>事件监听器处理：</p>
+<ul>
+<li>窗口大小改变时重置游戏</li>
+<li>键盘输入控制蛇的方向（确保蛇不能直接掉头）</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io">jim</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/28/%E8%B4%AA%E5%90%83%E8%9B%87%E6%B8%B8%E6%88%8F/">https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/28/%E8%B4%AA%E5%90%83%E8%9B%87%E6%B8%B8%E6%88%8F/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://johnsmithsren.github.io/renjmBlog.github.io" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/renjmBlog.github.io/tags/JavaScript/">JavaScript</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/%E6%B8%B8%E6%88%8F/">游戏</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/HTML5/">HTML5</a></div><div class="post-share"><div class="social-share" data-image="/renjmBlog.github.io/images/ice.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/renjmBlog.github.io/2024/12/30/%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E4%BD%BF%E7%94%A8/" title="二进制的使用"><img class="cover" src="https://johnsmithsren.github.io/renjmBlog.github.io/images/two.jpg" onerror="onerror=null;src='/renjmBlog.github.io/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">二进制的使用</div></div><div class="info-2"><div class="info-item-1">游戏开发中的二进制应用在游戏开发中，二进制操作是一个非常重要的技术点，它可以帮助我们高效地存储和处理各种游戏数据。本文将探讨几个常见的应用场景并使用Node.js来演示具体实现。 1. 使用位运算存储游戏状态在游戏中，我们经常需要记录玩家的各种状态，比如：  是否完成某个任务 是否解锁某个成就 是否获得某个道具  使用二进制的位运算可以非常高效地存储这些布尔值信息。 1234567891011121314151617181920212223// 使用一个32位整数存储32个不同的状态let playerState = 0;// 设置状态的函数function setState(state, position) &#123;    return state | (1 &lt;&lt; position);&#125;// 检查状态的函数function checkState(state, position) &#123;    return (state &amp; (1 &lt;&lt; position)) !== 0;&#125;// 清除状态的函数function...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2024/12/27/%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE%E5%88%9D%E5%AD%A6/" title="网络配置与路由基础"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">网络配置与路由基础</div></div><div class="info-2"><div class="info-item-1">网络配置与路由基础1. IP地址基础1.1 IP地址的组成 IP地址由32位二进制数组成（IPv4） 通常以点分十进制表示：如 192.168.1.1 分为网络部分和主机部分 IPv4地址分为A、B、C、D、E五类  1.2 网络位与主机位网络位（Network Portion） 定义：IP地址中用于标识网络的位 作用： 标识IP所属的网络 用于路由选择 决定网络的规模   特点： 同一网络中的所有主机，网络位相同 由子网掩码中的”1”对应的位确定 网络位越多，可划分的子网越多    主机位（Host Portion） 定义：IP地址中用于标识主机的位 作用： 标识网络内的具体主机 决定网络可容纳的主机数量   特点： 同一网络中的主机，主机位必须唯一 由子网掩码中的”0”对应的位确定 主机位越多，可用主机数越多 全0表示网络地址，全1表示广播地址    实例说明123456789101112IP地址：192.168.1.1子网掩码：255.255.255.0二进制形式：IP：    11000000.10101000.00000001.00000001掩码： ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/renjmBlog.github.io/2024/12/27/TS%E7%AC%94%E8%AE%B0/" title="TypeScript 入门笔记"><img class="cover" src="https://johnsmithsren.github.io/renjmBlog.github.io/images/ts.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-27</div><div class="info-item-2">TypeScript 入门笔记</div></div><div class="info-2"><div class="info-item-1">TypeScript 简介TypeScript 是 JavaScript 的超集，它添加了可选的静态类型和基于类的面向对象编程。TypeScript 由微软开发和维护，设计目标是开发大型应用。 常用点 类型判断 as 断言 interface record 用法 keyof typeof  类，class，type，enum 枚举  1. 基本类型1234567891011121314151617// 布尔值let isDone: boolean = false;// 数字let decimal: number = 6;let hex: number = 0xf00d;// 字符串let color: string = &quot;blue&quot;;let sentence: string = `The color is $&#123;color&#125;`;// 数组let list: number[] = [1, 2, 3];let list2: Array&lt;number&gt; = [1, 2, 3];// 元组let x: [string, number]...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" title="LeetCode 每日一题 - 两数之和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode 每日一题 - 两数之和</div></div><div class="info-2"><div class="info-item-1">题目描述给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。 解题思路方法一: 暴力循环最初采用双重循环的方式,但在大数据量时会超时。 方法二: Map优化使用 Map 数据结构可以避免多次遍历: 1234567891011121314var twoSum = function(nums, target) &#123;    let map = new Map();    let result;        for(let key in nums) &#123;        let value = nums[key];        result = target - value;                if(map.has(result)) &#123;            return [map.get(result), key];        &#125;        map.set(value, key);   ...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-21</div><div class="info-item-2">nextjs初体验</div></div><div class="info-2"><div class="info-item-1">Next.js 初体验总结项目背景最近在学习 Next.js 框架进行项目开发，这是一个非常强大的 React 全栈框架，它提供了服务端渲染（SSR）、静态站点生成（SSG）等现代 Web 开发所需的关键特性。 遇到的问题：数据库连接实例丢失在开发环境（dev）中，我遇到了一个有趣的问题。具体表现为：  使用 MySQL 作为后端数据库 采用单例模式创建数据库连接 当应用发生热重载（Hot Reload）时，偶尔会出现数据库实例丢失的现象  问题分析起初，我认为这可能是单例模式实现的问题。但在对比测试其他框架（如 NestJS）后发现，这个问题似乎是 Next.js 特有的。这让我开始思考框架本身的特性：  Next.js 是一个全栈框架，同时处理前端和后端逻辑 开发模式下的热重载机制可能会影响到后端状态的维护 传统的 Node.js 单例模式在这种环境下可能不够稳定  解决方案通过深入研究，发现可以使用 globalThis 来解决这个单例重复加载的问题。示例代码如下： 1234567891011121314151617// lib/db.tsimport mysql...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2025/04/14/pokemonInterview/" title="pokemonInterview"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-04-14</div><div class="info-item-2">pokemonInterview</div></div><div class="info-2"><div class="info-item-1">JavaScript 算法面试题精选本文整理了常见的 JavaScript 编程面试题型，包含详细的代码示例与解析，帮助你应对技术面试中的编程挑战。 1. 字符串处理1.1 判断回文字符串判断一个字符串是否为回文字符串（正读和反读都一样）。 1234567891011121314151617181920212223242526/** * 判断字符串是否为回文 * @param &#123;string&#125; s - 输入字符串 * @return &#123;boolean&#125; - 是否为回文 */function isPalindrome(s) &#123;  // 1. 预处理：转小写并移除非字母数字字符  const cleanStr = s.toLowerCase().replace(/[^a-z0-9]/g, &quot;&quot;);  // 2. 双指针法判断是否回文  let left = 0,    right = cleanStr.length - 1;  while (left &lt; right) &#123;    if...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="LeetCode - 三数之和题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 三数之和题解</div></div><div class="info-2"><div class="info-item-1">题目描述给你一个包含 n 个整数的数组 nums,判断 nums 中是否存在三个元素 a,b,c,使得 a + b + c &#x3D; 0。请找出所有满足条件且不重复的三元组。 解题思路双指针法123456789101112131415161718192021222324252627282930var threeSum = function(nums) &#123;    let result = [];    nums.sort((a, b) =&gt; a - b); // 先排序        for(let i = 0; i &lt; nums.length - 2; i++) &#123;        // 跳过重复值        if(i &gt; 0 &amp;&amp; nums[i] === nums[i-1]) continue;                let left = i + 1;        let right = nums.length - 1;                while(left &lt; right)...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/" title="LeetCode - 分隔链表题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 分隔链表题解</div></div><div class="info-2"><div class="info-item-1">题目描述给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。需要保持节点的相对顺序。 解题思路双指针法123456789101112131415161718192021222324252627var partition = function(head, x) &#123;    // 创建两个虚拟头节点    let smallHead = new ListNode(0);    let bigHead = new ListNode(0);        // 用于移动的指针    let small = smallHead;    let big = bigHead;        // 遍历原链表    while(head) &#123;        if(head.val &lt; x) &#123;            small.next = head;            small = small.next;        &#125; else &#123;            big.next =...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">jim</div><div class="author-info-description">生活就像青春恋爱物语，总是充满了意外</div><div class="site-data"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AA%E5%90%83%E8%9B%87%E6%B8%B8%E6%88%8F"><span class="toc-number">1.</span> <span class="toc-text">贪吃蛇游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E8%AF%B4%E6%98%8E"><span class="toc-number">1.1.</span> <span class="toc-text">游戏说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.</span> <span class="toc-text">技术实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">代码详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE%E5%92%8C%E5%8F%98%E9%87%8F"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 基础设置和变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Canvas-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. Canvas 初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%9B%87%E5%92%8C%E9%A3%9F%E7%89%A9%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 蛇和食物的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E9%A3%9F%E7%89%A9%E7%94%9F%E6%88%90"><span class="toc-number">1.3.4.</span> <span class="toc-text">4. 食物生成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B8%B8%E6%88%8F%E4%B8%BB%E5%BE%AA%E7%8E%AF"><span class="toc-number">1.3.5.</span> <span class="toc-text">5. 游戏主循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%B8%B8%E6%88%8F%E6%8E%A7%E5%88%B6%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.6.</span> <span class="toc-text">6. 游戏控制函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-number">1.3.7.</span> <span class="toc-text">7. 事件监听</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验">nextjs初体验</a><time datetime="2025-09-21T13:44:08.000Z" title="发表于 2025-09-21 21:44:08">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题">前端图片缓存，页面闪烁问题</a><time datetime="2025-06-05T10:58:58.000Z" title="发表于 2025-06-05 18:58:58">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/es.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="elasticSearch使用笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记">elasticSearch使用笔记</a><time datetime="2025-05-22T01:55:09.000Z" title="发表于 2025-05-22 09:55:09">2025-05-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/04/14/pokemonInterview/" title="pokemonInterview">pokemonInterview</a><time datetime="2025-04-14T06:27:12.000Z" title="发表于 2025-04-14 14:27:12">2025-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/tailwindCss.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="Tailwind CSS 学习笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记">Tailwind CSS 学习笔记</a><time datetime="2025-03-05T10:11:43.000Z" title="发表于 2025-03-05 18:11:43">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By jim</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/renjmBlog.github.io/js/utils.js"></script><script src="/renjmBlog.github.io/js/main.js"></script><div class="js-pjax"></div></div></body></html>

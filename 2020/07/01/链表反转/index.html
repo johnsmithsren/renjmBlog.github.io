@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LeetCode - 链表反转 | </title><meta name="author" content="jim"><meta name="copyright" content="jim"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目链接LeetCode 206. 反转链表 解题思路关键在于维护 next 指针。我们需要在遍历链表的过程中，逐步反转每个节点的指向。 代码实现12345678910111213141516171819202122232425&#x2F;** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.va">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode - 链表反转">
+<meta property="og:url" content="https://johnsmithsren.github.io/renjmBlog.github.io/2020/07/01/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="题目链接LeetCode 206. 反转链表 解题思路关键在于维护 next 指针。我们需要在遍历链表的过程中，逐步反转每个节点的指向。 代码实现12345678910111213141516171819202122232425&#x2F;** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.va">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg">
+<meta property="article:published_time" content="2020-07-01T13:31:48.000Z">
+<meta property="article:modified_time" content="2025-09-21T14:23:06.770Z">
+<meta property="article:author" content="jim">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="链表">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg"><link rel="shortcut icon" href="/renjmBlog.github.io/images/favicon.ico"><link rel="canonical" href="https://johnsmithsren.github.io/renjmBlog.github.io/2020/07/01/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/renjmBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/renjmBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LeetCode - 链表反转',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/renjmBlog.github.io/images/roam.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/renjmBlog.github.io/"><span class="site-name"></span></a><a class="nav-page-title" href="/renjmBlog.github.io/"><span class="site-name">LeetCode - 链表反转</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">LeetCode - 链表反转</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-01T13:31:48.000Z" title="发表于 2020-07-01 21:31:48">2020-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-21T14:23:06.770Z" title="更新于 2025-09-21 22:23:06">2025-09-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/renjmBlog.github.io/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">LeetCode 206. 反转链表</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>关键在于维护 <code>next</code> 指针。我们需要在遍历链表的过程中，逐步反转每个节点的指向。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">ListNode</span>&#125; <span class="variable">head</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">ListNode</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> reverseList = <span class="keyword">function</span>(<span class="params">head</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> current = head;</span><br><span class="line">    <span class="keyword">let</span> preNode = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> nextNode = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (current) &#123;</span><br><span class="line">        nextNode = current.<span class="property">next</span>; <span class="comment">// 保存下一个节点</span></span><br><span class="line">        current.<span class="property">next</span> = preNode;   <span class="comment">// 反转当前节点的指向</span></span><br><span class="line">        preNode = current;        <span class="comment">// 移动前驱节点</span></span><br><span class="line">        current = nextNode;      <span class="comment">// 移动到下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> preNode; <span class="comment">// 返回新的头节点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>反转链表的关键在于保护好下一个原始数据，否则链表会断裂。通过使用 <code>nextNode</code> 存储当前节点的下一个节点，我们可以有效地反转链表。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io">jim</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io/2020/07/01/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/">https://johnsmithsren.github.io/renjmBlog.github.io/2020/07/01/%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://johnsmithsren.github.io/renjmBlog.github.io" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/renjmBlog.github.io/tags/JavaScript/">JavaScript</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/LeetCode/">LeetCode</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/%E9%93%BE%E8%A1%A8/">链表</a></div><div class="post-share"><div class="social-share" data-image="/renjmBlog.github.io/images/ice.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E9%93%BE%E8%A1%A8%E6%B1%82%E5%92%8C/" title="LeetCode - 链表求和"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">LeetCode - 链表求和</div></div><div class="info-2"><div class="info-item-1">题目链接LeetCode 2. 两数相加 解题思路这道题主要的关键点在于最后的位数的处理。如果两数位数不等，那么就要进行补位操作。 代码实现123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657/** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.val = val; *     this.next = null; * &#125; */let reverseNode = function(head) &#123;    let preNode = null;    let nextNode = null;    let currentNode = head;    while (currentNode) &#123;        nextNode = currentNode.next; // 保存下一个节点 ...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/ABSD-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E6%BC%94%E5%8C%96/" title="ABSD 体系结构演化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">ABSD 体系结构演化</div></div><div class="info-2"><div class="info-item-1">引言软件体系结构的演化是一个持续的过程,需要遵循一定的规范和步骤。本文将详细介绍 ABSD 体系结构演化的六个关键步骤。 演化的关键步骤1. 需求变动归类 系统化归类用户需求变化 将变化需求与现有构件对应 标记无对应构件的变动,为后续创建新构件做准备  2. 制定演化计划在改变原有结构之前,开发团队需要制定周密的体系结构演化计划,作为后续演化开发工作的指南。计划应包含具体的时间节点和验收标准。 3. 构件的修改与管理 根据需求变动归类情况进行构件调整 增加、删除或修改现有构件 完成相关功能性测试 确保修改不影响现有功能  4. 更新构件交互关系 梳理构件间的依赖关系 更新构件间的控制流 确保接口兼容性 维护系统整体一致性  5. 构件组装与测试 使用组装支持工具完成构件组装 完成整个软件系统的链接和合成 形成新的体系结构 进行整体功能和性能测试  6. 技术评审 确认上述步骤的执行情况 评估组装后的体系结构是否反映了需求变动 验证是否符合用户需求 检查系统整体性能指标  最佳实践 保持完整的文档记录 建立有效的版本控制 进行充分的回归测试 制定应急回滚方案  总结ABSD...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E5%88%86%E9%9A%94%E9%93%BE%E8%A1%A8/" title="LeetCode - 分隔链表题解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 分隔链表题解</div></div><div class="info-2"><div class="info-item-1">题目描述给定一个链表和一个特定值 x，对链表进行分隔，使得所有小于 x 的节点都在大于或等于 x 的节点之前。需要保持节点的相对顺序。 解题思路双指针法123456789101112131415161718192021222324252627var partition = function(head, x) &#123;    // 创建两个虚拟头节点    let smallHead = new ListNode(0);    let bigHead = new ListNode(0);        // 用于移动的指针    let small = smallHead;    let big = bigHead;        // 遍历原链表    while(head) &#123;        if(head.val &lt; x) &#123;            small.next = head;            small = small.next;        &#125; else &#123;            big.next =...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" title="LeetCode - 合并两个有序链表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 合并两个有序链表</div></div><div class="info-2"><div class="info-item-1">题目描述将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 解题思路递归解法123456789101112var mergeTwoLists = function(l1, l2) &#123;    if(l1 === null) return l2;    if(l2 === null) return l1;        if(l1.val &lt; l2.val) &#123;        l1.next = mergeTwoLists(l1.next, l2);        return l1;    &#125; else &#123;        l2.next = mergeTwoLists(l1, l2.next);        return l2;    &#125;&#125;;  迭代解法123456789101112131415161718var mergeTwoLists = function(l1, l2) &#123;    const prehead = new ListNode(-1);   ...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E6%8E%92%E5%BA%8F%E5%88%97%E8%A1%A8/" title="LeetCode - 排序列表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 排序列表</div></div><div class="info-2"><div class="info-item-1">题目链接LeetCode 148. 排序链表 解题思路这道题应该是基础的简单排序。主要思路是：  使用归并排序来对链表进行排序。 归并排序的时间复杂度为 O(n log n)，适合链表的排序。  代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758/** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.val = val; *     this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @return &#123;ListNode&#125; */var sortList = function(head) &#123;    if (!head || !head.next) &#123;        return...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" title="LeetCode - 旋转链表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 旋转链表</div></div><div class="info-2"><div class="info-item-1">题目链接LeetCode 61. 旋转链表 解题思路思路主要包括以下几个步骤：  找到链表的总长度。 计算 k 取余总长度，获取真实移动步数。 根据移动步数，打断链表。 将打断后的链表重新拼接，然后输出。  代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152/** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.val = val; *     this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @param &#123;number&#125; k * @return &#123;ListNode&#125; */var rotateRight = function(head, k) &#123;    if (!head)...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8/" title="LeetCode - 环形链表"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 环形链表</div></div><div class="info-2"><div class="info-item-1">题目链接LeetCode 141. 环形链表 解题思路主要思路是对于节点 val 修改数值，那么如果出现节点 next 存在，但是 val 不存在，那就是环形。然而这个明显不对的解，居然通过了。 代码实现1234567891011121314151617181920212223242526/** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.val = val; *     this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @return &#123;boolean&#125; */var hasCycle = function(head) &#123;    let current = new ListNode();    current.next = head;        while (current.next &amp;&amp; current.val)...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/07/01/%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" title="LeetCode - 移除链表元素"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="info-item-2">LeetCode - 移除链表元素</div></div><div class="info-2"><div class="info-item-1">题目链接LeetCode 203. 移除链表元素 解题思路这道题最大的困难在于如何处理表头。在掌握了 JS 的传递引用之后，处理链表就慢慢走上正轨。 但是在遍历之后会发现表头无法处理，所以就想出了虚拟一个表头来解决这个问题。在官方题解中，这个做法被认为是”哨兵节点”。 代码实现1234567891011121314151617181920212223242526272829/** * Definition for singly-linked list. * function ListNode(val) &#123; *     this.val = val; *     this.next = null; * &#125; *//** * @param &#123;ListNode&#125; head * @param &#123;number&#125; val * @return &#123;ListNode&#125; */var removeElements = function(head, val) &#123;    let nextNode = null;   ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">jim</div><div class="author-info-description">生活就像青春恋爱物语，总是充满了意外</div><div class="site-data"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5"><span class="toc-number">1.</span> <span class="toc-text">题目链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验">nextjs初体验</a><time datetime="2025-09-21T13:44:08.000Z" title="发表于 2025-09-21 21:44:08">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题">前端图片缓存，页面闪烁问题</a><time datetime="2025-06-05T10:58:58.000Z" title="发表于 2025-06-05 18:58:58">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/es.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="elasticSearch使用笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记">elasticSearch使用笔记</a><time datetime="2025-05-22T01:55:09.000Z" title="发表于 2025-05-22 09:55:09">2025-05-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/04/14/pokemonInterview/" title="pokemonInterview">pokemonInterview</a><time datetime="2025-04-14T06:27:12.000Z" title="发表于 2025-04-14 14:27:12">2025-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/tailwindCss.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="Tailwind CSS 学习笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记">Tailwind CSS 学习笔记</a><time datetime="2025-03-05T10:11:43.000Z" title="发表于 2025-03-05 18:11:43">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By jim</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/renjmBlog.github.io/js/utils.js"></script><script src="/renjmBlog.github.io/js/main.js"></script><div class="js-pjax"></div></div></body></html>

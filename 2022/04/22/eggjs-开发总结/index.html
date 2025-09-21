@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Egg.js + UmiJS 开发总结 | </title><meta name="author" content="jim"><meta name="copyright" content="jim"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言从 Koa 到 Egg.js 的转变让我深刻体会到框架的重要性。框架不仅提供了规范化的开发方式,还解决了日志、定时任务等通用业务问题。本文记录使用 Egg.js + UmiJS 开发过程中的经验总结。 技术栈选择后端框架 Egg.js: 企业级 Node.js 框架 NATS: 微服务通信 HTTP: 前后端通信  前端框架 UmiJS: 可插拔的企业级 React 应用框架 Ant Desi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Egg.js + UmiJS 开发总结">
+<meta property="og:url" content="https://johnsmithsren.github.io/renjmBlog.github.io/2022/04/22/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="前言从 Koa 到 Egg.js 的转变让我深刻体会到框架的重要性。框架不仅提供了规范化的开发方式,还解决了日志、定时任务等通用业务问题。本文记录使用 Egg.js + UmiJS 开发过程中的经验总结。 技术栈选择后端框架 Egg.js: 企业级 Node.js 框架 NATS: 微服务通信 HTTP: 前后端通信  前端框架 UmiJS: 可插拔的企业级 React 应用框架 Ant Desi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg">
+<meta property="article:published_time" content="2022-04-22T23:31:48.000Z">
+<meta property="article:modified_time" content="2025-09-21T14:23:06.767Z">
+<meta property="article:author" content="jim">
+<meta property="article:tag" content="Egg.js">
+<meta property="article:tag" content="UmiJS">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="项目实践">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg"><link rel="shortcut icon" href="/renjmBlog.github.io/images/favicon.ico"><link rel="canonical" href="https://johnsmithsren.github.io/renjmBlog.github.io/2022/04/22/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/renjmBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/renjmBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Egg.js + UmiJS 开发总结',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/renjmBlog.github.io/images/roam.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/renjmBlog.github.io/"><span class="site-name"></span></a><a class="nav-page-title" href="/renjmBlog.github.io/"><span class="site-name">Egg.js + UmiJS 开发总结</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Egg.js + UmiJS 开发总结</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-22T23:31:48.000Z" title="发表于 2022-04-23 07:31:48">2022-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-09-21T14:23:06.767Z" title="更新于 2025-09-21 22:23:06">2025-09-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/renjmBlog.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>从 Koa 到 Egg.js 的转变让我深刻体会到框架的重要性。框架不仅提供了规范化的开发方式,还解决了日志、定时任务等通用业务问题。本文记录使用 Egg.js + UmiJS 开发过程中的经验总结。</p>
+<h2 id="技术栈选择"><a href="#技术栈选择" class="headerlink" title="技术栈选择"></a>技术栈选择</h2><h3 id="后端框架"><a href="#后端框架" class="headerlink" title="后端框架"></a>后端框架</h3><ul>
+<li>Egg.js: 企业级 Node.js 框架</li>
+<li>NATS: 微服务通信</li>
+<li>HTTP: 前后端通信</li>
+</ul>
+<h3 id="前端框架"><a href="#前端框架" class="headerlink" title="前端框架"></a>前端框架</h3><ul>
+<li>UmiJS: 可插拔的企业级 React 应用框架</li>
+<li>Ant Design: UI 组件库</li>
+</ul>
+<h2 id="项目优化经验"><a href="#项目优化经验" class="headerlink" title="项目优化经验"></a>项目优化经验</h2><h3 id="1-打包优化"><a href="#1-打包优化" class="headerlink" title="1. 打包优化"></a>1. 打包优化</h3><p>UmiJS 配置示例:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .umirc.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">  <span class="attr">nodeModulesTransform</span>: &#123; <span class="attr">type</span>: <span class="string">&#x27;none&#x27;</span> &#125;,</span><br><span class="line">  <span class="attr">hash</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">exportStatic</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">dynamicImport</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">antd</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">externals</span>: &#123;</span><br><span class="line">    <span class="attr">react</span>: <span class="string">&#x27;window.React&#x27;</span>,</span><br><span class="line">    <span class="attr">bizcharts</span>: <span class="string">&quot;BizCharts&quot;</span>,</span><br><span class="line">    <span class="string">&#x27;@antv/data-set&#x27;</span>: <span class="string">&#x27;DataSet&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">headScripts</span>: [</span><br><span class="line">    <span class="string">&#x27;https://unpkg.com/react@17/umd/react.production.min.js&#x27;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">scripts</span>: [</span><br><span class="line">    <span class="string">&#x27;https://g.alicdn.com/code/lib/bizcharts/4.1.11/BizCharts.js&#x27;</span>,</span><br><span class="line">    <span class="string">&quot;https://unpkg.com/@antv/data-set@1.2.8/build/data-set.js&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="title function_">chainWebpack</span>(<span class="params">config</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// 生产环境配置</span></span><br><span class="line">      config.<span class="title function_">merge</span>(&#123;</span><br><span class="line">        <span class="attr">optimization</span>: &#123;</span><br><span class="line">          <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">            <span class="attr">chunks</span>: <span class="string">&#x27;async&#x27;</span>,</span><br><span class="line">            <span class="attr">minSize</span>: <span class="number">30000</span>,</span><br><span class="line">            <span class="attr">minChunks</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">automaticNameDelimiter</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">            <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">              <span class="attr">vendor</span>: &#123;</span><br><span class="line">                <span class="attr">name</span>: <span class="string">&#x27;vendors&#x27;</span>,</span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">                <span class="attr">priority</span>: <span class="number">10</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Nginx-配置"><a href="#2-Nginx-配置" class="headerlink" title="2. Nginx 配置"></a>2. Nginx 配置</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> _;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 静态资源配置</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /work/frontend;</span><br><span class="line">        <span class="attribute">index</span> index.html;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># API 代理配置</span></span><br><span class="line">    <span class="section">location</span> /api/v1 &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://backend:7001;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Gzip 配置</span></span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_min_length</span> <span class="number">1k</span>;</span><br><span class="line">    <span class="attribute">gzip_comp_level</span> <span class="number">6</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain application/javascript application/x-javascript text/css application/json;</span><br><span class="line">    <span class="attribute">gzip_static</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_vary</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_buffers</span> <span class="number">4</span> <span class="number">16k</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io">jim</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io/2022/04/22/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/">https://johnsmithsren.github.io/renjmBlog.github.io/2022/04/22/eggjs-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://johnsmithsren.github.io/renjmBlog.github.io" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/renjmBlog.github.io/tags/Egg-js/">Egg.js</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/UmiJS/">UmiJS</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/React/">React</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/">项目实践</a></div><div class="post-share"><div class="social-share" data-image="/renjmBlog.github.io/images/ice.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/renjmBlog.github.io/2022/04/23/redis-ts-nodejs/" title="Redis + TypeScript 实现日志分析系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Redis + TypeScript 实现日志分析系统</div></div><div class="info-2"><div class="info-item-1">项目背景在开发运维平台时,需要实现日志分析功能。最初采用 MongoDB 直接查询的方式,但随着数据量增长,性能问题逐渐显现。本文记录了使用 Redis 缓存优化查询性能的实践经验。 性能问题分析MongoDB 查询瓶颈 跨日期查询耗时长(几十秒) 日志数据量达到千万级 lookup 联表查询性能差 索引优化效果有限  优化思路 使用 Redis 缓存热点数据 优化 MongoDB 查询方式 合理设置数据过期策略  实现方案Redis 缓存实现12345678910// Redis 扫描实现let uuidList = [];var stream = RedisStore.redis.scanStream(&#123;  match: `*$&#123;currentDay&#125;:$&#123;this.radioValue&#125;`,  count: 1000&#125;);for await (const resultKeys of stream) &#123;  // 处理扫描结果&#125;  MongoDB 查询优化12345const allTask =...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2022/04/22/%E6%8A%96%E9%9F%B3%E5%BC%B9%E5%B9%95%E8%8E%B7%E5%8F%96%E7%9A%84%E5%8F%A6%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="抖音弹幕获取的另一种方式"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">抖音弹幕获取的另一种方式</div></div><div class="info-2"><div class="info-item-1">背景需求公司最近需要做一个直播尝试，需要获取抖音弹幕的信息，没想到抖音的直播开放平台没有相关的接口开放出来，感觉这个绝对是有问题的，作为开发者，获取自己直播间的相关信息，是个很正常的需求。 然后诉诸网络，有人做了付费的服务来获取弹幕，比较贵，不过感觉挺厉害的，好像就是破解了算法，接口信息很详细，不过抖音也会换算法，这个接口估计也得跟着改，所以人家这个付费好像也能够理解。 实现思路所以公司考虑自己做，然后我就上场了 .第一步github找思路，发现都是广告，没有可利用的，不过在大量的信息中还是能够了解到只鳞片爪的，大家的思路基本是硬钢算法。 .分析抖音的网页直播间的请求，发现弹幕信息是个定时请求，返回数据是protobuf形式的，没有加密，只要protobuf序列化即可。 然后请求的关键在于请求中需要计算signature，还有什么x-xx啥的字段，然后结合github，发现还是么法找出前端的加密算法。 不过找到了protobuf的定义获取方式，这个还是比较关键的，有所了解的同学会方向，定义的proto...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-21</div><div class="info-item-2">nextjs初体验</div></div><div class="info-2"><div class="info-item-1">Next.js 初体验总结项目背景最近在学习 Next.js 框架进行项目开发，这是一个非常强大的 React 全栈框架，它提供了服务端渲染（SSR）、静态站点生成（SSG）等现代 Web 开发所需的关键特性。 遇到的问题：数据库连接实例丢失在开发环境（dev）中，我遇到了一个有趣的问题。具体表现为：  使用 MySQL 作为后端数据库 采用单例模式创建数据库连接 当应用发生热重载（Hot Reload）时，偶尔会出现数据库实例丢失的现象  问题分析起初，我认为这可能是单例模式实现的问题。但在对比测试其他框架（如 NestJS）后发现，这个问题似乎是 Next.js 特有的。这让我开始思考框架本身的特性：  Next.js 是一个全栈框架，同时处理前端和后端逻辑 开发模式下的热重载机制可能会影响到后端状态的维护 传统的 Node.js 单例模式在这种环境下可能不够稳定  解决方案通过深入研究，发现可以使用 globalThis 来解决这个单例重复加载的问题。示例代码如下： 1234567891011121314151617// lib/db.tsimport mysql...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2022/04/22/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/" title="egg-mongoose 多数据库配置实践"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-23</div><div class="info-item-2">egg-mongoose 多数据库配置实践</div></div><div class="info-2"><div class="info-item-1">背景在开发运维平台时,需要支持多分支环境,每个分支连接不同的数据库。为了实现数据库的动态切换,对 egg-mongoose 进行了多数据库配置。由于网上相关资料较少,特此记录实现方案。 实现步骤1. 配置多数据库连接在 config.default.js 中配置多个数据库连接: 123456789101112131415161718config.mongoose = &#123;  clients: &#123;    // clientId, 通过 app.mongooseDB.get(&#x27;clientId&#x27;) 访问实例    local: &#123;      url: &#x27;mongodb://xxx:xxx@xxx:/xxx-s?authSource=admin&#x27;,      options: &#123;             &#125;,    &#125;,    master: &#123;      url:...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2024/12/08/%E4%BB%8EEgg-js%E5%88%B0Nest-js%E8%B0%88%E8%B5%B7/" title="从Egg.js到Nest.js谈起"><img class="cover" src="https://johnsmithsren.github.io/renjmBlog.github.io/images/young.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-08</div><div class="info-item-2">从Egg.js到Nest.js谈起</div></div><div class="info-2"><div class="info-item-1">引言在 Node.js 后端开发的演进过程中，从最初的 Express.js，到 Koa.js，再到现在广受欢迎的 Egg.js 和 Nest.js，每一个框架都代表着不同的开发理念和实践方向。今天，我们就来聊聊 Egg.js 和 Nest.js 这两个优秀的框架。 如何选择？ 选择 Egg.js 的场景   团队主要使用 JavaScript 需要快速开发 重视开发约定 需要中文社区支持 项目规模中等   选择 Nest.js 的场景   团队熟悉 TypeScript 项目架构复杂 需要依赖注入 考虑微服务架构 大型项目  开发心得在使用 Egg.js 和 Nest.js...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2024/12/16/react%E5%9B%BE%E7%89%87%E5%8A%A8%E7%94%BB%E5%8A%A0%E8%BD%BD/" title="React 图片动画加载技术详解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-16</div><div class="info-item-2">React 图片动画加载技术详解</div></div><div class="info-2"><div class="info-item-1">图片加载动画的挑战开发过程中，我遇到了一个常见的问题：页面初始加载时，多张图片未完成加载会导致动画效果丢失。这不仅影响了用户体验，也降低了页面的交互质感。 解决方案：动态监听与懒加载我们的解决方案包含两个核心策略：  图片加载监听：确保所有图片加载完成后再触发动画 滚动懒加载：延迟加载动画，提高初始页面响应速度  代码实现1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950useEffect(() =&gt; &#123;    const onLoad = () =&gt; &#123;      gsap.utils        .toArray(&quot;.section-image-friends&quot;)        .forEach((image: any, index) =&gt; &#123;          // 交替方向，创建更生动的视觉效果          const direction = index % 2...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2022/04/23/react%E6%84%9F%E6%83%B3/" title="React 开发实践与组件设计思考"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-23</div><div class="info-item-2">React 开发实践与组件设计思考</div></div><div class="info-2"><div class="info-item-1">项目实践在开发内部管理平台时,主要使用了以下技术栈:  React Hooks (useState, useEffect, useRef) Ant Design 组件库 MobX 状态管理  组件设计经验状态管理对于简单的父子组件通信,使用 props 和 ref 就足够了。但在以下情况需要考虑使用状态管理工具:  组件层级过深 状态需要共享 状态变化复杂  组件拆分原则 功能独立 复用性高 维护方便 职责单一  实际案例12345678910111213141516171819202122// 日期范围选择组件const RangePickCondition = (&#123; onChange &#125;) =&gt; &#123;  const [dates, setDates] = useState([]);  const pickerRef = useRef(null);  useEffect(() =&gt; &#123;    // 初始化逻辑  &#125;, []);  const handleChange = (values) =&gt; &#123;  ...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-05</div><div class="info-item-2">前端图片缓存，页面闪烁问题</div></div><div class="info-2"><div class="info-item-1">问题描述1. 图片闪烁问题在 React 应用开发中，当我们将 img 标签封装到组件中并在页面间切换时，经常会遇到图片闪烁的问题。这种闪烁现象严重影响了用户体验，使界面切换显得不够流畅。 2. 复杂状态管理问题在处理复杂状态时，特别是涉及以下场景：  表单创建后的页面刷新 全局状态的调整 组件间数据共享  虽然使用常规的 React hooks 可以处理这些情况，但当业务逻辑变得复杂时，会导致频繁的 setState 调用。虽然可以通过自定义 hook 来优化代码结构，但仍然存在一些挑战。 例如，在一个电商应用中：  侧边栏需要显示商品总量 主页面展示商品列表 两个独立组件都需要调用相同的商品列表接口  这种情况下常见的解决方案是重复调用接口，虽然实现简单，但会造成不必要的性能开销。之前我主要通过 MobX 这类状态管理工具来减少重复请求。 解决方案1. 图片加载优化为了解决图片闪烁问题，采用了以下方案：  使用 CSS background-image 替代 img 标签 利用浏览器对背景图片的预加载和缓存机制 尽管尝试过 img 标签的 lazy...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">jim</div><div class="author-info-description">生活就像青春恋爱物语，总是充满了意外</div><div class="site-data"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">96</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">25</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E9%80%89%E6%8B%A9"><span class="toc-number">2.</span> <span class="toc-text">技术栈选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6"><span class="toc-number">2.1.</span> <span class="toc-text">后端框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6"><span class="toc-number">2.2.</span> <span class="toc-text">前端框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96%E7%BB%8F%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text">项目优化经验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%89%93%E5%8C%85%E4%BC%98%E5%8C%96"><span class="toc-number">3.1.</span> <span class="toc-text">1. 打包优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Nginx-%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">2. Nginx 配置</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验">nextjs初体验</a><time datetime="2025-09-21T13:44:08.000Z" title="发表于 2025-09-21 21:44:08">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题">前端图片缓存，页面闪烁问题</a><time datetime="2025-06-05T10:58:58.000Z" title="发表于 2025-06-05 18:58:58">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/es.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="elasticSearch使用笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记">elasticSearch使用笔记</a><time datetime="2025-05-22T01:55:09.000Z" title="发表于 2025-05-22 09:55:09">2025-05-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/04/14/pokemonInterview/" title="pokemonInterview">pokemonInterview</a><time datetime="2025-04-14T06:27:12.000Z" title="发表于 2025-04-14 14:27:12">2025-04-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/tailwindCss.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="Tailwind CSS 学习笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/03/05/tailwindCss/" title="Tailwind CSS 学习笔记">Tailwind CSS 学习笔记</a><time datetime="2025-03-05T10:11:43.000Z" title="发表于 2025-03-05 18:11:43">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By jim</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/renjmBlog.github.io/js/utils.js"></script><script src="/renjmBlog.github.io/js/main.js"></script><div class="js-pjax"></div></div></body></html>
