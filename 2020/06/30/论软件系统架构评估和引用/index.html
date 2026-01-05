@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>论软件系统架构评估和引用 | </title><meta name="author" content="jim"><meta name="copyright" content="jim"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SAAM 和 ATAMSAAM 是一种非功能质量属性的体系架构分析方法 最初用于比较不同的体系架构,分析架构的可修改性 后来用于其他的质量属性,如可移植性,可扩展性  SAAM 评估过程 场景开发 体系结构描述 单个场景评估 场景交互 总体评估  ATAM 在SAAM的基础上发展起来 主要针对性能、实用性、安全性和可修改性 在系统开发之前进行评价  ATAM 评估活动分为四个主要活动领域:  场景">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论软件系统架构评估和引用">
+<meta property="og:url" content="https://johnsmithsren.github.io/renjmBlog.github.io/2020/06/30/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="SAAM 和 ATAMSAAM 是一种非功能质量属性的体系架构分析方法 最初用于比较不同的体系架构,分析架构的可修改性 后来用于其他的质量属性,如可移植性,可扩展性  SAAM 评估过程 场景开发 体系结构描述 单个场景评估 场景交互 总体评估  ATAM 在SAAM的基础上发展起来 主要针对性能、实用性、安全性和可修改性 在系统开发之前进行评价  ATAM 评估活动分为四个主要活动领域:  场景">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg">
+<meta property="article:published_time" content="2020-06-30T22:31:48.000Z">
+<meta property="article:modified_time" content="2026-01-05T04:31:51.214Z">
+<meta property="article:author" content="jim">
+<meta property="article:tag" content="技术,博客,前端,后端,JavaScript,Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/ice.jpg"><link rel="shortcut icon" href="/renjmBlog.github.io/images/favicon.ico"><link rel="canonical" href="https://johnsmithsren.github.io/renjmBlog.github.io/2020/06/30/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/renjmBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/renjmBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '论软件系统架构评估和引用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">98</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/renjmBlog.github.io/images/roam.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/renjmBlog.github.io/"><span class="site-name"></span></a><a class="nav-page-title" href="/renjmBlog.github.io/"><span class="site-name">论软件系统架构评估和引用</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">论软件系统架构评估和引用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-30T22:31:48.000Z" title="发表于 2020-07-01 06:31:48">2020-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-05T04:31:51.214Z" title="更新于 2026-01-05 12:31:51">2026-01-05</time></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="SAAM-和-ATAM"><a href="#SAAM-和-ATAM" class="headerlink" title="SAAM 和 ATAM"></a>SAAM 和 ATAM</h2><h3 id="SAAM"><a href="#SAAM" class="headerlink" title="SAAM"></a>SAAM</h3><ul>
+<li>是一种非功能质量属性的体系架构分析方法</li>
+<li>最初用于比较不同的体系架构,分析架构的可修改性</li>
+<li>后来用于其他的质量属性,如可移植性,可扩展性</li>
+</ul>
+<h4 id="SAAM-评估过程"><a href="#SAAM-评估过程" class="headerlink" title="SAAM 评估过程"></a>SAAM 评估过程</h4><ol>
+<li>场景开发</li>
+<li>体系结构描述</li>
+<li>单个场景评估</li>
+<li>场景交互</li>
+<li>总体评估</li>
+</ol>
+<h3 id="ATAM"><a href="#ATAM" class="headerlink" title="ATAM"></a>ATAM</h3><ul>
+<li>在SAAM的基础上发展起来</li>
+<li>主要针对性能、实用性、安全性和可修改性</li>
+<li>在系统开发之前进行评价</li>
+</ul>
+<h4 id="ATAM-评估活动"><a href="#ATAM-评估活动" class="headerlink" title="ATAM 评估活动"></a>ATAM 评估活动</h4><p>分为四个主要活动领域:</p>
+<ol>
+<li>场景和需求收集</li>
+<li>体系结构视图和场景实现</li>
+<li>属性模型构造和分析</li>
+<li>折中</li>
+</ol>
+<h2 id="架构复审"><a href="#架构复审" class="headerlink" title="架构复审"></a>架构复审</h2><p>来自于ABSD,在ABSD中:</p>
+<ul>
+<li>架构设计、文档化和复审是一个迭代过程</li>
+<li>主版本架构分析后要安排外部人员参加复审</li>
+</ul>
+<h3 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h3><ul>
+<li><strong>敏感点</strong>: 构件之间的关系特性</li>
+<li><strong>权衡点</strong>: 质量属性之间的比较</li>
+<li><strong>风险点</strong>: 可能引起风险的因素</li>
+</ul>
+<h2 id="构建分类方法"><a href="#构建分类方法" class="headerlink" title="构建分类方法"></a>构建分类方法</h2><h3 id="关键字分类法"><a href="#关键字分类法" class="headerlink" title="关键字分类法"></a>关键字分类法</h3><ul>
+<li>不可分解的原子级别关键字包含隶属于他的某些构建</li>
+</ul>
+<h3 id="刻面分类法"><a href="#刻面分类法" class="headerlink" title="刻面分类法"></a>刻面分类法</h3><ul>
+<li>定义若干用于刻画构建特征的面</li>
+<li>每个面包含若干概念</li>
+<li>这些概念表述构建在面上的特征</li>
+</ul>
+<h3 id="超文本组织方法"><a href="#超文本组织方法" class="headerlink" title="超文本组织方法"></a>超文本组织方法</h3><ul>
+<li>基于全文检索技术</li>
+</ul>
+<h2 id="EJB分类"><a href="#EJB分类" class="headerlink" title="EJB分类"></a>EJB分类</h2><h3 id="1-会话Bean"><a href="#1-会话Bean" class="headerlink" title="1. 会话Bean"></a>1. 会话Bean</h3><ul>
+<li>实现数据访问</li>
+<li>实现业务逻辑</li>
+<li>可以有状态或无状态</li>
+</ul>
+<h3 id="2-实体Bean"><a href="#2-实体Bean" class="headerlink" title="2. 实体Bean"></a>2. 实体Bean</h3><ul>
+<li>主要映射数据库中的表</li>
+</ul>
+<h3 id="3-消息驱动Bean"><a href="#3-消息驱动Bean" class="headerlink" title="3. 消息驱动Bean"></a>3. 消息驱动Bean</h3><ul>
+<li>只能接受客户端发送的消息处理</li>
+<li>是一个异步的构件</li>
+</ul>
+<h2 id="构件和对象概念"><a href="#构件和对象概念" class="headerlink" title="构件和对象概念"></a>构件和对象概念</h2><h3 id="构件特点"><a href="#构件特点" class="headerlink" title="构件特点"></a>构件特点</h3><ul>
+<li>独立部署单元</li>
+<li>第三方的组装单元</li>
+<li>没有可见状态</li>
+</ul>
+<h3 id="对象特点"><a href="#对象特点" class="headerlink" title="对象特点"></a>对象特点</h3><ul>
+<li>实例单元</li>
+<li>具有唯一标识</li>
+<li>可能具有状态</li>
+<li>封装了自身状态和行为</li>
+</ul>
+<p>[文章后续内容略…]</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io">jim</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io/2020/06/30/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/">https://johnsmithsren.github.io/renjmBlog.github.io/2020/06/30/%E8%AE%BA%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0%E5%92%8C%E5%BC%95%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://johnsmithsren.github.io/renjmBlog.github.io" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/renjmBlog.github.io/images/ice.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/renjmBlog.github.io/2020/06/30/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="Redis 数据类型及应用场景"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Redis 数据类型及应用场景</div></div><div class="info-2"><div class="info-item-1">Redis 核心数据类型String (字符串) 二进制安全的字符串 最大支持 512MB 适用场景: 缓存 计数器 分布式锁    Hash (哈希) 键值对集合 适用场景: 用户信息存储 对象缓存 购物车    List (列表) 双向链表 适用场景: 消息队列 最新数据存储 数据分页    Set (集合) 无序不重复集合 适用场景: 标签系统 用户关注关系 推荐系统    Sorted Set (有序集合) 有序不重复集合 适用场景: 排行榜 优先级队列 延时队列    扩展数据类型HyperLogLog 基数统计 适用于UV统计  Bitmap 位图操作 适用于签到统计  Geo 地理位置信息 适用于附近的人  应用建议 根据业务场景选择合适的数据类型 注意内存使用和过期策略 合理使用数据结构的特性 关注性能和扩展性  参考资料 Redis 官方文档 Redis 命令参考  </div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2020/05/25/%E5%8A%A0%E5%85%A5gitalk%E8%AF%84%E8%AE%BA/" title="为 Hexo 博客添加 Gitalk 评论系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">为 Hexo 博客添加 Gitalk 评论系统</div></div><div class="info-2"><div class="info-item-1">配置步骤1. 注册 GitHub OAuth Application 进入 GitHub Settings -&gt; Developer settings -&gt; OAuth Apps 点击 “New OAuth App” 填写相关信息: Application name: 随意填写 Homepage URL: 博客地址 Authorization callback URL: 博客地址    2. 安装 Gitalk1npm install --save gitalk  3. 修改主题配置在主题的 _config.yml 中添加: 12345678gitalk:  enable: true  clientID: &#x27;GitHub Application Client ID&#x27;  clientSecret: &#x27;GitHub Application Client Secret&#x27;  repo: &#x27;GitHub repo name&#x27;  owner: &#x27;GitHub repo owner&#x27;  admin:...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">jim</div><div class="author-info-description">生活就像青春恋爱物语，总是充满了意外</div><div class="site-data"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">98</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SAAM-%E5%92%8C-ATAM"><span class="toc-number">1.</span> <span class="toc-text">SAAM 和 ATAM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SAAM"><span class="toc-number">1.1.</span> <span class="toc-text">SAAM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SAAM-%E8%AF%84%E4%BC%B0%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">SAAM 评估过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ATAM"><span class="toc-number">1.2.</span> <span class="toc-text">ATAM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ATAM-%E8%AF%84%E4%BC%B0%E6%B4%BB%E5%8A%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">ATAM 评估活动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%B6%E6%9E%84%E5%A4%8D%E5%AE%A1"><span class="toc-number">2.</span> <span class="toc-text">架构复审</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">关键概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">构建分类方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AD%97%E5%88%86%E7%B1%BB%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">关键字分类法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%BB%E9%9D%A2%E5%88%86%E7%B1%BB%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">刻面分类法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%96%87%E6%9C%AC%E7%BB%84%E7%BB%87%E6%96%B9%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">超文本组织方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EJB%E5%88%86%E7%B1%BB"><span class="toc-number">4.</span> <span class="toc-text">EJB分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BC%9A%E8%AF%9DBean"><span class="toc-number">4.1.</span> <span class="toc-text">1. 会话Bean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9E%E4%BD%93Bean"><span class="toc-number">4.2.</span> <span class="toc-text">2. 实体Bean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B6%88%E6%81%AF%E9%A9%B1%E5%8A%A8Bean"><span class="toc-number">4.3.</span> <span class="toc-text">3. 消息驱动Bean</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E4%BB%B6%E5%92%8C%E5%AF%B9%E8%B1%A1%E6%A6%82%E5%BF%B5"><span class="toc-number">5.</span> <span class="toc-text">构件和对象概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E4%BB%B6%E7%89%B9%E7%82%B9"><span class="toc-number">5.1.</span> <span class="toc-text">构件特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%89%B9%E7%82%B9"><span class="toc-number">5.2.</span> <span class="toc-text">对象特点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2026/01/05/React-Context%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="React Context使用指南">React Context使用指南</a><time datetime="2026-01-05T04:00:00.000Z" title="发表于 2026-01-05 12:00:00">2026-01-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2026/01/03/%E5%89%8D%E7%AB%AFreact+form/" title="React Hook Form 在复杂表单场景下的应用实践">React Hook Form 在复杂表单场景下的应用实践</a><time datetime="2026-01-03T16:00:00.000Z" title="发表于 2026-01-04 00:00:00">2026-01-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验">nextjs初体验</a><time datetime="2025-09-21T13:44:08.000Z" title="发表于 2025-09-21 21:44:08">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题">前端图片缓存，页面闪烁问题</a><time datetime="2025-06-05T10:58:58.000Z" title="发表于 2025-06-05 18:58:58">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/es.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="elasticSearch使用笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记">elasticSearch使用笔记</a><time datetime="2025-05-22T01:55:09.000Z" title="发表于 2025-05-22 09:55:09">2025-05-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By jim</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/renjmBlog.github.io/js/utils.js"></script><script src="/renjmBlog.github.io/js/main.js"></script><div class="js-pjax"></div></div></body></html>

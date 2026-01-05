@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>从Egg.js到Nest.js谈起 | </title><meta name="author" content="jim"><meta name="copyright" content="jim"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="引言在 Node.js 后端开发的演进过程中，从最初的 Express.js，到 Koa.js，再到现在广受欢迎的 Egg.js 和 Nest.js，每一个框架都代表着不同的开发理念和实践方向。今天，我们就来聊聊 Egg.js 和 Nest.js 这两个优秀的框架。 如何选择？ 选择 Egg.js 的场景   团队主要使用 JavaScript 需要快速开发 重视开发约定 需要中文社区支持 项目规">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从Egg.js到Nest.js谈起">
+<meta property="og:url" content="https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/08/%E4%BB%8EEgg-js%E5%88%B0Nest-js%E8%B0%88%E8%B5%B7/index.html">
+<meta property="og:site_name">
+<meta property="og:description" content="引言在 Node.js 后端开发的演进过程中，从最初的 Express.js，到 Koa.js，再到现在广受欢迎的 Egg.js 和 Nest.js，每一个框架都代表着不同的开发理念和实践方向。今天，我们就来聊聊 Egg.js 和 Nest.js 这两个优秀的框架。 如何选择？ 选择 Egg.js 的场景   团队主要使用 JavaScript 需要快速开发 重视开发约定 需要中文社区支持 项目规">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/young.png">
+<meta property="article:published_time" content="2024-12-08T12:05:03.000Z">
+<meta property="article:modified_time" content="2026-01-05T04:31:51.212Z">
+<meta property="article:author" content="jim">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="Egg.js">
+<meta property="article:tag" content="Nest.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://johnsmithsren.github.io/renjmBlog.github.io/images/young.png"><link rel="shortcut icon" href="/renjmBlog.github.io/images/favicon.ico"><link rel="canonical" href="https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/08/%E4%BB%8EEgg-js%E5%88%B0Nest-js%E8%B0%88%E8%B5%B7/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/renjmBlog.github.io/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/renjmBlog.github.io/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '从Egg.js到Nest.js谈起',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">98</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://johnsmithsren.github.io/renjmBlog.github.io/images/young.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/renjmBlog.github.io/"><span class="site-name"></span></a><a class="nav-page-title" href="/renjmBlog.github.io/"><span class="site-name">从Egg.js到Nest.js谈起</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/renjmBlog.github.io/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">从Egg.js到Nest.js谈起</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-08T12:05:03.000Z" title="发表于 2024-12-08 20:05:03">2024-12-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-05T04:31:51.212Z" title="更新于 2026-01-05 12:31:51">2026-01-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/renjmBlog.github.io/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在 Node.js 后端开发的演进过程中，从最初的 Express.js，到 Koa.js，再到现在广受欢迎的 Egg.js 和 Nest.js，每一个框架都代表着不同的开发理念和实践方向。今天，我们就来聊聊 Egg.js 和 Nest.js 这两个优秀的框架。</p>
+<h2 id="如何选择？"><a href="#如何选择？" class="headerlink" title="如何选择？"></a>如何选择？</h2><ol>
+<li><strong>选择 Egg.js 的场景</strong></li>
+</ol>
+<ul>
+<li>团队主要使用 JavaScript</li>
+<li>需要快速开发</li>
+<li>重视开发约定</li>
+<li>需要中文社区支持</li>
+<li>项目规模中等</li>
+</ul>
+<ol start="2">
+<li><strong>选择 Nest.js 的场景</strong></li>
+</ol>
+<ul>
+<li>团队熟悉 TypeScript</li>
+<li>项目架构复杂</li>
+<li>需要依赖注入</li>
+<li>考虑微服务架构</li>
+<li>大型项目</li>
+</ul>
+<h2 id="开发心得"><a href="#开发心得" class="headerlink" title="开发心得"></a>开发心得</h2><p>在使用 Egg.js 和 Nest.js 进行项目开发的几年中，我深刻体会到项目的可维护性远比业务逻辑本身更为重要。以下是几个关键的开发要点：</p>
+<ol>
+<li><p><strong>参数校验</strong><br>前后端双重校验是不可或缺的。严格的参数校验能够有效预防线上错误，降低维护成本。在开发阶段投入校验机制的时间和精力，将在生产环境中获得丰厚的回报。</p>
+</li>
+<li><p><strong>日志系统</strong><br>框架提供的日志功能往往需要根据具体项目进行定制。一个完善的日志系统应包含：</p>
+<ul>
+<li>详细的参数信息，body，query，param</li>
+<li>准确的日志行号</li>
+<li>完整的错误堆栈<br>线上环境中，详尽的日志信息往往是快速定位和解决问题的关键。</li>
+</ul>
+</li>
+<li><p><strong>部署流程</strong></p>
+<ul>
+<li>大型项目：推荐使用 Jenkins 等 CI&#x2F;CD 工具</li>
+<li>小型项目：可以采用 shell 脚本实现部署，快速便捷</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 示例部署流程</span></span><br><span class="line">1. 打包编译后的文件</span><br><span class="line">2. 传输到目标服务器</span><br><span class="line">3. 解压并安装依赖</span><br><span class="line">4. 启动服务</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置管理</strong><br>配置文件的重要性常常被低估。我特别欣赏 Nest.js 的配置方案：</p>
+<ul>
+<li>使用 .env 文件管理环境变量</li>
+<li>配置文件与编译文件分离</li>
+<li>手动管理敏感配置</li>
+<li>支持多环境配置</li>
+</ul>
+</li>
+<li><p><strong>存储空间管理</strong></p>
+</li>
+</ol>
+<p>在后端开发中，存储空间管理是一个容易被忽视但极其重要的话题。之所以重要，是因为存储空间管理一旦部署后，就不好改动了，比如数据库的配置，一旦运行，就很难改动，就得等到停服维护的时候，去进行升降配了。以下是几个关键注意点：</p>
+<h3 id="业务层面"><a href="#业务层面" class="headerlink" title="业务层面"></a>业务层面</h3><ul>
+<li><p><strong>数据边界控制</strong></p>
+<ul>
+<li>设计业务逻辑时必须考虑数据上限</li>
+<li>防止浮点数精度问题</li>
+<li>为关键数据设置预警阈值</li>
+<li>建立完善的失败处理机制</li>
+</ul>
+</li>
+<li><p><strong>关键业务设计</strong></p>
+<ul>
+<li>遵循”先扣除，后发放”原则</li>
+<li>例如：商品交易先确认收款，再发货</li>
+<li>所有涉及数据增长的逻辑都要设置合理上限</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统层面"><a href="#系统层面" class="headerlink" title="系统层面"></a>系统层面</h3><ul>
+<li><p><strong>日志管理</strong></p>
+<ul>
+<li>设置单个日志文件大小上限（建议不超过 100MB）</li>
+<li>实现日志分片和轮转机制</li>
+<li>配置自动清理过期日志</li>
+<li>考虑使用 ELK 等专业日志系统</li>
+</ul>
+</li>
+<li><p><strong>磁盘空间监控</strong></p>
+<ul>
+<li>常用监控工具：gdu、htop、tree、du、df</li>
+<li>定期检查关键目录空间占用</li>
+<li>设置磁盘使用率预警阈值</li>
+<li>建立磁盘空间异常应急预案</li>
+</ul>
+</li>
+</ul>
+<h3 id="Docker-环境注意事项"><a href="#Docker-环境注意事项" class="headerlink" title="Docker 环境注意事项"></a>Docker 环境注意事项</h3><ul>
+<li><strong>存储路径配置</strong><ul>
+<li>合理设置 data-root 路径</li>
+<li>使用数据盘而非系统盘存储数据</li>
+<li>配置容器日志轮转策略</li>
+<li>监控容器磁盘使用情况</li>
+</ul>
+</li>
+</ul>
+<h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><ol>
+<li>提前评估各类数据增长速度</li>
+<li>建立完善的监控预警机制</li>
+<li>定期检查和清理冗余数据</li>
+<li>为核心服务配置独立存储空间</li>
+<li>使用云服务器时配置资源告警规则</li>
+</ol>
+<p>通过合理的存储空间管理，可以有效预防因存储问题导致的系统异常，确保服务的稳定运行。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>nestJs 用着很舒服，很方便，推荐，适合大型项目</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io">jim</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/08/%E4%BB%8EEgg-js%E5%88%B0Nest-js%E8%B0%88%E8%B5%B7/">https://johnsmithsren.github.io/renjmBlog.github.io/2024/12/08/%E4%BB%8EEgg-js%E5%88%B0Nest-js%E8%B0%88%E8%B5%B7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://johnsmithsren.github.io/renjmBlog.github.io" target="_blank"></a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/renjmBlog.github.io/tags/Node-js/">Node.js</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/TypeScript/">TypeScript</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/Egg-js/">Egg.js</a><a class="post-meta__tags" href="/renjmBlog.github.io/tags/Nest-js/">Nest.js</a></div><div class="post-share"><div class="social-share" data-image="https://johnsmithsren.github.io/renjmBlog.github.io/images/young.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/renjmBlog.github.io/2024/12/09/nestjs%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="nestjs文件上传"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">nestjs文件上传</div></div><div class="info-2"><div class="info-item-1">引言在开发 Web 应用时，文件上传是一个非常常见的需求。本文将详细介绍如何在 NestJS 框架中实现文件上传功能，包括普通上传和大文件分片上传两种实现方式。 文件上传实现方案1. 分片上传实现对于小型文件的分片上传，我们可以直接将文件存储在内存中。通过 FileInterceptor 拦截器，我们可以轻松获取到包含文件 buffer 的文件流： 12345678910@Post(&#x27;file/uploadFile&#x27;)@UseInterceptors(FileInterceptor(&#x27;file&#x27;))async uploadCommonChunk(    @UploadedFile() file: Express.Multer.File,    @Body(&#x27;index&#x27;) index: number,    @Body(&#x27;hash&#x27;) hash: string,    @Body(&#x27;dir&#x27;) dir: string,) &#123;    return await...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2024/12/06/%E5%86%8D%E5%AD%A6python/" title="再学python"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">再学python</div></div><div class="info-2"><div class="info-item-1">实战项目示例：股票数据分析这里是一个使用Python获取和分析股票数据的实际例子，展示了Python在数据处理方面的强大能力： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253import akshare as akimport pandas as pdfrom datetime import datetimedef get_stock_data():    print(&quot;正在获取股票数据，请稍候...&quot;)    # 获取上证所有股票的实时行情    try:        stock_zh_a_spot_df = ak.stock_zh_a_spot()        print(&quot;数据获取成功，正在处理...&quot;)        print(&quot;可用的列名：&quot;, stock_zh_a_spot_df.columns.tolist())       ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/renjmBlog.github.io/2024/12/09/nestjs%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="nestjs文件上传"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-09</div><div class="info-item-2">nestjs文件上传</div></div><div class="info-2"><div class="info-item-1">引言在开发 Web 应用时，文件上传是一个非常常见的需求。本文将详细介绍如何在 NestJS 框架中实现文件上传功能，包括普通上传和大文件分片上传两种实现方式。 文件上传实现方案1. 分片上传实现对于小型文件的分片上传，我们可以直接将文件存储在内存中。通过 FileInterceptor 拦截器，我们可以轻松获取到包含文件 buffer 的文件流： 12345678910@Post(&#x27;file/uploadFile&#x27;)@UseInterceptors(FileInterceptor(&#x27;file&#x27;))async uploadCommonChunk(    @UploadedFile() file: Express.Multer.File,    @Body(&#x27;index&#x27;) index: number,    @Body(&#x27;hash&#x27;) hash: string,    @Body(&#x27;dir&#x27;) dir: string,) &#123;    return await...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2022/04/22/egg-mongoose-%E5%A4%9A%E6%95%B0%E6%8D%AE%E5%BA%93/" title="egg-mongoose 多数据库配置实践"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-23</div><div class="info-item-2">egg-mongoose 多数据库配置实践</div></div><div class="info-2"><div class="info-item-1">背景在开发运维平台时,需要支持多分支环境,每个分支连接不同的数据库。为了实现数据库的动态切换,对 egg-mongoose 进行了多数据库配置。由于网上相关资料较少,特此记录实现方案。 实现步骤1. 配置多数据库连接在 config.default.js 中配置多个数据库连接: 123456789101112131415161718config.mongoose = &#123;  clients: &#123;    // clientId, 通过 app.mongooseDB.get(&#x27;clientId&#x27;) 访问实例    local: &#123;      url: &#x27;mongodb://xxx:xxx@xxx:/xxx-s?authSource=admin&#x27;,      options: &#123;             &#125;,    &#125;,    master: &#123;      url:...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2022/04/23/redis-ts-nodejs/" title="Redis + TypeScript 实现日志分析系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-23</div><div class="info-item-2">Redis + TypeScript 实现日志分析系统</div></div><div class="info-2"><div class="info-item-1">项目背景在开发运维平台时,需要实现日志分析功能。最初采用 MongoDB 直接查询的方式,但随着数据量增长,性能问题逐渐显现。本文记录了使用 Redis 缓存优化查询性能的实践经验。 性能问题分析MongoDB 查询瓶颈 跨日期查询耗时长(几十秒) 日志数据量达到千万级 lookup 联表查询性能差 索引优化效果有限  优化思路 使用 Redis 缓存热点数据 优化 MongoDB 查询方式 合理设置数据过期策略  实现方案Redis 缓存实现12345678910// Redis 扫描实现let uuidList = [];var stream = RedisStore.redis.scanStream(&#123;  match: `*$&#123;currentDay&#125;:$&#123;this.radioValue&#125;`,  count: 1000&#125;);for await (const resultKeys of stream) &#123;  // 处理扫描结果&#125;  MongoDB 查询优化12345const allTask =...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2025/01/10/AStar/" title="A*寻路算法的JavaScript实现"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-10</div><div class="info-item-2">A*寻路算法的JavaScript实现</div></div><div class="info-2"><div class="info-item-1">A*算法简介A*（A-Star）算法是一种启发式搜索算法，广泛应用于游戏开发中的寻路系统。 核心概念A*算法的核心在于其评估函数:f(n) &#x3D; g(n) + h(n),其中：  g(n)：从起点到当前节点的实际代价，g(b)+(b,c) h(n)：从当前节点到目标节点的估计代价（启发函数） f(n)：总估计代价  算法通过维护一个开放列表（openList）来存储待评估的节点，每次从中选择 f 值最小的节点进行扩展。这种方式既能避免遍历大量远离目标的节点，又能有效规避障碍物，从而找到最优路径。  记住 f(n) &#x3D; g(n) + h(n) 每次轮询 openList，都是找 f 值最小的节点 将当前节点从 openList 移到 closedList 评估所有相邻节点，此时会更新各个相邻节点的 f 值，g 值 如果是新节点，添加到 openList 如果找到更优路径，更新节点信息 直到找到目标节点，返回路径  代码实现下面是一个完整的 JavaScript...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2024/12/24/NODEJS%E7%AC%94%E8%AE%B0/" title="NODEJS笔记"><img class="cover" src="https://johnsmithsren.github.io/renjmBlog.github.io/images/nodejs.webp" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-24</div><div class="info-item-2">NODEJS笔记</div></div><div class="info-2"><div class="info-item-1">Node.js 事件循环机制Node.js 存在事件循环，主要分为 task 和 microtask 两种任务队列：  microtask：一般涉及业务逻辑的 await 后面的逻辑都会在 microtask 中执行，执行优先级很高 task：在每次清理完 microtask 中的任务后执行  Task 的六个阶段 timers：定时器回调阶段 I&#x2F;O callbacks：处理网络、流、TCP的错误回调 idle, prepare：仅系统内部使用 poll：检索新的 I&#x2F;O 事件 check：setImmediate() 回调 close callbacks：关闭回调  示例代码12345678910setTimeout(() =&gt; console.log(&#x27;setTimeout&#x27;), 0);setImmediate(() =&gt; console.log(&#x27;setImmediate&#x27;));(async () =&gt; &#123;  console.log(&#x27;async start&#x27;);...</div></div></div></a><a class="pagination-related" href="/renjmBlog.github.io/2024/12/20/bullMq%E5%9C%A8NestJs%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" title="bullMq在NestJs中的应用"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-20</div><div class="info-item-2">bullMq在NestJs中的应用</div></div><div class="info-2"><div class="info-item-1">简介BullMQ 是一个强大的基于 Redis 的队列管理库，它可以帮助我们在 NestJS 应用中处理后台任务、消息队列和作业调度。在实际项目开发中，消息队列是一个几乎不可或缺的组件，主要基于以下几个原因：  延时队列需求：在业务中经常需要处理延时执行的任务。  事件触发处理：比如玩家登录、升级等行为触发的后续操作，这些都需要可靠的消息处理机制。  消息可靠性：直接在消息监听器中处理业务逻辑风险较高，特别是对于一些关键操作（如支付）。消息队列提供了消息持久化能力，确保即使处理失败也可以重试。  系统解耦：通过消息队列，可以实现业务逻辑的解耦，提高系统的可维护性和扩展性。  性能优化：提供消息缓存机制，避免系统过载，实现更好的性能表现。   为什么选择 BullMQ？BullMQ 具有以下优势：  高性能：基于 Redis 实现，具有出色的性能表现 可靠性：支持任务重试和错误处理机制 功能丰富：提供作业进度追踪能力 并发处理：支持多进程并发处理任务 灵活调度：支持延迟任务和重复任务处理 事件系统：完善的事件监听和处理机制 框架集成：与 NestJS 框架完美集成  配置...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/renjmBlog.github.io/images/ice.jpg" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">jim</div><div class="author-info-description">生活就像青春恋爱物语，总是充满了意外</div><div class="site-data"><a href="/renjmBlog.github.io/archives/"><div class="headline">文章</div><div class="length-num">69</div></a><a href="/renjmBlog.github.io/tags/"><div class="headline">标签</div><div class="length-num">98</div></a><a href="/renjmBlog.github.io/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/johnsmithsren"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/johnsmithsren" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:rjm1149104294@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">如何选择？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E5%BF%83%E5%BE%97"><span class="toc-number">3.</span> <span class="toc-text">开发心得</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%9A%E5%8A%A1%E5%B1%82%E9%9D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">业务层面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%B1%82%E9%9D%A2"><span class="toc-number">3.2.</span> <span class="toc-text">系统层面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-%E7%8E%AF%E5%A2%83%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">3.3.</span> <span class="toc-text">Docker 环境注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">3.4.</span> <span class="toc-text">最佳实践</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2026/01/05/React-Context%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="React Context使用指南">React Context使用指南</a><time datetime="2026-01-05T04:00:00.000Z" title="发表于 2026-01-05 12:00:00">2026-01-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2026/01/03/%E5%89%8D%E7%AB%AFreact+form/" title="React Hook Form 在复杂表单场景下的应用实践">React Hook Form 在复杂表单场景下的应用实践</a><time datetime="2026-01-03T16:00:00.000Z" title="发表于 2026-01-04 00:00:00">2026-01-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/09/21/nextjs%E5%88%9D%E4%BD%93%E9%AA%8C/" title="nextjs初体验">nextjs初体验</a><time datetime="2025-09-21T13:44:08.000Z" title="发表于 2025-09-21 21:44:08">2025-09-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/renjmBlog.github.io/2025/06/05/%E5%89%8D%E7%AB%AF%E5%9B%BE%E7%89%87%E7%BC%93%E5%AD%98%EF%BC%8C%E9%A1%B5%E9%9D%A2%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98/" title="前端图片缓存，页面闪烁问题">前端图片缓存，页面闪烁问题</a><time datetime="2025-06-05T10:58:58.000Z" title="发表于 2025-06-05 18:58:58">2025-06-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记"><img src="https://johnsmithsren.github.io/renjmBlog.github.io/images/es.png" onerror="this.onerror=null;this.src='/renjmBlog.github.io/img/404.jpg'" alt="elasticSearch使用笔记"/></a><div class="content"><a class="title" href="/renjmBlog.github.io/2025/05/22/elasticSearch%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" title="elasticSearch使用笔记">elasticSearch使用笔记</a><time datetime="2025-05-22T01:55:09.000Z" title="发表于 2025-05-22 09:55:09">2025-05-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By jim</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/renjmBlog.github.io/js/utils.js"></script><script src="/renjmBlog.github.io/js/main.js"></script><div class="js-pjax"></div></div></body></html>
